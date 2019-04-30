@@ -1,0 +1,33 @@
+<div class="sticky-top bg-success text-center">
+  <h1 class="">Welcome!</h1>
+</div>
+
+<span>Please Login to Continue...</span>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col">
+      <table class="table">
+        <tbody>
+        <tr>
+          <td>CustomerName:</td>
+          <td><input type="text" class="form-control" id="usr" [(ngModel)]="userName" placeholder="Enter your Name"></td>
+        </tr>
+        <tr>
+          <td>Email:</td>
+          <td><input type="email" class="form-control" id="email" [(ngModel)]="email" placeholder="Enter your Email"></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td class="">
+            <div class="row">
+              <div class="col-sm-4"><button class="form-control btn-primary active" (click)="enterIntoproject()">Enter</button></div>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>
