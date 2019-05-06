@@ -22,7 +22,7 @@ import {LocalStorage} from "@ngx-pwa/local-storage";
 
       .btn{
         color: indigo;
-        background-color: orchid;
+        background-color: cyan;
         border-color: indigo;
         border-style: dot-dash;
       }
@@ -37,22 +37,26 @@ export class BuyProductHomePageComponent implements OnInit {
 
   constructor(private dbServiceObj: DatabasedataService, private router:Router, private activatedRoute: ActivatedRoute,
               private localStorage: LocalStorage) { }
+
+  myControl = new FormControl();
   addTableFlag = false;
+  homePageFlag = false;
+  autoCompleteOnFlag = false;
   productFilter = { name: ''};
   userName: string;
   email: string;
-  myControl = new FormControl();
+  productId: number;
+  productTable = [] ;
+  databaseData: any ;
+
   options = [1, 2, 3, 4, 5];
   productCost = 0;
   netCost = 0;
   autoIncrement = 0;
   netTotal = 0;
-  homePageFlag = false;
-  productId: number;
-  productTable = [] ;
   quantity = 1;
-  databaseData: any ;
-  welcomeMessageFlag = true;
+
+
 
   ngOnInit() {
       this.databaseDataSubscribeMethod();
@@ -88,26 +92,18 @@ export class BuyProductHomePageComponent implements OnInit {
             productObject['quantity'] = this.quantity;
             productObject['netCost'] = this.netCost;
             this.productTable.push(productObject);
-            this.productFilter.name = '';
 
-            let itemDetails = {};
-            // itemData['userName'] = this.userName;
-           itemDetails['productId'] = --this.productId;
+         let itemDetails = {};
+           itemDetails['productId'] = --this.productId+1;
            itemDetails['quantity'] = this.quantity;
            itemDetails['totalCost'] = this.netCost;
-           this.dbServiceObj.postItemData(itemDetails).subscribe((resolve) => console.log(resolve));
-
+           this.dbServiceObj.postItemData(itemDetails).subscribe((response) => console.log(response));
+           this.productFilter.name = '';
+           this.quantity = 1;
       }
     }
   }
 
-
-
-  enterIntoproject() {
-    if (this.userName != null && this.email != null) {
-      this.homePageFlag = true;
-    }
-  }
 
   selectQuantity(id: number) {
       this.quantity = id;
@@ -122,16 +118,30 @@ export class BuyProductHomePageComponent implements OnInit {
       let navigationextras: NavigationExtras = {
           queryParams : {
             'userName' : this.userName,
-            'email' : this.email,
-            'noOfItems' : this.autoIncrement,
+            'email'    : this.email,
+            'noOfItems': this.autoIncrement,
             'totalCost': this.netTotal,
             'ItemsList': this.productTable
           }
       };
 
-    if (confirm("Are you sure to proceed!")) {
-      this.router.navigate(['successPage'], navigationextras);
-    } else {    }
+
+    2
+    3
+    4
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var dateTime = date+' '+time;
+    let billDetails = {
+      purchasedBy: this.userName,
+      purchasedOn: dateTime,
+      list: this.autoIncrement,
+      netTotal: this.netTotal
+    }
+    this.dbServiceObj.postBillData(billDetails).subscribe((response) => console.log(response));
+
+    this.router.navigate(['successPage'], navigationextras);
   }
 
   cancelMethod() {

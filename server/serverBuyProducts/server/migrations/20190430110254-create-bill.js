@@ -13,6 +13,7 @@ module.exports = {
       },
       purchasedOn: {
         type: Sequelize.DATE,
+        allowNull: false,
         defaultValue: Sequelize.NOW
       },
       list: {

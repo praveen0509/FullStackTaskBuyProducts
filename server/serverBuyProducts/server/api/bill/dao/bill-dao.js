@@ -1,7 +1,9 @@
 import Promise from 'bluebird';
 import models from '../../../models';
+/*
 const bill = require('/home/sb-33/Desktop/FullStackTask/FullStackTaskBuyProducts' +
   '/server/serverBuyProducts/server/models/bill').bill;
+*/
 
 export default class BillDao {
   static getAll(_query) {
@@ -20,8 +22,8 @@ export default class BillDao {
       models.bill
         .create({
           id: parseInt(body.id),
-          purchasedBy: body.userName,
-          purchasedOn: body.date,
+          purchasedBy: body.purchasedBy,
+          purchasedOn: body.purchasedOn,
           list: body.list,
           total: body.netTotal
         })

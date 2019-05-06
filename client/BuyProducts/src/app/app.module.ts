@@ -19,6 +19,10 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import {AngularFontAwesomeModule} from "angular-font-awesome";
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { LogoutComponent } from './logout/logout.component';
+import { RegistrationComponent } from './registration/registration.component';
+import {NgxPaginationModule} from "ngx-pagination";
+import {NgFlashMessagesModule} from "ng-flash-messages";
+import {FlashMessagesModule} from "ngx-flash-messages";
 
 @NgModule({
   declarations: [
@@ -30,7 +34,8 @@ import { LogoutComponent } from './logout/logout.component';
     SampleTestingPageComponent,
     LoginPageComponent,
     WelcomePageComponent,
-    LogoutComponent
+    LogoutComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
@@ -42,8 +47,11 @@ import { LogoutComponent } from './logout/logout.component';
     MatButtonModule,
     MatCheckboxModule,
     HttpClientModule,
+    NgxPaginationModule,
     BrowserAnimationsModule,
     AngularFontAwesomeModule,
+    NgFlashMessagesModule.forRoot(),
+    FlashMessagesModule,
     RouterModule.forRoot([
       { path: 'successPage', component: SuccessMessageComponent },
       { path: '', component: WelcomePageComponent },

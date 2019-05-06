@@ -2,20 +2,20 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-6">
-      <table>
+      <table >
         <tbody>
           <tr>
             <td>Select An Item : </td>
             <td>
                 <form  class="example-form" name="autoCompleterForm">
                 <mat-form-field  class="example-full-width">
-                  <input type="text" placeholder="" class="bg-white text-dark" matInput
+                  <input type="text" placeholder="" class="text-dark bg-transparent " matInput
                          [formControl]="myControl" [matAutocomplete]="auto" [(ngModel)]="productFilter.name" name="searchBox">
                   <mat-autocomplete #auto="matAutocomplete">
                     <mat-option *ngFor="let item of databaseData | filterBy: productFilter"
                                 [value]="item.name" class="active bg-dark text-white rounded-circle"
                                 (click)="productPrice(item.price, item.id)">
-                      {{item.name}}
+                      <div class="text-center">{{item.name}}</div>
                     </mat-option>
                   </mat-autocomplete>
                 </mat-form-field>
@@ -53,7 +53,7 @@
     </div>
 
     <div class="col">
-        <table border="2 px" class="table table-hover" *ngIf="addTableFlag">
+        <table border="2 px" class="table table-hover" *ngIf="addTableFlag" style="width: 100%;">
           <thead>
           <tr>
             <th >Id</th>
@@ -74,19 +74,38 @@
           </tbody>
         </table>
     </div>
-
   </div>
 
-  <div class="row">
+  <div class="row" *ngIf="addTableFlag">
     <div class="col-sm-4"></div>
-    <div class="col-sm-4">
-      <button type="button" class="btn" (click)="successPageNavigationMethod()">Proceed To Pay</button>
-      <button type="button" class="btn" (click)="cancelMethod()">Cancel</button>
+    <div class="col-sm-6">
+      <button type="button" class="btn p-2"  data-toggle="modal" data-target="#alertModal" (click)="successPageNavigationMethod()">Proceed To Pay</button>
+      <button type="button" class="btn p-2" (click)="cancelMethod()">Cancel</button>
     </div>
   </div>
 </div>
 
+<app-footer></app-footer>
 
+
+<!-- Modal -->
+<!--
+<div class="modal fade bd-example-modal-sm" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div>Are you sure to proceed!</div><br><br>
+        <div class="clearfix">
+          <div class="float-right">
+            <button type="button" class="btn  btn-outline-success" (click)="successPageNavigationMethod()">Ok</button>
+            <button type="button" class="btn  btn-outline-success" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+-->
 
 
 
