@@ -1,4 +1,5 @@
-<app-header></app-header>
+
+<!--
 <div class="container">
   <div class="row">
     <div class="col-sm-6">
@@ -12,9 +13,8 @@
                   <input type="text" placeholder="" class="text-dark bg-transparent " matInput
                          [formControl]="myControl" [matAutocomplete]="auto" [(ngModel)]="productFilter.name" name="searchBox">
                   <mat-autocomplete #auto="matAutocomplete">
-                    <mat-option *ngFor="let item of databaseData | filterBy: productFilter"
-                                [value]="item.name" class="active bg-dark text-white rounded-circle"
-                                (click)="productPrice(item.price, item.id)">
+                    <mat-option *ngFor="let item of databaseData | filterBy: productFilter"  [value]="item.name" class="active bg-dark text-white rounded-circle"
+                                (click)="productPrice(item)">
                       <div class="text-center">{{item.name}}</div>
                     </mat-option>
                   </mat-autocomplete>
@@ -84,28 +84,168 @@
     </div>
   </div>
 </div>
+-->
 
-<app-footer></app-footer>
-
-
-<!-- Modal -->
-<!--
-<div class="modal fade bd-example-modal-sm" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        <div>Are you sure to proceed!</div><br><br>
-        <div class="clearfix">
-          <div class="float-right">
-            <button type="button" class="btn  btn-outline-success" (click)="successPageNavigationMethod()">Ok</button>
-            <button type="button" class="btn  btn-outline-success" data-dismiss="modal">Cancel</button>
-          </div>
-        </div>
-      </div>
+<app-header></app-header>
+<div class="container">
+  <!--First Row-->
+  <div class="row">
+    <div class="col-lg-3 col-sm-3 col-md-3"></div>
+    <div class="col-lg col-sm col-md p-lg-5">
+      <h3>Choose one:</h3>
+      <button class="btn btn-outline-danger bg-success text-white" type="button" (click)="buyProductFlag = true">Buy Product</button>
+      <button class="btn btn-outline-danger bg-success text-white" type="button" (click)="displayProductDataFlag = true ">Product Details</button>
+      <button class="btn btn-outline-danger bg-success text-white" type="button">Customer Details</button>
     </div>
   </div>
+
+   <!--Second Row-->
+  <div class="row" *ngIf="buyProductFlag">
+    <div class="col-lg-3 col-sm-3 col-md-3"></div>
+    <div class="col">
+      <table class="table table-hover col-lg-6 col-sm-6 col-md-6" border="2px solid black">
+        <tbody>
+        <tr>
+          <td>Select An Item : </td>
+          <td>
+            <form  class="example-form" name="autoCompleterForm">
+              <mat-form-field  class="example-full-width">
+                <input type="text" placeholder="Enter Here" class="btn text-dark bg-transparent " matInput
+                       [formControl]="myControl" [matAutocomplete]="auto" [(ngModel)]="productFilter.name" name="searchBox">
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option *ngFor="let item of databaseData | filterBy: productFilter"  [value]="item.name" class="active bg-dark text-white rounded-circle"
+                              (click)="productPrice(item)">
+                    <div class="text-center">{{item.name}}</div>
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </form>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Enter Quantity :</td>
+          <td>
+            <form>
+              <div class="form-group">
+                <select class="form-control" id="sel1"  (click)="selectQuantity($event.target.value)"
+                        [(ngModel)]="quantity" [value]="options[0]" name="quantityDropDownform">
+                  <option [value]="option" *ngFor="let option of options">{{option}}</option>
+                </select>
+              </div>
+            </form>
+          </td>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td><input type="button" value="add into table" (click)="addProduct()" class="btn btn-outline-info bg-success text-white"><br><br></td>
+        </tr>
+
+        <tr></tr>
+        <tr></tr>
+        <tr>
+          <td>Total cost:</td>
+          <td><button type="button" class="btn btn-info">{{netTotal}}</button></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <br>
+  <br>
+  <!--Third Row-->
+
+  <div class="row">
+    <div class="col-lg-2 col-sm-2 col-md-2"></div>
+    <div class="col-lg-9 col-sm-9 col-md-9" *ngIf="addTableFlag">
+      <div><strong><h3 class="text-success"><u>Table data:</u></h3></strong></div>
+      <table border="2 px" class="table table-hover table-active"  style="width: 100%;">
+        <thead>
+          <tr>
+            <th >Id</th>
+            <th>ProductName</th>
+            <th>ItemCost</th>
+            <th>Quantity</th>
+            <th>NetCost</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of productTable">
+          <td>{{item.id}}</td>
+          <td>{{item.productName}}</td>
+          <td>{{item.itemCost}}</td>
+          <td>{{item.quantity}}</td>
+          <td>{{item.netCost}}</td>
+          <td><button (click)="removeDataFromTable(item)" type="button" class="btn btn-primary">Remove</button></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!--Fourth Row-->
+  <!--SuccessPage buttons-->
+  <div *ngIf="addTableFlag" class="row">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-3">
+      <button type="button" class="btn p-2 bg-success btn-outline-info text-white float-left"  data-toggle="modal" data-target="#alertModal" (click)="successPageNavigationMethod()">Proceed To Pay</button>
+      <button type="button" class="btn p-2 bg-success btn-outline-info text-white float-right" (click)="cancelMethod()">Cancel</button>
+    </div>
+  </div>
+
+
+  <!--Display Product Data-->
+  <div class="row" *ngIf="displayProductDataFlag">
+    <div class="col-lg-2 col-sm-2 col-md-2"></div>
+    <div class="col-lg-9 col-sm-9 col-md-9">
+      <br>
+      <br>
+      <br>
+      <table class="table">
+        <thead class="bg-dark text-white">
+          <tr>
+            <td><b>id</b></td>
+            <td><b>Product Name</b></td>
+            <td><b>Category</b></td>
+            <td><b>price</b></td>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let productDetails of databaseData">
+            <td>{{productDetails.id}}</td>
+            <td>{{productDetails.name}}</td>
+            <td>{{productDetails.category}}</td>
+            <td>{{productDetails.price}}</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td></td>
+            <td>Close Table Data?</td>
+            <td><button (click)="displayProductDataFlag = false" class="btn btn-outline-info bg-success text-white">close</button></td>
+            <td></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+
 </div>
--->
+
+
+
+
+<br>
+<br>
+<br>
+<br>
+<app-footer></app-footer>
+
 
 
 

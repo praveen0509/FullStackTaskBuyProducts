@@ -8,11 +8,7 @@ import {NgFlashMessageService} from "ng-flash-messages";
   selector: 'app-success-message',
   templateUrl: './success-message.component.html',
   styles: [
-    `
-    .table {
-      background-color: antiquewhite;
-    }
-    
+    `          
     .alert-trim {
       display: inline-block;
     }
@@ -24,7 +20,6 @@ import {NgFlashMessageService} from "ng-flash-messages";
 
     .table-nonfluid {
       width: auto !important;
-      background-color: darkgray;
     }
     `
   ]
@@ -36,11 +31,10 @@ export class SuccessMessageComponent implements OnInit {
   billDBData: any;
   userData: any = {};
   p: number = 1;
-  displayRowPagination: number = 3;
-  tableByNameFlag = false;
-  tableByIdFlag = false;
+  displayRowPagination: number = 5;
   tableDataFlag = false;
-  searchByName = {purchasedBy : '', id: ''};
+  searchByName = {purchasedBy : '', id: '', purchasedOn:''};
+  options = [5,6,7,8,9,10];
 
 
   ngOnInit() {

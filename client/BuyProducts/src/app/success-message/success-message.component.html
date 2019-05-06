@@ -67,7 +67,7 @@
   <div class="row">
     <div class="col-sm-3"></div>
     <div class="col-sm-7">
-      <strong><h3>Customer Details:</h3></strong>
+      <strong><h3 class="text-success">Customer Details:</h3></strong>
       <table class="table table-bordered">
         <tbody>
         <tr>
@@ -92,32 +92,43 @@
   </div>
 
   <div class="row">
-    <div class="col-lg-5"></div>
+    <div class="col-lg-3"></div>
     <div class="col">
       <table>
         <tbody>
         <tr>
           <td>Enter number of rows to display:</td>
-          <td><input type="number" max="20" min="3" [(ngModel)]="displayRowPagination"></td>
+          <td><!--<input type="number" max="20" min="3" [(ngModel)]="displayRowPagination">-->
+            <form>
+              <div class="form-group">
+                <select class="form-control" id="sel1" se
+                        [(ngModel)]="displayRowPagination" [value]="" name="quantityDropDownform">
+                  <option [value]="option" *ngFor="let option of options">{{option}}</option>
+                </select>
+              </div>
+            </form>
+          </td>
         </tr>
-        <tr>
-          <td><input type="text" [(ngModel)]="searchByName.purchasedBy" placeholder="search by name" (click)="tableDataFlag = true"></td>
-        </tr>
-        <tr>
-          <td><input type="text" [(ngModel)]="searchByName.id" placeholder="search by id" (click)="tableDataFlag = true"></td>
-        </tr>
-        <tr *ngIf="tableDataFlag"><td>
-          <button class="btn btn-outline-info btn-primary text-white" (click)="tableDataFlag= false">Close</button></td>
+        <tr style="text-align: center">
+          <td><input type="text" [(ngModel)]="searchByName.purchasedBy" placeholder="search by name" (click)="tableDataFlag = true" class="btn border-dark"></td>
+          <td><input type="text" [(ngModel)]="searchByName.id" placeholder="search by id" class="btn border-dark" (click)="tableDataFlag = true"></td>
+          <td><input type="text" [(ngModel)]="searchByName.purchasedOn" placeholder="search by date" class="btn border-dark" (click)="tableDataFlag = true"></td>
+          <td><button *ngIf="tableDataFlag" class="btn btn-outline-info btn-primary text-white" (click)="tableDataFlag= false">Close</button></td>
         </tr>
         </tbody>
       </table>
     </div>
   </div>
 
+  <br>
+  <br>
+  <br>
+
 
   <div class="row">
-    <div class="col-sm-12 col-md-12 col-lg-12" *ngIf="tableDataFlag">
-      <div><strong>Customer Details</strong></div>
+    <div class="col-sm-2 col-md-2 col-lg-2"></div>
+    <div class="col-sm-10 col-md-10 col-lg-10" *ngIf="tableDataFlag">
+      <div class="text-success"><strong><h3>Customers Details:</h3></strong></div>
       <table class="table table-bordered table-nonfluid table-hover">
         <thead>
         <tr>
@@ -131,7 +142,7 @@
         <tr *ngFor="let billData of billDBData| filterBy: searchByName | paginate: { itemsPerPage: displayRowPagination, currentPage: p }">
           <td>{{billData.id}}</td>
           <td>{{billData.purchasedBy}}</td>
-          <td>{{billData.purchasedOn}}</td>
+          <td class="text-center">{{billData.purchasedOn}}</td>
           <td>{{billData.total}}</td>
         </tr>
         </tbody>
@@ -139,10 +150,11 @@
         <tr>
           <td></td>
           <td></td>
-          <td><div class="row"  *ngIf="tableDataFlag"><pagination-controls (pageChange)="p = $event"></pagination-controls></div>
+          <td><div class="float-left" *ngIf="tableDataFlag"><pagination-controls (pageChange)="p = $event"></pagination-controls></div>
             <br>
             <div>.</div>
           </td>
+          <td></td>
         </tr>
         </tfoot>
       </table>
@@ -150,6 +162,11 @@
   </div>
 
 </div>
+
+<br>
+<br>
+<br>
+<br>
 
 <app-footer></app-footer>
 

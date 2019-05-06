@@ -19,12 +19,9 @@ import {LocalStorage} from "@ngx-pwa/local-storage";
         width: 100%;
         float: right;
       }
-
-      .btn{
-        color: indigo;
-        background-color: cyan;
-        border-color: indigo;
-        border-style: dot-dash;
+        
+      .table {
+        text-align: center;
       }
 
       .autoc {
@@ -40,14 +37,17 @@ export class BuyProductHomePageComponent implements OnInit {
 
   myControl = new FormControl();
   addTableFlag = false;
-  homePageFlag = false;
-  autoCompleteOnFlag = false;
+  buyProductFlag = false;
+  displayProductDataFlag = false;
   productFilter = { name: ''};
   userName: string;
   email: string;
   productId: number;
   productTable = [] ;
+  itemDetails = {};
   databaseData: any ;
+  productName: string;
+  productCategory: string;
 
   options = [1, 2, 3, 4, 5];
   productCost = 0;
@@ -60,7 +60,6 @@ export class BuyProductHomePageComponent implements OnInit {
 
   ngOnInit() {
       this.databaseDataSubscribeMethod();
-
       this.localStorage.getItem('key').subscribe((customerDetails)=>{
         this.userName = customerDetails.userName;
         this.email = customerDetails.email;
@@ -93,11 +92,10 @@ export class BuyProductHomePageComponent implements OnInit {
             productObject['netCost'] = this.netCost;
             this.productTable.push(productObject);
 
-         let itemDetails = {};
-           itemDetails['productId'] = --this.productId+1;
-           itemDetails['quantity'] = this.quantity;
-           itemDetails['totalCost'] = this.netCost;
-           this.dbServiceObj.postItemData(itemDetails).subscribe((response) => console.log(response));
+           this.itemDetails['productId'] = --this.productId+1;
+           this.itemDetails['quantity'] = this.quantity;
+           this.itemDetails['totalCost'] = this.netCost;
+           this.dbServiceObj.postItemData(this.itemDetails).subscribe((response) => console.log(response));
            this.productFilter.name = '';
            this.quantity = 1;
       }
@@ -109,9 +107,11 @@ export class BuyProductHomePageComponent implements OnInit {
       this.quantity = id;
   }
 
-  productPrice(cost, productId) {
-    this.productCost = cost;
-    this.productId = productId;
+  productPrice(item) {
+    this.productCost = item.price;
+    this.productId = item.id;
+    this.productName = item.name;
+    this.productCategory = item.category;
   }
 
   successPageNavigationMethod() {
@@ -125,10 +125,6 @@ export class BuyProductHomePageComponent implements OnInit {
           }
       };
 
-
-    2
-    3
-    4
     var today = new Date();
     var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
@@ -150,4 +146,17 @@ export class BuyProductHomePageComponent implements OnInit {
     this.autoIncrement = 0;
     this.netTotal = 0;
   }
+
+  removeDataFromTable(item) {
+    console.log(this.databaseData[0], item);
+    for( let i=0; i< this.databaseData.length; i++) {
+      if(this.databaseData[i].name === item.productName){
+        console.log(i);
+        console.log(this.databaseData.splice(i,1));
+      }
+    }
+
+    // this.databaseData.splice(item.findIndex(index => { index.id = item.id; } ), 1);
+  }
+
 }
