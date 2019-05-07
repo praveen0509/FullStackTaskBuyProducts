@@ -1,91 +1,4 @@
 
-<!--
-<div class="container">
-  <div class="row">
-    <div class="col-sm-6">
-      <table >
-        <tbody>
-          <tr>
-            <td>Select An Item : </td>
-            <td>
-                <form  class="example-form" name="autoCompleterForm">
-                <mat-form-field  class="example-full-width">
-                  <input type="text" placeholder="" class="text-dark bg-transparent " matInput
-                         [formControl]="myControl" [matAutocomplete]="auto" [(ngModel)]="productFilter.name" name="searchBox">
-                  <mat-autocomplete #auto="matAutocomplete">
-                    <mat-option *ngFor="let item of databaseData | filterBy: productFilter"  [value]="item.name" class="active bg-dark text-white rounded-circle"
-                                (click)="productPrice(item)">
-                      <div class="text-center">{{item.name}}</div>
-                    </mat-option>
-                  </mat-autocomplete>
-                </mat-form-field>
-              </form>
-            </td>
-          </tr>
-
-          <tr>
-            <td>Enter Quantity :</td>
-            <td>
-               <form>
-                <div class="form-group">
-                  <select class="form-control" id="sel1"  (click)="selectQuantity($event.target.value)"
-                          [(ngModel)]="quantity" [value]="options[0]" name="quantityDropDownform">
-                    <option [value]="option" *ngFor="let option of options">{{option}}</option>
-                  </select>
-                </div>
-              </form>
-             </td>
-          </tr>
-
-          <tr>
-            <td></td>
-            <td><input type="button" value="add into table" (click)="addProduct()" class="btn"><br><br></td>
-          </tr>
-
-          <tr></tr>
-          <tr></tr>
-          <tr>
-            <td>Total cost:</td>
-            <td><button type="button" class="btn-info">{{netTotal}}</button></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="col">
-        <table border="2 px" class="table table-hover" *ngIf="addTableFlag" style="width: 100%;">
-          <thead>
-          <tr>
-            <th >Id</th>
-            <th>ProductName</th>
-            <th>ItemCost</th>
-            <th>Quantity</th>
-            <th>NetCost</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let item of productTable">
-            <td>{{item.id}}</td>
-            <td>{{item.productName}}</td>
-            <td>{{item.itemCost}}</td>
-            <td>{{item.quantity}}</td>
-            <td>{{item.netCost}}</td>
-          </tr>
-          </tbody>
-        </table>
-    </div>
-  </div>
-
-  <div class="row" *ngIf="addTableFlag">
-    <div class="col-sm-4"></div>
-    <div class="col-sm-6">
-      <button type="button" class="btn p-2"  data-toggle="modal" data-target="#alertModal" (click)="successPageNavigationMethod()">Proceed To Pay</button>
-      <button type="button" class="btn p-2" (click)="cancelMethod()">Cancel</button>
-    </div>
-  </div>
-</div>
--->
-
 <app-header></app-header>
 <div class="container">
   <!--First Row-->
@@ -139,7 +52,8 @@
 
         <tr>
           <td></td>
-          <td><input type="button" value="add into table" (click)="addProduct()" class="btn btn-outline-info bg-success text-white"><br><br></td>
+          <td><input type="button" value="add into table" (click)="addProduct()" class="btn btn-outline-info bg-success text-white">
+            </td>
         </tr>
 
         <tr></tr>

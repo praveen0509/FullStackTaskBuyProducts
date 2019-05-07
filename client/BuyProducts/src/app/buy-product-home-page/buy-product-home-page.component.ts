@@ -8,7 +8,7 @@ import {LocalStorage} from "@ngx-pwa/local-storage";
   selector: 'app-buy-product-home-page',
   templateUrl: './buy-product-home-page.component.html',
   styles: [
-    `
+      `
       .example-form {
         min-width: 150px;
         max-width: 500px;
@@ -19,7 +19,7 @@ import {LocalStorage} from "@ngx-pwa/local-storage";
         width: 100%;
         float: right;
       }
-        
+
       .table {
         text-align: center;
       }
@@ -59,52 +59,52 @@ export class BuyProductHomePageComponent implements OnInit {
 
 
   ngOnInit() {
-      this.databaseDataSubscribeMethod();
-      this.localStorage.getItem('key').subscribe((customerDetails)=>{
-        this.userName = customerDetails.userName;
-        this.email = customerDetails.email;
-      })
+    this.databaseDataSubscribeMethod();
+    this.localStorage.getItem('key').subscribe((customerDetails)=>{
+      this.userName = customerDetails.userName;
+      this.email = customerDetails.email;
+    })
   }
 
   databaseDataSubscribeMethod() {
-      this.dbServiceObj.getProductData().subscribe((resolve) => {
-        console.log(resolve);
-        this.databaseData = resolve;
-      });
+    this.dbServiceObj.getProductData().subscribe((resolve) => {
+      console.log(resolve);
+      this.databaseData = resolve;
+    });
   }
 
 
 
   addProduct() {
     for (let i = 0; i < this.databaseData.length; i++) {
-                                                    // total : total qauntity cost
-                                                    // netTotal: Total of all the ItemsCost
-                                                    // productCost: Cost of one Product:
+      // total : total qauntity cost
+      // netTotal: Total of all the ItemsCost
+      // productCost: Cost of one Product:
       if (this.productFilter.name === this.databaseData[i].name) {
-            this.netCost = this.productCost * this.quantity;
-            this.netTotal = this.netTotal + this.netCost;
-            this.addTableFlag = true;       // Enables Table
-            const productObject = {};
-            productObject['id'] = ++this.autoIncrement;
-            productObject['productName'] =  this.productFilter.name;
-            productObject['itemCost'] = this.productCost;
-            productObject['quantity'] = this.quantity;
-            productObject['netCost'] = this.netCost;
-            this.productTable.push(productObject);
+        this.netCost = this.productCost * this.quantity;
+        this.netTotal = this.netTotal + this.netCost;
+        this.addTableFlag = true;       // Enables Table
+        const productObject = {};
+        productObject['id'] = ++this.autoIncrement;
+        productObject['productName'] =  this.productFilter.name;
+        productObject['itemCost'] = this.productCost;
+        productObject['quantity'] = this.quantity;
+        productObject['netCost'] = this.netCost;
+        this.productTable.push(productObject);
 
-           this.itemDetails['productId'] = --this.productId+1;
-           this.itemDetails['quantity'] = this.quantity;
-           this.itemDetails['totalCost'] = this.netCost;
-           // this.dbServiceObj.postItemData(this.itemDetails).subscribe((response) => console.log(response));
-           this.productFilter.name = '';
-           this.quantity = 1;
+        this.itemDetails['productId'] = --this.productId+1;
+        this.itemDetails['quantity'] = this.quantity;
+        this.itemDetails['totalCost'] = this.netCost;
+        // this.dbServiceObj.postItemData(this.itemDetails).subscribe((response) => console.log(response));
+        this.productFilter.name = '';
+        this.quantity = 1;
       }
     }
   }
 
 
   selectQuantity(id: number) {
-      this.quantity = id;
+    this.quantity = id;
   }
 
   productPrice(item) {
@@ -115,15 +115,15 @@ export class BuyProductHomePageComponent implements OnInit {
   }
 
   successPageNavigationMethod() {
-      let navigationextras: NavigationExtras = {
-          queryParams : {
-            'userName' : this.userName,
-            'email'    : this.email,
-            'noOfItems': this.autoIncrement,
-            'totalCost': this.netTotal,
-            'ItemsList': this.productTable
-          }
-      };
+    let navigationextras: NavigationExtras = {
+      queryParams : {
+        'userName' : this.userName,
+        'email'    : this.email,
+        'noOfItems': this.autoIncrement,
+        'totalCost': this.netTotal,
+        'ItemsList': this.productTable
+      }
+    };
 
     var today = new Date();
     var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
@@ -136,7 +136,6 @@ export class BuyProductHomePageComponent implements OnInit {
       netTotal: this.netTotal
     }
     this.dbServiceObj.postBillData(billDetails).subscribe((response) => console.log(response));
-
     this.router.navigate(['successPage'], navigationextras);
   }
 

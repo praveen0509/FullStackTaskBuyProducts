@@ -8,19 +8,19 @@ import {NgFlashMessageService} from "ng-flash-messages";
   selector: 'app-success-message',
   templateUrl: './success-message.component.html',
   styles: [
-    `          
-    .alert-trim {
-      display: inline-block;
-    }
-      
-    .alert {
-      background-color: green;
-      color: azure;
-    }
+      `
+      .alert-trim {
+        display: inline-block;
+      }
 
-    .table-nonfluid {
-      width: auto !important;
-    }
+      .alert {
+        background-color: green;
+        color: azure;
+      }
+
+      .table-nonfluid {
+        width: auto !important;
+      }
     `
   ]
 })
@@ -31,6 +31,7 @@ export class SuccessMessageComponent implements OnInit {
   billDBData: any;
   userData: any = {};
   p: number = 1;
+  selectedItemsList: any;
   displayRowPagination: number = 5;
   tableDataFlag = false;
   searchByName = {purchasedBy : '', id: '', purchasedOn:''};
@@ -48,7 +49,7 @@ export class SuccessMessageComponent implements OnInit {
     this.localStorage.getItem('key').subscribe((customerDetails)=> {
       this.userData['userName'] = customerDetails['userName'];
       this.userData['email'] = customerDetails['email'];
-    })
+    });
 
     this.dbServiceObj.getBillData().subscribe((resolve) => {
       this.billDBData = resolve;

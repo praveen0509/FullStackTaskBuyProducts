@@ -13,16 +13,19 @@ module.exports = {
         references: {
           model: 'productModels',
           key: 'id'
-        }
+        },
+        onDelete: 'CASCADE'
       },
 
       billId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'bill',
+          model: 'bills',
           key: 'id'
-        }
+        },
+        onDelete: 'CASCADE'
       },
+
       quantity: {
         type: Sequelize.INTEGER
       },

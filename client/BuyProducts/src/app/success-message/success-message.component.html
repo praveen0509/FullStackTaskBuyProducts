@@ -2,64 +2,6 @@
 <h1><ng-flash-message></ng-flash-message></h1>
 
 <div class="container-fluid">
-  <!--<div class="row">
-    <div class="col-sm-5 col-md-5 col-lg-5">
-      <div class="row">
-        <div class="col-sm-12">
-
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-sm-12 col-md-12 col-lg-12">
-          <table class="table table-bordered">
-            <tbody>
-            <tr>
-              <td><b>Customer Name:</b></td>
-              <td>{{userData.userName}}</td>
-            </tr>
-            <tr>
-              <td><b>Email:</b></td>
-              <td>{{userData.email}}</td>
-            </tr>
-            <tr>
-              <td><b>Number Of Items:</b></td>
-              <td>{{userData.noOfItems}}</td>
-            </tr>
-            <tr>
-              <td><b>TotalCost:</b></td>
-              <td>{{userData.totalCost}}</td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-sm-12 col-md-12 col-lg-12">
-          <table>
-            <tbody>
-              <tr>
-                <td>Enter number of rows to display:</td>
-                <td><input type="number" max="20" min="3" [(ngModel)]="displayRowPagination"></td>
-              </tr>
-              <tr>
-                <td><input type="text" [(ngModel)]="searchByName.purchasedBy" placeholder="search by name" (click)="tableDataFlag = true"></td>
-              </tr>
-              <tr>
-                <td><input type="text" [(ngModel)]="searchByName.id" placeholder="search by id" (click)="tableDataFlag = true"></td>
-              </tr>
-              <tr *ngIf="tableByNameFlag || tableByIdFlag">
-                <td >Wants To Close.....</td>
-                <td><a class="text-primary" (click)="tableDataFlag= false"><u>click Here</u></a></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>-->
-
   <div class="row">
     <div class="col-lg-4"><ng-flash-message></ng-flash-message></div>
   </div>
@@ -124,7 +66,7 @@
   <br>
   <br>
 
-
+<!--Display iing customer Details who buyed products-->
   <div class="row">
     <div class="col-sm-2 col-md-2 col-lg-2"></div>
     <div class="col-sm-10 col-md-10 col-lg-10" *ngIf="tableDataFlag">
@@ -142,7 +84,7 @@
         <tr *ngFor="let billData of billDBData| filterBy: searchByName | paginate: { itemsPerPage: displayRowPagination, currentPage: p }">
           <td>{{billData.id}}</td>
           <td>{{billData.purchasedBy}}</td>
-          <td class="text-center">{{billData.purchasedOn}}</td>
+          <td class="text-center">{{billData.purchasedOn | date}}</td>
           <td>{{billData.total}}</td>
         </tr>
         </tbody>
@@ -160,7 +102,27 @@
       </table>
     </div>
   </div>
+</div>
 
+
+<!-- Modal -->
+<div class="container">
+  <div class="modal fade"  role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Your list of Items</h4>
+        </div>
+        <div class="modal-body">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <p>This is a large modal.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <br>
