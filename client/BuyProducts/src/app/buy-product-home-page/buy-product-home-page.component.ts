@@ -95,7 +95,7 @@ export class BuyProductHomePageComponent implements OnInit {
            this.itemDetails['productId'] = --this.productId+1;
            this.itemDetails['quantity'] = this.quantity;
            this.itemDetails['totalCost'] = this.netCost;
-           this.dbServiceObj.postItemData(this.itemDetails).subscribe((response) => console.log(response));
+           // this.dbServiceObj.postItemData(this.itemDetails).subscribe((response) => console.log(response));
            this.productFilter.name = '';
            this.quantity = 1;
       }
@@ -148,11 +148,12 @@ export class BuyProductHomePageComponent implements OnInit {
   }
 
   removeDataFromTable(item) {
-    console.log(this.databaseData[0], item);
-    for( let i=0; i< this.databaseData.length; i++) {
-      if(this.databaseData[i].name === item.productName){
-        console.log(i);
-        console.log(this.databaseData.splice(i,1));
+    console.log(this.productTable[0], item);
+    for( let i=0; i< this.productTable.length; i++) {
+      if(this.productTable[i].productName === item.productName){
+        this.productTable.splice(i,1);
+        --this.autoIncrement;
+        this.netTotal = this.netTotal - item.netCost;
       }
     }
 

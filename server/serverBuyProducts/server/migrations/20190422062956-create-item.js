@@ -15,6 +15,14 @@ module.exports = {
           key: 'id'
         }
       },
+
+      billId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'bill',
+          key: 'id'
+        }
+      },
       quantity: {
         type: Sequelize.INTEGER
       },

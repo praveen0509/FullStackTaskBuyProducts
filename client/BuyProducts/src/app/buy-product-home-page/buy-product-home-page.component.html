@@ -204,7 +204,7 @@
     <div class="col-lg-9 col-sm-9 col-md-9">
       <br>
       <br>
-      <br>
+      <div><strong><h3 class="text-success"><u>Product details:</u></h3></strong></div>
       <table class="table">
         <thead class="bg-dark text-white">
           <tr>
@@ -223,11 +223,12 @@
             <td>{{productDetails.price}}</td>
           </tr>
         </tbody>
+
         <tfoot>
           <tr>
             <td></td>
-            <td>Close Table Data?</td>
-            <td><button (click)="displayProductDataFlag = false" class="btn btn-outline-info bg-success text-white">close</button></td>
+            <td class="float-right">  Close Table Data?</td>
+            <td><button (click)="displayProductDataFlag = false" class="btn btn-outline-info bg-success text-white float-left">close</button></td>
             <td></td>
           </tr>
         </tfoot>

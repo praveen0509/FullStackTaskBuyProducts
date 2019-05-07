@@ -80,7 +80,7 @@
         </tr>
         <tr>
           <td><b>Number Of Items:</b></td>
-          <td>{{userData.noOfItems}}</td>
+          <td>{{userData.noOfItems}} <div class="float-right"><button type="button" class="btn btn-primary">Display Items List</button></div></td>
         </tr>
         <tr>
           <td><b>TotalCost:</b></td>
@@ -112,7 +112,7 @@
         <tr style="text-align: center">
           <td><input type="text" [(ngModel)]="searchByName.purchasedBy" placeholder="search by name" (click)="tableDataFlag = true" class="btn border-dark"></td>
           <td><input type="text" [(ngModel)]="searchByName.id" placeholder="search by id" class="btn border-dark" (click)="tableDataFlag = true"></td>
-          <td><input type="text" [(ngModel)]="searchByName.purchasedOn" placeholder="search by date" class="btn border-dark" (click)="tableDataFlag = true"></td>
+          <td><input type="text" [(ngModel)]="searchByName.purchasedOn" placeholder="search by date(yy-mm-dd)" class="btn border-dark" (click)="tableDataFlag = true"></td>
           <td><button *ngIf="tableDataFlag" class="btn btn-outline-info btn-primary text-white" (click)="tableDataFlag= false">Close</button></td>
         </tr>
         </tbody>
