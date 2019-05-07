@@ -1,5 +1,4 @@
 import ItemDao from '../dao/item-dao';
-// import ProductModelDao from "../../productModel/dao/productModel-dao";
 
 export default class ItemController {
 
@@ -8,19 +7,26 @@ export default class ItemController {
     ItemDao.getAll(deptQuery).then(items => {
       res.status(200);
       res.send(items);
-      // console.log('ItemController getAll method Called');
     }).catch(error => res.status(400).json(error));
   }
 
   static add(req, res){
     let _body = req.body;
-    // console.log(_body);
     ItemDao.add(_body).then(addedItem=> {
       res.status(200);
       res.send(addedItem);
     }).catch(error => res.status(400).json(error));
   }
 
+  static bulkAdd(req, res) {
+    const _reqBody = req.body;
+    console.log('controller:', req.body);
+    ItemDao.bulkAdd(_reqBody, _reqBody["billId"].id)
+      .then( itemDao =>{
+        res.status(201).json(itemDao);
+      }) .catch(error => { res(error).json(error); });
+
+  }
 
   static getById(req, res){
     ItemDao.getById(req.id).then(itemById=> {

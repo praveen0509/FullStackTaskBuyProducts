@@ -9,7 +9,7 @@
   <div class="row">
     <div class="col-sm-3"></div>
     <div class="col-sm-7">
-      <strong><h3 class="text-success">Customer Details:</h3></strong>
+      <strong><h3 class="text-success">Your cart details:</h3></strong>
       <table class="table table-bordered">
         <tbody>
         <tr>
@@ -22,7 +22,8 @@
         </tr>
         <tr>
           <td><b>Number Of Items:</b></td>
-          <td>{{userData.noOfItems}} <div class="float-right"><button type="button" class="btn btn-primary">Display Items List</button></div></td>
+          <td>{{userData.noOfItems}} <div class="float-right">
+            <button type="button" class="btn btn-primary" >Display Items List</button></div></td>
         </tr>
         <tr>
           <td><b>TotalCost:</b></td>
@@ -32,104 +33,12 @@
       </table>
     </div>
   </div>
-
-  <div class="row">
-    <div class="col-lg-3"></div>
-    <div class="col">
-      <table>
-        <tbody>
-        <tr>
-          <td>Enter number of rows to display:</td>
-          <td><!--<input type="number" max="20" min="3" [(ngModel)]="displayRowPagination">-->
-            <form>
-              <div class="form-group">
-                <select class="form-control" id="sel1" se
-                        [(ngModel)]="displayRowPagination" [value]="" name="quantityDropDownform">
-                  <option [value]="option" *ngFor="let option of options">{{option}}</option>
-                </select>
-              </div>
-            </form>
-          </td>
-        </tr>
-        <tr style="text-align: center">
-          <td><input type="text" [(ngModel)]="searchByName.purchasedBy" placeholder="search by name" (click)="tableDataFlag = true" class="btn border-dark"></td>
-          <td><input type="text" [(ngModel)]="searchByName.id" placeholder="search by id" class="btn border-dark" (click)="tableDataFlag = true"></td>
-          <td><input type="text" [(ngModel)]="searchByName.purchasedOn" placeholder="search by date(yy-mm-dd)" class="btn border-dark" (click)="tableDataFlag = true"></td>
-          <td><button *ngIf="tableDataFlag" class="btn btn-outline-info btn-primary text-white" (click)="tableDataFlag= false">Close</button></td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <br>
-  <br>
-  <br>
-
-<!--Display iing customer Details who buyed products-->
-  <div class="row">
-    <div class="col-sm-2 col-md-2 col-lg-2"></div>
-    <div class="col-sm-10 col-md-10 col-lg-10" *ngIf="tableDataFlag">
-      <div class="text-success"><strong><h3>Customers Details:</h3></strong></div>
-      <table class="table table-bordered table-nonfluid table-hover">
-        <thead>
-        <tr>
-          <td ><strong>id</strong></td>
-          <td><strong>Customer Name</strong></td>
-          <td class="text-center"><strong>Date</strong></td>
-          <td><strong>Total Cost</strong></td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let billData of billDBData| filterBy: searchByName | paginate: { itemsPerPage: displayRowPagination, currentPage: p }">
-          <td>{{billData.id}}</td>
-          <td>{{billData.purchasedBy}}</td>
-          <td class="text-center">{{billData.purchasedOn | date}}</td>
-          <td>{{billData.total}}</td>
-        </tr>
-        </tbody>
-        <tfoot>
-        <tr>
-          <td></td>
-          <td></td>
-          <td><div class="float-left" *ngIf="tableDataFlag"><pagination-controls (pageChange)="p = $event"></pagination-controls></div>
-            <br>
-            <div>.</div>
-          </td>
-          <td></td>
-        </tr>
-        </tfoot>
-      </table>
-    </div>
-  </div>
-</div>
-
-
-<!-- Modal -->
-<div class="container">
-  <div class="modal fade"  role="dialog">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Your list of Items</h4>
-        </div>
-        <div class="modal-body">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <p>This is a large modal.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
 
 <br>
 <br>
 <br>
 <br>
-
 <app-footer></app-footer>
 
 

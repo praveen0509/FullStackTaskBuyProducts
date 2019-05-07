@@ -23,6 +23,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import {NgxPaginationModule} from "ngx-pagination";
 import {NgFlashMessagesModule} from "ng-flash-messages";
 import {FlashMessagesModule} from "ngx-flash-messages";
+import { PreviousOrdersComponent } from './previous-orders/previous-orders.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import {FlashMessagesModule} from "ngx-flash-messages";
     LoginPageComponent,
     WelcomePageComponent,
     LogoutComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    PreviousOrdersComponent
   ],
   imports: [
     BrowserModule,

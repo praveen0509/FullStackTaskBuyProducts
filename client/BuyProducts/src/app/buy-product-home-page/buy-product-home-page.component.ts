@@ -42,9 +42,20 @@ export class BuyProductHomePageComponent implements OnInit {
   productFilter = { name: ''};
   userName: string;
   email: string;
+
+
+  selectedItemsList: any;
+  displayRowPagination: number = 5;
+  tableDataFlag = false;
+  searchByName = {purchasedBy : '', id: '', purchasedOn:''};
+  paginationOptions = [5,6,7,8,9,10];
+  billDBData: any;
+
   productId: number;
+  billId = 1;
+
   productTable = [] ;
-  itemDetails = {};
+  listOfItemsDetails = [];
   databaseData: any ;
   productName: string;
   productCategory: string;
@@ -64,6 +75,10 @@ export class BuyProductHomePageComponent implements OnInit {
       this.userName = customerDetails.userName;
       this.email = customerDetails.email;
     })
+
+    this.dbServiceObj.getBillData().subscribe((resolve) => {
+      this.billDBData = resolve;
+    });
   }
 
   databaseDataSubscribeMethod() {
@@ -75,6 +90,8 @@ export class BuyProductHomePageComponent implements OnInit {
 
 
 
+
+
   addProduct() {
     for (let i = 0; i < this.databaseData.length; i++) {
       // total : total qauntity cost
@@ -83,7 +100,7 @@ export class BuyProductHomePageComponent implements OnInit {
       if (this.productFilter.name === this.databaseData[i].name) {
         this.netCost = this.productCost * this.quantity;
         this.netTotal = this.netTotal + this.netCost;
-        this.addTableFlag = true;       // Enables Table
+        this.addTableFlag = true;       // Enables selected ItemsList Table
         const productObject = {};
         productObject['id'] = ++this.autoIncrement;
         productObject['productName'] =  this.productFilter.name;
@@ -92,10 +109,12 @@ export class BuyProductHomePageComponent implements OnInit {
         productObject['netCost'] = this.netCost;
         this.productTable.push(productObject);
 
-        this.itemDetails['productId'] = --this.productId+1;
-        this.itemDetails['quantity'] = this.quantity;
-        this.itemDetails['totalCost'] = this.netCost;
-        // this.dbServiceObj.postItemData(this.itemDetails).subscribe((response) => console.log(response));
+        let itemDetails = {};
+        itemDetails['productId'] = this.productId;
+        itemDetails['quantity'] = this.quantity;
+        itemDetails['totalCost'] = this.netCost;
+        this.listOfItemsDetails.push(itemDetails);
+        console.log(this.listOfItemsDetails);
         this.productFilter.name = '';
         this.quantity = 1;
       }
@@ -107,11 +126,11 @@ export class BuyProductHomePageComponent implements OnInit {
     this.quantity = id;
   }
 
-  productPrice(item) {
-    this.productCost = item.price;
-    this.productId = item.id;
-    this.productName = item.name;
-    this.productCategory = item.category;
+  productDetails(product) {
+    this.productCost = product.price;
+    this.productId = product.id;
+    this.productName = product.name;
+    this.productCategory = product.category;
   }
 
   successPageNavigationMethod() {
@@ -135,7 +154,9 @@ export class BuyProductHomePageComponent implements OnInit {
       list: this.autoIncrement,
       netTotal: this.netTotal
     }
-    this.dbServiceObj.postBillData(billDetails).subscribe((response) => console.log(response));
+    ++this.billId;
+    this.dbServiceObj.bulkPostItemData(this.listOfItemsDetails, this.billId).subscribe((response) => console.log(response));
+    this.dbServiceObj.postBillData(billDetails, this.billId).subscribe((response) => console.log(response));
     this.router.navigate(['successPage'], navigationextras);
   }
 
@@ -155,8 +176,6 @@ export class BuyProductHomePageComponent implements OnInit {
         this.netTotal = this.netTotal - item.netCost;
       }
     }
-
-    // this.databaseData.splice(item.findIndex(index => { index.id = item.id; } ), 1);
   }
 
 }

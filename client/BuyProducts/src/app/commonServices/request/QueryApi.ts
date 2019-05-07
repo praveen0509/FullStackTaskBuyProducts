@@ -11,7 +11,7 @@ export class QueryApi {
   }
 
 
-  doPost(url: string, params: any) {
+  doPost(url: string, params: any, headers?: any) {
     url = UserEndPoint(url);
     return this.http.post(url, params);
   }

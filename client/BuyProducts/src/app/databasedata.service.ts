@@ -18,15 +18,23 @@ export class DatabasedataService {
 
   getBillData() : Observable <any> {
     let req;
-    return this.queryApi.doGet('BILL_DETAILS', req).pipe(catchError(err => of([err])));
+    return this.queryApi.doGet('BILL_DETAILS', req)
+      .pipe(catchError(err => of([err])));
   }
 
   postItemData(itemDetails): Observable<any> {
-    return this.queryApi.doPost('INSERT_DATA_INTO_ITEM', itemDetails).pipe(catchError(err => of([err])));
+    return this.queryApi.doPost('INSERT_DATA_INTO_ITEM', itemDetails)
+      .pipe(catchError(err => of([err])));
   }
 
-  postBillData(billDetails): Observable<any> {
-    return this.queryApi.doPost('INSERT_DATA_INTO_BILL', billDetails).pipe(catchError(err => of([err])));
+  bulkPostItemData(listOfItemsDetails, billId): Observable<any> {
+    return this.queryApi.doPost('BULK_INSERT_DATA_INTO_ITEM', {"itemDetails":listOfItemsDetails,"billId":billId})
+      .pipe(catchError(err => of([err])));
+  }
+
+  postBillData(billDetails, billId): Observable<any> {
+    return this.queryApi.doPost('INSERT_DATA_INTO_BILL', billDetails)
+      .pipe(catchError(err => of([err])));
   }
 
 }

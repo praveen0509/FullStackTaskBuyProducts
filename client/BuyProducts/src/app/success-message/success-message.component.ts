@@ -31,11 +31,6 @@ export class SuccessMessageComponent implements OnInit {
   billDBData: any;
   userData: any = {};
   p: number = 1;
-  selectedItemsList: any;
-  displayRowPagination: number = 5;
-  tableDataFlag = false;
-  searchByName = {purchasedBy : '', id: '', purchasedOn:''};
-  options = [5,6,7,8,9,10];
 
 
   ngOnInit() {

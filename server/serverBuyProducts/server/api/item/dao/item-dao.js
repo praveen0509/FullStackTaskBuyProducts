@@ -7,17 +7,14 @@ const item = require('/home/sb-33/Desktop/FullStackTask/FullStackTaskBuyProducts
 export default class ItemDao {
   static getAll(_query) {
     return new Promise((resolve, reject) => {
-      console.log('itemDao getAll method called ');
       models.item.findAll()
         .then(items => {
-          console.log('all users are'+JSON.stringify(items))
           resolve(items);
         });
     });
   }
 
   static add(body) {
-    // console.log(body);
     return new Promise((resolve, reject) => {
       models.item
         .create({
@@ -28,6 +25,23 @@ export default class ItemDao {
         })
         .then(() => {})
         .catch(() => {})
+    });
+  }
+
+  static bulkAdd(body, id) {
+    return new Promise((resolve, reject)=> {
+      var productList = [];
+      for(let i=0;i<body.itemDetails.length;i++){
+        console.log(body.itemDetails.length, body.itemDetails[0]);
+        productList.push({
+          productId:body.itemDetails[i].productId,
+          billId  : parseInt(body.itemDetails[i].id),
+          quantity : body.itemDetails[i].quantity,
+          totalCost:body.itemDetails[i].totalCost
+        })
+      } models.item.bulkCreate(productList,{returning: true})
+    }).then((result)=>{
+      resolve(result);
     });
   }
 

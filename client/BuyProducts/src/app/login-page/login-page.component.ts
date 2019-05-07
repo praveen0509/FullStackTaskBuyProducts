@@ -31,8 +31,7 @@ export class LoginPageComponent implements OnInit {
   enterIntoproject() {
     if (this.userName != null && this.email != null && this.userName.match('[a-zA-Z0-9]')) {
       let customerDetails = {userName: this.userName, email: this.email};
-      this.localStorage.setItem('key', customerDetails).subscribe(() => {
-      });
+      this.localStorage.setItem('key', customerDetails).subscribe(() => { });
       this.router.navigate(['/buyProductsPage']);
     }
   }
