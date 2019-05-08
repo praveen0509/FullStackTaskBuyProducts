@@ -24,6 +24,7 @@ import {NgxPaginationModule} from "ngx-pagination";
 import {NgFlashMessagesModule} from "ng-flash-messages";
 import {FlashMessagesModule} from "ngx-flash-messages";
 import { PreviousOrdersComponent } from './previous-orders/previous-orders.component';
+import { ProductsListComponent } from './products-list/products-list.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { PreviousOrdersComponent } from './previous-orders/previous-orders.compo
     WelcomePageComponent,
     LogoutComponent,
     RegistrationComponent,
-    PreviousOrdersComponent
+    PreviousOrdersComponent,
+    ProductsListComponent
   ],
   imports: [
     BrowserModule,
@@ -60,6 +62,7 @@ import { PreviousOrdersComponent } from './previous-orders/previous-orders.compo
       { path: 'buyProductsPage', component: BuyProductHomePageComponent},
       { path: 'loginPage', component: LoginPageComponent },
       { path: 'logoutPage', component: LogoutComponent },
+      { path: 'previousOrders', component: PreviousOrdersComponent },
       { path: '**', redirectTo: '/', pathMatch: 'full' }
     ])
   ],

@@ -1,5 +1,3 @@
-
-<app-header></app-header>
 <div class="container">
   <!--First Row-->
   <div class="row">
@@ -8,119 +6,11 @@
       <h3>Select one:</h3>
       <button class="btn btn-outline-primary bg-success text-white m-1" type="button" (click)="buyProductFlag = true">Buy Product</button>
       <button class="btn btn-outline-primary bg-success text-white m-1" data-toggle="modal" data-target="#myModal" type="button" (click)="displayProductDataFlag = true ">Product Details</button>
-      <button class="btn btn-outline-primary bg-success text-white m-1" type="button">Customer Details</button>
     </div>
   </div>
 
 
-  <div class="row">
-    <div class="col-lg-3"></div>
-    <div class="col">
-      <table>
-        <tbody>
-        <tr>
-          <td>Enter number of rows to display:</td>
-          <td>
-            <form>
-              <div class="form-group">
-                <select class="form-control" se
-                        [(ngModel)]="displayRowPagination" [value]="" name="quantityDropDownform">
-                  <option [value]="option" *ngFor="let option of paginationOptions">{{option}}</option>
-                </select>
-              </div>
-            </form>
-          </td>
-        </tr>
-        <tr style="text-align: center">
-          <td><input type="text" [(ngModel)]="searchByName.purchasedBy" placeholder="search by name" (click)="tableDataFlag = true" class="btn border-dark"></td>
-          <td><input type="text" [(ngModel)]="searchByName.id" placeholder="search by id" class="btn border-dark" (click)="tableDataFlag = true"></td>
-          <td><input type="text" [(ngModel)]="searchByName.purchasedOn" max="3000-12-31"   min="1000-01-01"
-                     placeholder="search by date(yy-mm-dd)" class="btn border-dark" (click)="tableDataFlag = true"></td>
-          <td><button *ngIf="tableDataFlag" class="btn btn-outline-info btn-primary text-white" (click)="tableDataFlag= false">Close</button></td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-
-  <div class="row">
-    <div class="col-sm-3 col-md-3 col-lg-3"></div>
-    <div class="col-sm-9 col-md-9 col-lg-9" *ngIf="tableDataFlag">
-      <div class="text-success"><strong><h3>Customers Details:</h3></strong></div>
-      <table class="table table-bordered table-nonfluid table-hover" style="text-align: center">
-        <thead>
-        <tr>
-          <td ><strong>id</strong></td>
-          <td><strong>Customer Name</strong></td>
-          <td><strong>List</strong></td>
-          <td><strong>Total Cost</strong></td>
-          <td class="text-center"><strong>Date</strong></td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let billData of billDBData| filterBy: searchByName | paginate: { itemsPerPage: displayRowPagination, currentPage: p }">
-          <td>{{billData.id}}</td>
-          <td>{{billData.purchasedBy}}</td>
-          <td>{{billData.list}}</td>
-          <td>{{billData.total}}</td>
-          <td class="text-center">{{billData.purchasedOn | date: 'medium'}}</td>
-        </tr>
-        </tbody>
-        <tfoot>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td><div class="float-left" *ngIf="tableDataFlag"><pagination-controls (pageChange)="p = $event"></pagination-controls></div></td>
-        </tr>
-        </tfoot>
-      </table>
-    </div>
-  </div>
-
-
-  <!--Modal display -->
-  <div class="container">
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" role="dialog">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-body">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <div>
-              <strong><h3 class="text-success"><u>Products List:</u></h3></strong>
-            </div>
-            <table class="table">
-              <thead class="bg-dark text-white">
-              <tr>
-                <td><b>id</b></td>
-                <td><b>Product Name</b></td>
-                <td><b>Category</b></td>
-                <td><b>price</b></td>
-              </tr>
-              </thead>
-
-              <tbody>
-              <tr *ngFor="let productDetails of databaseData">
-                <td>{{productDetails.id}}</td>
-                <td>{{productDetails.name}}</td>
-                <td>{{productDetails.category}}</td>
-                <td>{{productDetails.price}}</td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-success btn-outline-primary text-white" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-   <!--Second Row-->
+  <!--Second Row-->
   <div class="row" *ngIf="buyProductFlag">
     <div class="col-lg-3 col-sm-3 col-md-3"></div>
     <div class="col">
@@ -161,7 +51,7 @@
         <tr>
           <td></td>
           <td><input type="button" value="add into table" (click)="addProduct()" class="btn btn-outline-info bg-success text-white">
-            </td>
+          </td>
         </tr>
 
         <tr></tr>
@@ -186,14 +76,14 @@
       <div><strong><h3 class="text-success"><u>Item details:</u></h3></strong></div>
       <table border="2 px" class="table table-hover table-active"  style="width: 100%;">
         <thead>
-          <tr>
-            <th >Id</th>
-            <th>ProductName</th>
-            <th>ItemCost</th>
-            <th>Quantity</th>
-            <th>NetCost</th>
-            <th></th>
-          </tr>
+        <tr>
+          <th >Id</th>
+          <th>ProductName</th>
+          <th>ItemCost</th>
+          <th>Quantity</th>
+          <th>NetCost</th>
+          <th></th>
+        </tr>
         </thead>
         <tbody>
         <tr *ngFor="let item of productTable">
@@ -223,22 +113,48 @@
 
 
 
+<!--Modal Products List-->
+<div class="container">
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <div>
+            <strong><h3 class="text-success"><u>Products List:</u></h3></strong>
+          </div>
+          <table class="table">
+            <thead class="bg-dark text-white">
+            <tr>
+              <td><b>id</b></td>
+              <td><b>Product Name</b></td>
+              <td><b>Category</b></td>
+              <td><b>price</b></td>
+            </tr>
+            </thead>
 
+            <tbody>
+            <tr *ngFor="let productDetails of databaseData">
+              <td>{{productDetails.id}}</td>
+              <td>{{productDetails.name}}</td>
+              <td>{{productDetails.category}}</td>
+              <td>{{productDetails.price}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success btn-outline-primary text-white" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--<br>
 <br>
 <br>
 <br>
-<br>
-<app-footer></app-footer>
-
-
-
-
-
-
-
-
-
-
-
-
+<app-footer></app-footer>-->
 

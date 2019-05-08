@@ -8,6 +8,11 @@ import { Component, OnInit } from '@angular/core';
     .a {
       color: white;
     }
+      
+     #nav .btn{
+       color: orchid;
+     } 
+      
     `
   ]
 })
