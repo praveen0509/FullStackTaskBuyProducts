@@ -60,10 +60,11 @@ import { ProductsListComponent } from './products-list/products-list.component';
       { path: 'successPage', component: SuccessMessageComponent },
       { path: '', component: WelcomePageComponent },
       { path: 'buyProductsPage', component: BuyProductHomePageComponent},
+      { path: 'buyProductsPage/:buyProductsId', component: BuyProductHomePageComponent},
       { path: 'loginPage', component: LoginPageComponent },
       { path: 'logoutPage', component: LogoutComponent },
       { path: 'previousOrders', component: PreviousOrdersComponent },
-      { path: '**', redirectTo: '/', pathMatch: 'full' }
+      { path: '**', redirectTo: '/previousOrders', pathMatch: 'full' }
     ])
   ],
   providers: [QueryApi],

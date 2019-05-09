@@ -1,24 +1,14 @@
 <div class="container">
   <!--First Row-->
-  <div class="row">
-    <div class="col-lg-3 col-sm-3 col-md-3"></div>
-    <div class="col-lg col-sm col-md p-lg-5">
-      <h3>Select one:</h3>
-      <button class="btn btn-outline-primary bg-success text-white m-1" type="button" (click)="buyProductFlag = true">Buy Product</button>
-      <button class="btn btn-outline-primary bg-success text-white m-1" data-toggle="modal" data-target="#myModal" type="button" (click)="displayProductDataFlag = true ">Product Details</button>
-    </div>
-  </div>
-
-
-  <!--Second Row-->
-  <div class="row" *ngIf="buyProductFlag">
+  <div class="row pt-lg-4" *ngIf="buyProductFlag">
     <div class="col-lg-3 col-sm-3 col-md-3"></div>
     <div class="col">
-      <table class="table table-hover col-lg-6 col-sm-6 col-md-6" border="2px solid black">
+      <b><h3 class="text-success">Select Items to buy:</h3></b>
+      <table class="table col-lg-6 col-sm-6 col-md-6" border="2px solid black">
         <tbody>
         <tr>
-          <td>Select An Item : </td>
-          <td>
+          <td class="pt-lg-4 pt-sm-4 pt-md-4">Select An Item : </td>
+          <td class="pt-0 pb-0">
             <form  class="example-form" name="autoCompleterForm">
               <mat-form-field  class="example-full-width">
                 <input type="text" placeholder="Enter Here" class="btn text-dark bg-transparent " matInput
@@ -35,8 +25,8 @@
         </tr>
 
         <tr>
-          <td>Enter Quantity :</td>
-          <td>
+          <td class="pt-lg-4 pt-sm-4 pt-md-4">Enter Quantity :</td>
+          <td class="pb-0">
             <form>
               <div class="form-group">
                 <select class="form-control" id="sel1"  (click)="selectQuantity($event.target.value)"
@@ -70,6 +60,7 @@
 
 
   <!--Third Row-->
+  <!--Displaying List of items selected by Customer-->
   <div class="row">
     <div class="col-lg-2 col-sm-2 col-md-2"></div>
     <div class="col-lg-9 col-sm-9 col-md-9" *ngIf="addTableFlag">
@@ -110,51 +101,4 @@
     </div>
   </div>
 </div>
-
-
-
-<!--Modal Products List-->
-<div class="container">
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-body">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <div>
-            <strong><h3 class="text-success"><u>Products List:</u></h3></strong>
-          </div>
-          <table class="table">
-            <thead class="bg-dark text-white">
-            <tr>
-              <td><b>id</b></td>
-              <td><b>Product Name</b></td>
-              <td><b>Category</b></td>
-              <td><b>price</b></td>
-            </tr>
-            </thead>
-
-            <tbody>
-            <tr *ngFor="let productDetails of databaseData">
-              <td>{{productDetails.id}}</td>
-              <td>{{productDetails.name}}</td>
-              <td>{{productDetails.category}}</td>
-              <td>{{productDetails.price}}</td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-success btn-outline-primary text-white" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!--<br>
-<br>
-<br>
-<br>
-<app-footer></app-footer>-->
 

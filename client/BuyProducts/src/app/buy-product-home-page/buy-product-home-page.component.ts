@@ -38,7 +38,7 @@ export class BuyProductHomePageComponent implements OnInit {
   myControl = new FormControl();
   addTableFlag = false;
   buyProductFlag = false;
-  displayProductDataFlag = false;
+  productsListFlag = false;
   productObjectFlag = true;
   addProductObjectFlag  = true;
 
@@ -71,9 +71,18 @@ export class BuyProductHomePageComponent implements OnInit {
       this.email = customerDetails.email;
     })
 
-    this.dbServiceObj.getBillData().subscribe((resolve) => {
-      this.billDBData = resolve;
+    this.activatedRoute.params.subscribe((params) => {
+      console.log(params.buyProductsId);
+      if(params.buyProductsId == 1) {
+        this.buyProductFlag = true;
+      }
+      else if(params.buyProductsId == 2) {
+        this.productsListFlag  = true;
+      }
+
+
     });
+    this.dbServiceObj.getBillData().subscribe((resolve) => { this.billDBData = resolve;});
   }
 
   databaseDataSubscribeMethod() {
@@ -98,8 +107,8 @@ export class BuyProductHomePageComponent implements OnInit {
         this.addTableFlag = true;       // Enables selected ItemsList Table
 
 
-        if(this.productObjectFlag) {
-          const productObject = {};    // executes First time Only, to save Object into productTable array
+        if(this.productObjectFlag) {   // executes First time Only, to save Object into productTable array
+          const productObject = {};
           productObject['id'] = ++this.autoIncrement;
           productObject['productName'] =  this.productFilter.name;
           productObject['itemCost'] = this.productCost;
@@ -115,7 +124,6 @@ export class BuyProductHomePageComponent implements OnInit {
               let num1 = parseInt(this.productTable[i].quantity);
               let num2 = parseInt(String(this.quantity));
               this.productTable[i].quantity = num1 + num2;  // adding quantity to already existing product quantity
-              console.log("ProductTable quantity:", isNaN(this.productTable[i].quantity), " netCost:", isNaN(this.quantity));
               this.productTable[i].netCost = parseInt(this.productTable[i].netCost) + this.netCost; // adding netCost to already existing product netCost
               this.addProductObjectFlag = false;
               break;
@@ -135,14 +143,12 @@ export class BuyProductHomePageComponent implements OnInit {
         }
 
 
-
-
         let itemDetails = {};
         itemDetails['productId'] = this.productId;
+        itemDetails['productName'] = this.productName;
         itemDetails['quantity'] = this.quantity;
         itemDetails['totalCost'] = this.netCost;
         this.listOfItemsDetails.push(itemDetails);
-        console.log(this.listOfItemsDetails);
         this.productFilter.name = '';
         this.quantity = 1;
       }
@@ -185,7 +191,7 @@ export class BuyProductHomePageComponent implements OnInit {
     ++this.billId;
     this.dbServiceObj.bulkPostItemData(this.listOfItemsDetails, this.billId).subscribe((response) => console.log(response));
     this.dbServiceObj.postBillData(billDetails, this.billId).subscribe((response) => console.log(response));
-    this.router.navigate(['successPage'], navigationextras);
+    this.router.navigate(['successPage', {skipLocationChange: true}], navigationextras);
   }
 
   cancelMethod() {

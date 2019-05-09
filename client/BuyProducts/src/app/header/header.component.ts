@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from "@angular/router";
+import {DatabasedataService} from "../databasedata.service";
 
 @Component({
   selector: 'app-header',
@@ -17,10 +19,22 @@ import { Component, OnInit } from '@angular/core';
   ]
 })
 export class HeaderComponent implements OnInit {
+  constructor(private router: Router, private dbServiceObj: DatabasedataService) { }
 
-  constructor() { }
+  databaseData: any;
+  buyProductsId = 0;
 
   ngOnInit() {
+    this.dbServiceObj.getProductData().subscribe((resolve) => {
+      console.log(resolve);
+      this.databaseData = resolve;
+    });
   }
+
+  buyProductSendData(){
+    this.buyProductsId = 1;
+    this.router.navigate(['/buyProductsPage', this.buyProductsId] );
+  }
+
 
 }
