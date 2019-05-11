@@ -19,9 +19,7 @@ export default class ItemController {
   }
 
   static bulkAdd(req, res) {
-    console.log("req:",req.body.itemDetails, "id:", req.body.billId);
     const _reqBody = req.body;
-    console.log('controller:');
     ItemDao.bulkAdd(_reqBody, _reqBody["billId"])   //doubt
       .then( itemDao =>{res.status(201).json(itemDao);
       }) .catch(error => res.status(400).json(error));
@@ -29,7 +27,10 @@ export default class ItemController {
   }
 
   static getById(req, res){
-    ItemDao.getById(req.id).then(itemById=> {
+    let id = req.params.id;
+    console.log("Item Controller:", id);
+    ItemDao.getById(id).then(itemById=> {
+      console.log("controller:", itemById);
       res.status(200);
       res.send(itemById);
     }).catch(error => res.status(400).json(error));

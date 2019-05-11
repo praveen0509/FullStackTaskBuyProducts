@@ -27,7 +27,8 @@ import {NgFlashMessageService} from "ng-flash-messages";
 export class SuccessMessageComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute, private localStorage: LocalStorage, private dbServiceObj: DatabasedataService) { }
-  billDBData: any;
+  billLastRowId: number;
+  itemsByBillId: any;
   userData: any = {};
   p: number = 1;
 
@@ -39,12 +40,18 @@ export class SuccessMessageComponent implements OnInit {
     });
 
     this.dbServiceObj.getBillData().subscribe((resolve) => {
-      this.billDBData = resolve;
+      this.billLastRowId = resolve.length;
+      console.log("bill Last Row:", this.billLastRowId);
       this.userData['noOfItems'] = resolve[resolve.length-1]["list"];
       this.userData['totalCost'] = resolve[resolve.length-1]["total"];
     });
+  }
 
-
+  displayItemsById(){
+     this.dbServiceObj.getItemDataById(this.billLastRowId).subscribe((resolve)=> {
+       this.itemsByBillId = resolve;
+       console.log("SuccessPage:", resolve);
+     })
   }
 }
 

@@ -83,8 +83,6 @@ export class BuyProductHomePageComponent implements OnInit {
 
     this.dbServiceObj.getBillData().subscribe((resolve) => {
       this.billDBData = resolve;
-      this.billId = resolve.length;
-      console.log("Bill Length:",this.billId);
     });
   }
 
@@ -186,10 +184,13 @@ export class BuyProductHomePageComponent implements OnInit {
       netTotal: this.netTotal
     }
 
-    ++this.billId;                            // Sending Object to Bill Model
-    this.dbServiceObj.postBillData(billDetails).subscribe((response) => console.log(response));
+    this.dbServiceObj.postBillData(billDetails).subscribe((params) => {  // Sending Object to Bill Model
+      console.log("params:", params.id);
+      this.billId = params.id;
+      this.dbServiceObj.bulkPostItemData(this.listOfItemsDetails, this.billId).subscribe((res) => {});
+    });
+
                                              // Sending Object Array  Data To Items Model
-    this.dbServiceObj.bulkPostItemData(this.listOfItemsDetails, this.billId).subscribe((response) => console.log(response));
     this.router.navigate(['successPage']);
   }
 
@@ -201,7 +202,6 @@ export class BuyProductHomePageComponent implements OnInit {
   }
 
   removeDataFromTable(item) {
-    console.log(this.productTable[0], item);
     for( let i=0; i< this.productTable.length; i++) {
       if(this.productTable[i].productName === item.productName){
         this.productTable.splice(i,1);

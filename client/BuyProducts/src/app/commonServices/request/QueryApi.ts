@@ -13,8 +13,6 @@ export class QueryApi {
 
   doPost(url: string, params: any, headers?: any) {
     url = UserEndPoint(url, params);
-    console.log('QQQ',url);
-    console.log(params);
     return this.http.post(url, params, headers);
   }
 

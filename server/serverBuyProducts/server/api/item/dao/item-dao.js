@@ -29,32 +29,30 @@ export default class ItemDao {
   }
 
   static bulkAdd(body, id) {
-    console.log("body:",body, "id", id);
     return new Promise((resolve, reject)=> {
       var productList = [];
       for(let i=0;i<body.itemDetails.length;i++){
-        console.log(body.itemDetails.length, body.itemDetails[0]);
         productList.push({
           productId:body.itemDetails[i].productId,
-          billId  : parseInt(body.itemDetails[i].id),
+          billId   : id,
           quantity : body.itemDetails[i].quantity,
           totalCost:body.itemDetails[i].totalCost
         })
       } models.item.bulkCreate(productList,{returning: true})
-    }).then((result)=>{
-      resolve(result);
-    });
+    }).then((result)=>{resolve(result);})
+      .catch(error => res.status(400).json(error));
   }
 
   static getById(id) {
-    return new Promise(
-      (resolve, reject) => {
+    console.log("Item Dao:", id);
+    return new Promise((resolve, reject) => {
           models.item.find({
-            where: {id: id}
+            where: {billId: id}
           })
           .then(itemById => {
-            resolve(itemById);
-          });
+            console.log("dao itemById:", itemById);
+            resolve(itemById); })
+            .catch(error => res.status(400).json(error));
       });
   }
 

@@ -1,17 +1,11 @@
 import Promise from 'bluebird';
 import models from '../../../models';
-/*
-const bill = require('/home/sb-33/Desktop/FullStackTask/FullStackTaskBuyProducts' +
-  '/server/serverBuyProducts/server/models/bill').bill;
-*/
 
 export default class BillDao {
   static getAll(_query) {
     return new Promise((resolve, reject) => {
       models.bill.findAll()
-        .then(bills => {
-          resolve(bills);
-        });
+        .then(bills => { resolve(bills); });
     });
   }
 
@@ -25,8 +19,7 @@ export default class BillDao {
           list: body.list,
           total: body.netTotal
         })
-        .then(() => {})
-        .catch(() => {})
+        .then(bills => { resolve(bills); });
     });
   }
 
@@ -36,9 +29,7 @@ export default class BillDao {
         models.bill.find({
           where: {id: id}
         })
-          .then(billById => {
-            resolve(billById);
-          });
+          .then(billById => { resolve(billById); });
       });
   }
 }
