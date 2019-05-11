@@ -29,10 +29,10 @@ export class DatabasedataService {
 
   bulkPostItemData(listOfItemsDetails, billId): Observable<any> {
     return this.queryApi.doPost('BULK_INSERT_DATA_INTO_ITEM', {"itemDetails":listOfItemsDetails,"billId":billId})
-      .pipe(catchError(err => of([err])));
+      .pipe(catchError(err => of([err],console.log('eerrr'))));
   }
 
-  postBillData(billDetails, billId): Observable<any> {
+  postBillData(billDetails): Observable<any> {
     return this.queryApi.doPost('INSERT_DATA_INTO_BILL', billDetails)
       .pipe(catchError(err => of([err])));
   }

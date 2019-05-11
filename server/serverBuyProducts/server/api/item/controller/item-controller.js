@@ -19,12 +19,12 @@ export default class ItemController {
   }
 
   static bulkAdd(req, res) {
+    console.log("req:",req.body.itemDetails, "id:", req.body.billId);
     const _reqBody = req.body;
-    console.log('controller:', req.body);
-    ItemDao.bulkAdd(_reqBody, _reqBody["billId"].id)
-      .then( itemDao =>{
-        res.status(201).json(itemDao);
-      }) .catch(error => { res(error).json(error); });
+    console.log('controller:');
+    ItemDao.bulkAdd(_reqBody, _reqBody["billId"])   //doubt
+      .then( itemDao =>{res.status(201).json(itemDao);
+      }) .catch(error => res.status(400).json(error));
 
   }
 

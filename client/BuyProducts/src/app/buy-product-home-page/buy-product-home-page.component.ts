@@ -48,7 +48,7 @@ export class BuyProductHomePageComponent implements OnInit {
   billDBData: any;
   productId: number;
 
-  billId = 1;
+  billId: number;
   productTable = [] ;
   listOfItemsDetails = [];
   databaseData: any ;
@@ -65,37 +65,31 @@ export class BuyProductHomePageComponent implements OnInit {
 
 
   ngOnInit() {
-    this.databaseDataSubscribeMethod();
     this.localStorage.getItem('key').subscribe((customerDetails)=>{
       this.userName = customerDetails.userName;
       this.email = customerDetails.email;
     })
 
     this.activatedRoute.params.subscribe((params) => {
-      console.log(params.buyProductsId);
       if(params.buyProductsId == 1) {
         this.buyProductFlag = true;
       }
-      else if(params.buyProductsId == 2) {
-        this.productsListFlag  = true;
-      }
-
-
     });
-    this.dbServiceObj.getBillData().subscribe((resolve) => { this.billDBData = resolve;});
-  }
 
-  databaseDataSubscribeMethod() {
     this.dbServiceObj.getProductData().subscribe((resolve) => {
       console.log(resolve);
       this.databaseData = resolve;
     });
+
+    this.dbServiceObj.getBillData().subscribe((resolve) => {
+      this.billDBData = resolve;
+      this.billId = resolve.length;
+      console.log("Bill Length:",this.billId);
+    });
   }
 
 
-
-
-
+  // Displaying Selected items list as a table
   addProduct() {
     for (let i = 0; i < this.databaseData.length; i++) {
       // total : total qauntity cost
@@ -156,10 +150,12 @@ export class BuyProductHomePageComponent implements OnInit {
   }
 
 
+  // Getting Quantity information about an Item
   selectQuantity(id: number) {
     this.quantity = id;
   }
 
+  // Gathering all the information related to One product choosen by Customer
   productDetails(product) {
     this.productCost = product.price;
     this.productId = product.id;
@@ -167,6 +163,7 @@ export class BuyProductHomePageComponent implements OnInit {
     this.productCategory = product.category;
   }
 
+  //
   successPageNavigationMethod() {
     let navigationextras: NavigationExtras = {
       queryParams : {
@@ -188,10 +185,12 @@ export class BuyProductHomePageComponent implements OnInit {
       list: this.autoIncrement,
       netTotal: this.netTotal
     }
-    ++this.billId;
+
+    ++this.billId;                            // Sending Object to Bill Model
+    this.dbServiceObj.postBillData(billDetails).subscribe((response) => console.log(response));
+                                             // Sending Object Array  Data To Items Model
     this.dbServiceObj.bulkPostItemData(this.listOfItemsDetails, this.billId).subscribe((response) => console.log(response));
-    this.dbServiceObj.postBillData(billDetails, this.billId).subscribe((response) => console.log(response));
-    this.router.navigate(['successPage', {skipLocationChange: true}], navigationextras);
+    this.router.navigate(['successPage']);
   }
 
   cancelMethod() {

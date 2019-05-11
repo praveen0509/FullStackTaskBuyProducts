@@ -29,6 +29,7 @@ export default class ItemDao {
   }
 
   static bulkAdd(body, id) {
+    console.log("body:",body, "id", id);
     return new Promise((resolve, reject)=> {
       var productList = [];
       for(let i=0;i<body.itemDetails.length;i++){

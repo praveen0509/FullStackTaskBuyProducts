@@ -58,6 +58,7 @@ import { ProductsListComponent } from './products-list/products-list.component';
     FlashMessagesModule,
     RouterModule.forRoot([
       { path: 'successPage', component: SuccessMessageComponent },
+      { path: 'successPage/:navExtras', component: SuccessMessageComponent },
       { path: '', component: WelcomePageComponent },
       { path: 'buyProductsPage', component: BuyProductHomePageComponent},
       { path: 'buyProductsPage/:buyProductsId', component: BuyProductHomePageComponent},

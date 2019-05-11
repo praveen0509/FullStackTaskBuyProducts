@@ -3,6 +3,7 @@ import BillDao from '../dao/bill-dao';
 export default class BillController {
   static getAll(req, res) {
     const deptQuery = req.query;
+    console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAA');
     BillDao.getAll(deptQuery).then(bills => {
       res.status(200);
       res.send(bills);

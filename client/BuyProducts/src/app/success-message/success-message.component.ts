@@ -26,21 +26,13 @@ import {NgFlashMessageService} from "ng-flash-messages";
 })
 export class SuccessMessageComponent implements OnInit {
 
-  constructor(private activatedRoute: ActivatedRoute, private localStorage: LocalStorage, private dbServiceObj: DatabasedataService,
-              private ngFlashMessageService: NgFlashMessageService) { }
+  constructor(private activatedRoute: ActivatedRoute, private localStorage: LocalStorage, private dbServiceObj: DatabasedataService) { }
   billDBData: any;
   userData: any = {};
   p: number = 1;
 
 
   ngOnInit() {
-    this.ngFlashMessageService.showFlashMessage({
-      messages: ["Payment successfull..."],
-      dismissible: true,
-      timeout: 3000,
-      type: 'danger'
-    });
-
     this.localStorage.getItem('key').subscribe((customerDetails)=> {
       this.userData['userName'] = customerDetails['userName'];
       this.userData['email'] = customerDetails['email'];
@@ -48,10 +40,11 @@ export class SuccessMessageComponent implements OnInit {
 
     this.dbServiceObj.getBillData().subscribe((resolve) => {
       this.billDBData = resolve;
-      this.userData['noOfItems'] = resolve[resolve.length-1]["list"]
-      this.userData['totalCost'] = resolve[resolve.length-1]["total"]
-      console.log(resolve);
+      this.userData['noOfItems'] = resolve[resolve.length-1]["list"];
+      this.userData['totalCost'] = resolve[resolve.length-1]["total"];
     });
+
+
   }
 }
 

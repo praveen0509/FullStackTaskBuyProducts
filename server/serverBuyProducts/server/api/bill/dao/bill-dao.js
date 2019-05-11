@@ -8,10 +8,8 @@ const bill = require('/home/sb-33/Desktop/FullStackTask/FullStackTaskBuyProducts
 export default class BillDao {
   static getAll(_query) {
     return new Promise((resolve, reject) => {
-      console.log('BillDao getAll method called ');
       models.bill.findAll()
         .then(bills => {
-          console.log('all users are'+JSON.stringify(bills))
           resolve(bills);
         });
     });
