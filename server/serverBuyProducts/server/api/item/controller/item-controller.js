@@ -27,15 +27,14 @@ export default class ItemController {
   }
 
   static getById(req, res){
+    console.log("Item Controller:", req.params.id);
     let id = req.params.id;
-    console.log("Item Controller:", id);
-    ItemDao.getById(id).then(itemById=> {
-      console.log("controller:", itemById);
+    ItemDao.getById(id).
+    then(itemById=> {
       res.status(200);
       res.send(itemById);
-    }).catch(error => res.status(400).json(error));
+    }).catch(error => {res.status(400).json(error)}
+    );
   }
 }
-
-
 

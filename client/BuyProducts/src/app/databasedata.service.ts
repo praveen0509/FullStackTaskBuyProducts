@@ -22,6 +22,7 @@ export class DatabasedataService {
   }
 
   getItemDataById(id) : Observable<any> {
+    console.log(id);
       return this.queryApi.doGet('ITEM_BY_ID', id).pipe(catchError(err => of([err])));
   }
 

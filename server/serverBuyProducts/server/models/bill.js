@@ -11,7 +11,8 @@ module.exports = (sequelize, DataTypes) => {
 
     bill.hasMany(models.item, {
        foreignKey: 'id',
-       targetKey: 'billId'
+       targetKey: 'billId',
+      as: "items"
     });
   };
   return bill;

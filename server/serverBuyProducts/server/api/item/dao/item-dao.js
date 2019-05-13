@@ -7,10 +7,11 @@ const item = require('/home/sb-33/Desktop/FullStackTask/FullStackTaskBuyProducts
 export default class ItemDao {
   static getAll(_query) {
     return new Promise((resolve, reject) => {
-      models.item.findAll()
+      models.item.findAll({ })
         .then(items => {
           resolve(items);
-        });
+        })
+        .catch(error => res.status(400).json(error));
     });
   }
 
@@ -24,7 +25,7 @@ export default class ItemDao {
           totalCost: body.totalCost
         })
         .then(() => {})
-        .catch(() => {})
+        .catch(error => res.status(400).json(error));
     });
   }
 
@@ -44,15 +45,19 @@ export default class ItemDao {
   }
 
   static getById(id) {
-    console.log("Item Dao:", id);
     return new Promise((resolve, reject) => {
-          models.item.find({
-            where: {billId: id}
+          models.item.findAll({
+            where: {billId: parseInt(id)},
+            include:[
+                      { model: models.productModel,
+                        attributes: ["id", "name", "category", "price"]
+                      },
+                      {model: models.bill}
+                    ],
+            attributes: ["id", "productId", "billId", "quantity", "totalCost"]
           })
-          .then(itemById => {
-            console.log("dao itemById:", itemById);
-            resolve(itemById); })
-            .catch(error => res.status(400).json(error));
+          .then(itemById => {resolve(itemById); })
+            .catch(error => { reject(error);});
       });
   }
 

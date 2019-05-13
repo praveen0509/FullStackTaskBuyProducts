@@ -1,11 +1,14 @@
 import Promise from 'bluebird';
 import models from '../../../models';
+import * as res from "express";
 
 export default class BillDao {
   static getAll(_query) {
     return new Promise((resolve, reject) => {
-      models.bill.findAll()
-        .then(bills => { resolve(bills); });
+      models.bill.findAll({
+      })
+        .then(bills => { resolve(bills); })
+        .catch(error => res.status(400).json(error));
     });
   }
 
@@ -19,7 +22,8 @@ export default class BillDao {
           list: body.list,
           total: body.netTotal
         })
-        .then(bills => { resolve(bills); });
+        .then(bills => { resolve(bills); })
+        .catch(error => res.status(400).json(error));
     });
   }
 
@@ -29,7 +33,8 @@ export default class BillDao {
         models.bill.find({
           where: {id: id}
         })
-          .then(billById => { resolve(billById); });
+          .then(billById => { resolve(billById); })
+          .catch(error => res.status(400).json(error));
       });
   }
 }
