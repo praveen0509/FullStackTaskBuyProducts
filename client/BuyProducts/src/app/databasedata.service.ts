@@ -17,8 +17,12 @@ export class DatabasedataService {
   }
 
   getBillData() : Observable <any> {
-    let req;
+    let req
     return this.queryApi.doGet('BILL_DETAILS', req).pipe(catchError(err => of([err])));
+  }
+
+  getBillDataWithPageDetails(page): Observable<any> {
+    return this.queryApi.doGet('BILL_DETAILS_WITH_PAGE', page).pipe(catchError(err => of([err])));
   }
 
   getItemDataById(id) : Observable<any> {

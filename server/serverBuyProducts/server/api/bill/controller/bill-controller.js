@@ -2,8 +2,15 @@ import BillDao from '../dao/bill-dao';
 
 export default class BillController {
   static getAll(req, res) {
-    const deptQuery = req.query;
-    BillDao.getAll(deptQuery).then(bills => {
+    BillDao.getAll().then(bills => {
+      res.status(200);
+      res.send(bills);
+    }).catch(error => res.status(400).json(error));
+  }
+
+  static getAllWithPage(req, res) {
+    let body= req.body;
+    BillDao.getAllWithPage(body.pageNo, body.itemsPerPage, body.search).then(bills => {
       res.status(200);
       res.send(bills);
     }).catch(error => res.status(400).json(error));

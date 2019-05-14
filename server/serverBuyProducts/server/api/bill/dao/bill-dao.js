@@ -3,12 +3,29 @@ import models from '../../../models';
 import * as res from "express";
 
 export default class BillDao {
-  static getAll(_query) {
+  static getAll() {
     return new Promise((resolve, reject) => {
       models.bill.findAll({
       })
         .then(bills => { resolve(bills); })
         .catch(error => res.status(400).json(error));
+    });
+  }
+
+
+  static getAllWithPage(pageNo,limit, search) {
+    return new Promise((resolve, reject) => {
+      let offset = limit * (pageNo - 1);
+      models.bill.findAndCountAll({
+        limit: limit,
+        offset: offset,
+        where: { purchasedBy: search },
+        order: [
+          ['createdAt', 'DESC']
+        ]
+      })
+        .then((result) => {resolve(result)})
+        .catch(error=>{ reject(error); })
     });
   }
 

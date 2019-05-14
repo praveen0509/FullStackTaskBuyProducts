@@ -6,7 +6,6 @@ import { UserEndPoint } from "./userEndPoint";
 export class QueryApi {
   constructor(private http: HttpClient) { }
   doGet(url: string,  params: any) {
-    console.log("url:", url, " params:", params);
     url = UserEndPoint(url, params);
     return this.http.get(url, {params: params});
   }

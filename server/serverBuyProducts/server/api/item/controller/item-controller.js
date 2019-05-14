@@ -27,7 +27,6 @@ export default class ItemController {
   }
 
   static getById(req, res){
-    console.log("Item Controller:", req.params.id);
     let id = req.params.id;
     ItemDao.getById(id).
     then(itemById=> {
