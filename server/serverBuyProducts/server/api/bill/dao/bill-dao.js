@@ -1,6 +1,9 @@
 import Promise from 'bluebird';
 import models from '../../../models';
 import * as res from "express";
+var Sequelize = require('sequelize');
+const Op = Sequelize.Op;
+
 
 export default class BillDao {
   static getAll() {
@@ -12,14 +15,27 @@ export default class BillDao {
     });
   }
 
+  static getAllWithSearch(searchByName) {
+    return new Promise((resolve, reject) => {
+      models.bill.findAll({
+        where: {
+          purchasedBy: { [Op.iLike] :'%'+ searchByName + '%'
+            }
+        }
+      })
+        .then(bills => { resolve(bills); })
+        .catch(error => res.status(400).json(error));
+    });
+  }
 
-  static getAllWithPage(pageNo,limit, search) {
+
+
+  static getAllWithPage(pageNo,limit) {
     return new Promise((resolve, reject) => {
       let offset = limit * (pageNo - 1);
       models.bill.findAndCountAll({
         limit: limit,
         offset: offset,
-        where: { purchasedBy: search },
         order: [
           ['createdAt', 'DESC']
         ]
