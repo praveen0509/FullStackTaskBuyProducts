@@ -1,4 +1,5 @@
 import BillDao from '../dao/bill-dao';
+var url = require('url');
 
 export default class BillController {
 
@@ -11,9 +12,18 @@ export default class BillController {
   }
 
   // pagination based on pageNo and itemsPerPage
-  static getAllWithPage(req, res) {
-    let body= req.query;
+ /* static getAllWithPage(req, res) {
+    let body= req.body;
     BillDao.getAllWithPage(body.pageNo, body.itemsPerPage).then(bills => {
+      res.status(200);
+      res.send(bills);
+    }).catch(error => res.status(400).json(error));
+  }*/
+
+  static getAllWithPage(req, res) {
+    let bodyPage= req.body.page;
+    let bodySearch= req.body.search;
+    BillDao.getAllWithPage(bodyPage.pageNo, bodyPage.itemsPerPage, bodySearch).then(bills => {
       res.status(200);
       res.send(bills);
     }).catch(error => res.status(400).json(error));
@@ -21,9 +31,8 @@ export default class BillController {
 
   // Searching Bill data by Name and id
   static getAllWithSearch(req, res) {
-    let searchByName = req.query;
-    console.log("controller:", req.params.search);
-    BillDao.getAllWithSearch(searchByName).then(bills => {
+    let search = req.query;
+    BillDao.getAllWithSearch(search).then(bills => {
       res.status(200);
       res.send(bills);
     }).catch(error => res.status(400).json(error));

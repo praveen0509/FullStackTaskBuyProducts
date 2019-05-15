@@ -21,12 +21,8 @@ export class DatabasedataService {
     return this.queryApi.doGet('BILL_DETAILS', req).pipe(catchError(err => of([err])));
   }
 
-  getBillDataWithPageDetails(page): Observable<any> {
-    return this.queryApi.doGet('BILL_DETAILS_WITH_PAGE', page).pipe(catchError(err => of([err])));
-  }
-
-  getBillDataServerSearch(search): Observable<any> {
-    return this.queryApi.doGet('BILL_DETAILS_WITH_SEARCH', search).pipe(catchError(err => of([err])));
+  getBillDataWithPageAndSearch(page, search): Observable<any> {
+    return this.queryApi.doPost('BILL_DETAILS_WITH_PAGE', {"page":page, "search":search}).pipe(catchError(err => of([err])));
   }
 
   getItemDataById(id) : Observable<any> {
