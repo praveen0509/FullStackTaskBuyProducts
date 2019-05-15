@@ -38,8 +38,12 @@ export class SuccessMessageComponent implements OnInit {
       this.userData['userName'] = customerDetails['userName'];
       this.userData['email'] = customerDetails['email'];
     });
+    this.getBillData();
+  }
 
-    this.dbServiceObj.getBillData().subscribe((resolve) => {
+
+  getBillData() {
+    this.dbServiceObj.getBillData().subscribe((resolve) => { // Getting bill Data
       this.billLastRowId = resolve.length;
       console.log("bill Last Row:", this.billLastRowId);
       this.userData['noOfItems'] = resolve[resolve.length-1]["list"];

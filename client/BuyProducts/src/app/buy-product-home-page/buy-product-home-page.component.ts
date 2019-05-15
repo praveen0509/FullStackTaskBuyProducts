@@ -81,9 +81,10 @@ export class BuyProductHomePageComponent implements OnInit {
       this.databaseData = resolve;
     });
 
-    this.dbServiceObj.getBillData().subscribe((resolve) => {
+    // Getting Bill data
+    /*this.dbServiceObj.getBillData().subscribe((resolve) => {
       this.billDBData = resolve;
-    });
+    });*/
   }
 
 
@@ -188,10 +189,9 @@ export class BuyProductHomePageComponent implements OnInit {
       console.log("params:", params.id);
       this.billId = params.id;
       this.dbServiceObj.bulkPostItemData(this.listOfItemsDetails, this.billId).subscribe((res) => {});
-    });
+      this.router.navigate(['successPage']);
+    });                                             // Sending Object Array  Data To Items Model
 
-                                             // Sending Object Array  Data To Items Model
-    this.router.navigate(['successPage']);
   }
 
   cancelMethod() {
