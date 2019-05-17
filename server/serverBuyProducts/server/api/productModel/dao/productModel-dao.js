@@ -6,7 +6,11 @@ const productModel = require('/home/sb-33/Desktop/FullStackTask/FullStackTaskBuy
 
 export default class ProductModelDao {
   static getAll(_query) {
-    return new Promise((resolve, reject) => {models.productModel.findAll()
+    return new Promise((resolve, reject) => {models.productModel.findAll({
+      order: [
+        ['category', 'DESC']
+      ]
+      })
         .then(productModel => {
           console.log('all users are'+JSON.stringify(productModel));
           resolve(productModel);
@@ -24,23 +28,35 @@ export default class ProductModelDao {
           category: body.category,
           price: body.price
         })
-        .then(() => {})
-        .catch(() => {})
+        .then((productModelAdd) => {resolve(productModelAdd)})
+        .catch((err) => {reject(err)})
     });
   }
+
+
 
   static getById(id) {
     console.log(id);
     return new Promise(
       (resolve, reject) => {
-        models.productModel.find({
+        models.productModel.findAll({
           where: { id : id }
         })
-          .then(productModel => {
-            console.log('Try')
-            resolve(productModel);
-          }).catch(() => {console.log('Error')} );
+          .then(productModelId => {
+            resolve(productModelId);
+          }).catch((err) => {reject(err)} );
       });
+  }
+
+
+  /*Searching and Pagination using One field with multiple Data*/
+  oneFieldAllAttributes(bodyPage) {
+    return new Promise((resolve, reject) => {
+      let value = 
+      models.productModel.findAll({
+
+      })
+    });
   }
 
 }

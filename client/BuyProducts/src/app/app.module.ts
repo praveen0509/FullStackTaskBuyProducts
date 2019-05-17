@@ -25,6 +25,7 @@ import {NgFlashMessagesModule} from "ng-flash-messages";
 import {FlashMessagesModule} from "ngx-flash-messages";
 import { PreviousOrdersComponent } from './previous-orders/previous-orders.component';
 import { ProductsListComponent } from './products-list/products-list.component';
+import { SearchProductsPipe } from './search-products.pipe';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ProductsListComponent } from './products-list/products-list.component';
     LogoutComponent,
     RegistrationComponent,
     PreviousOrdersComponent,
-    ProductsListComponent
+    ProductsListComponent,
+    SearchProductsPipe
   ],
   imports: [
     BrowserModule,

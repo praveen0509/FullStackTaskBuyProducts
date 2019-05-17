@@ -1,6 +1,6 @@
-<div class="container">
+<div class="container-fluid">
   <!--First Row-->
-  <div class="row pt-lg-4" *ngIf="buyProductFlag">
+  <div class="row pt-lg-4 jumbotron shadow" *ngIf="buyProductFlag">
     <div class="col-lg-3 col-sm-3 col-md-3"></div>
     <div class="col">
       <b><h3 class="text-success">Select Items to buy:</h3></b>
@@ -38,22 +38,74 @@
           </td>
         </tr>
 
-        <tr>
+        <tr class="border-0">
           <td></td>
-          <td><input type="button" value="add into table" (click)="addProduct()" class="btn btn-outline-info bg-success text-white">
+          <td class="float-left"><input type="button" value="add into cart" (click)="addProduct()" class="btn btn-outline-info bg-success text-white">
           </td>
-        </tr>
-
-        <tr></tr>
-        <tr></tr>
-        <tr>
-          <td>Total cost:</td>
-          <td><button type="button" class="btn btn-info">{{netTotal}}</button></td>
         </tr>
         </tbody>
       </table>
     </div>
   </div>
+
+
+  <!--<div class="row bg-secondary p-xl-2 p-md-2 p-lg-2 p-sm-2">
+    <div class="col">
+      <div class="dropdown">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+          All Categories<span class="caret"></span>
+        </button>
+
+        <ul class="dropdown-menu">
+          <li class="dropdown">
+            <button type="button">Soaps<span class="caret"></span></button>
+            <div class="dropdown-menu" *ngFor="let product of databaseData">
+              <a *ngIf="product.category === 'Soap' ">{{product.name}}</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>-->
+
+
+  <div class="row">
+    <div class="col-lg-2 col-xl-2 col-sm-2 col-md-2 jumbotron shadow">
+       <input type="search" placeholder="Search" aria-label="Search" [(ngModel)]="searchProducts">
+    </div>
+    <div class="col-lg-10 col-xl-10 col-sm-10 col-md-10">
+      <div class="row">
+        <div class="col-lg-4 col-xl-4 col-sm-4 col-md-4 p-2" *ngFor="let product of databaseData">
+          <div class="card shadow" id="{{product.id}}">
+            <div class="card-body"><img src="../../assets/{{product.category}}/{{product.name}}.jpg" height="250" width="278"></div>
+            <div class="card-footer">
+              <!--Price and default Add and Subtract buttons-->
+              <div class="row no-gutters">
+                <div class="col-lg-1 col-xl-1 col-sm-1 col-md-1"></div>
+                <div class="col-lg-3 col-xl-3 col-sm-3 col-md-3 font-weight-bold pt-2">Price:</div>
+                <div class="col-lg-3 col-xl-3 col-sm-3 col-md-3 pt-2"><i class="fa">&#xf156;</i> {{product.price}}</div>
+                <div class="col-lg-5 col-xl-5 col-sm-5 col-md-5">
+                  <div class="btn-group" *ngIf="product.id">
+                    <button type="button" class="btn btn-primary font-weight-bolder" (click)="addQuantity()">+</button>
+                    <button type="button" class="btn btn-primary">{{quantity}}</button>
+                    <button type="button" class="btn btn-primary font-weight-bolder" (click)="subQuantity()">-</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row no-gutters">
+                <div class="col-lg-2 col-xl-2 col-sm-2 col-md-2"></div>
+                <div class="col-lg-8 col-xl-8 col-sm-8 col-md-8 font-weight-bold">Total: <i class="fa">&#xf156;</i></div>
+                <div class="col-lg-2 col-xl-2 col-sm-2 col-md-2"></div>
+              </div>
+            </div>
+          </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
+
 
   <br>
   <br>
@@ -65,7 +117,7 @@
     <div class="col-lg-2 col-sm-2 col-md-2"></div>
     <div class="col-lg-9 col-sm-9 col-md-9" *ngIf="addTableFlag">
       <div><strong><h3 class="text-success"><u>Item details:</u></h3></strong></div>
-      <table border="2 px" class="table table-hover table-active"  style="width: 100%;">
+      <table border="2 px" class="table table-active"  style="width: 100%;">
         <thead>
         <tr>
           <th >Id</th>
@@ -84,6 +136,14 @@
           <td>{{item.quantity}}</td>
           <td>{{item.netCost}}</td>
           <td><button (click)="removeDataFromTable(item)" type="button" class="btn btn-primary">Remove</button></td>
+        </tr>
+        <tr class="border-0">
+          <td></td>
+          <td></td>
+          <td><strong><h4>Total cost:</h4></strong></td>
+          <td><button type="button" class="btn btn-info">{{netTotal}}</button></td>
+          <td></td>
+          <td></td>
         </tr>
         </tbody>
       </table>

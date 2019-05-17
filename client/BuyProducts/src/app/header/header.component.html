@@ -1,40 +1,43 @@
-<div class="container-fluid fixed-top"  style="background-color: black; width: 100%">
+<div class="container-fluid fixed-top p-1"  style="background-color: black; width: 100%">
   <div class="row">
+     <!--Header Search Box-->
     <div class="col-lg-4 col-sm-4 col-md-4">
       <form class="form-inline my-2 my-lg-0" style="position: absolute; top: 20%;">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </form>
     </div>
+
+    <!--Welcome Content-->
     <div class="col-lg-4 col-sm-4 col-md-4"><h3 style="position: absolute; top: 20%; color: moccasin; text-align: center">Welcome To Buy Prodcuts</h3></div>
+
+    <!--Home, Profile, dropDown(Buy Product, Products List, Previous Orders List), Help and LogOut Buttons -->
     <div class="col-lg-4 col-sm-4 col-md-4">
-      <nav class="navbar navbar-expand-sm navbar-dark float-right" id="nav">
-        <!-- Brand -->
-        <!--<a class="navbar-brand" href="#">Logo</a>-->
-        <!-- Links -->
-        <ul class="navbar-nav" id="ul" style="width: 100%">
-          <li class="nav-item p-2"> <button class=" btn nav-link " type="button">Home</button> </li>
-          <li class="nav-item p-2"> <button class="btn nav-link" type="button">Profile</button> </li>
-          <li class="nav-item p-2"> <button class="btn nav-link" type="button">login</button> </li>
+      <nav class="navbar navbar-expand-sm navbar-dark " id="nav">
+         <ul class="navbar-nav" id="ul" style="width: 100%">
+          <li class="nav-item p-1"> <button class=" btn nav-link " type="button">Home</button> </li>
+          <li class="nav-item p-1"> <button class="btn nav-link" type="button">My Cart</button> </li>
 
           <!-- Dropdown -->
-          <li class="nav-item dropdown p-2">
+          <li class="nav-item dropdown p-1">
             <button class="btn nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown"> Select </button>
             <div class="dropdown-menu">
               <button class="btn dropdown-item" type="button" (click)="buyProductSendData()">Buy Product</button>
               <button class="btn dropdown-item" type="button" data-toggle="modal" data-target="#myModal">Products List</button>
-              <button class="btn dropdown-item" type="button" [routerLink]="['previousOrders']">Previous Orders list</button>
+              <button class="btn dropdown-item" type="button" [routerLink]="['previousOrders']">Previous Orders List</button>
             </div>
           </li>
-          <li class="nav-item p-2"> <button class="btn nav-link" type="button" [routerLink]="['/loginPage']">logout</button> </li>
+           <li class="nav-item p-1"> <button class="btn nav-link" type="button">Help</button> </li>
+          <li class="nav-item p-1"> <button class="btn nav-link" type="button" [routerLink]="['/loginPage']">logout</button> </li>
         </ul>
       </nav>
-
     </div>
+
   </div>
 </div>
 
-<!--/home/sb-33/projects/FullStackTaskBuyProducts/client/BuyProducts/src/app/header/header.component.html-->
+
+<!--Displaying All Products details which are available in the database-->
 <div class="container" >
   <!-- Modal -->
   <div class="modal fade" id="myModal"  role="dialog">

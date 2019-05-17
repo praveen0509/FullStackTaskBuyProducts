@@ -51,17 +51,49 @@ export default class BillDao {
   }*/
 
 
+/*
   static getAllWithPage(pageNo,limit, search) {
+
+      return new Promise((resolve, reject) => {
+          search.purchasedBy = search.purchasedBy.trim();
+          if(typeof search.total === "string")        // If the given value is String, we Have to trim first
+             search.total = search.total.trim();
+          if(search.total.length==0)                 // Checking whether the field is empty or not
+            search.total = 0;
+
+          let offset = limit * (pageNo - 1);          // Setting baseValue
+          models.bill.findAndCountAll({
+            where: {
+                      purchasedBy: {[Op.iLike]: '%' + search.purchasedBy + '%'},
+                      total: {  [Op.gte]: search.total }
+                   },
+            limit: limit,
+            offset: offset,
+            order: [
+              ['createdAt', 'DESC']
+            ]
+          }).then((result) => {resolve(result)})
+            .catch(error=>{ reject(error); })
+      });
+  }
+*/
+
+
+  static getAllWithPage(pageNo,limit, search) {
+
     return new Promise((resolve, reject) => {
-      if(search.total.length==0){
-        search.total = 0;
+      var value = Number(search.purchasedBy);
+      if(!isNaN(value)){
+        search.purchasedBy = parseInt(search.purchasedBy);
       }
       let offset = limit * (pageNo - 1);
       models.bill.findAndCountAll({
         where: {
-                  purchasedBy: {[Op.iLike]: '%' + search.purchasedBy + '%'},
-                  total: {  [Op.gte]: search.total }
-               },
+          [Op.or]: [
+            { purchasedBy: {[Op.iLike]: '%' + search.purchasedBy + '%'} },
+            { total: {  [Op.gte]: search.purchasedBy } }
+          ]
+        },
         limit: limit,
         offset: offset,
         order: [

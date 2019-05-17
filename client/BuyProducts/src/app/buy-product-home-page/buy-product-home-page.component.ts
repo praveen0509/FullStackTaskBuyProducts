@@ -38,16 +38,15 @@ export class BuyProductHomePageComponent implements OnInit {
   myControl = new FormControl();
   addTableFlag = false;
   buyProductFlag = false;
-  productsListFlag = false;
   productObjectFlag = true;
   addProductObjectFlag  = true;
 
   productFilter = { name: ''};
   userName: string;
   email: string;
-  billDBData: any;
   productId: number;
 
+  searchProducts = "";
   billId: number;
   productTable = [] ;
   listOfItemsDetails = [];
@@ -61,7 +60,6 @@ export class BuyProductHomePageComponent implements OnInit {
   autoIncrement = 0;
   netTotal = 0;
   quantity = 1;
-
 
 
   ngOnInit() {
@@ -81,10 +79,6 @@ export class BuyProductHomePageComponent implements OnInit {
       this.databaseData = resolve;
     });
 
-    // Getting Bill data
-    /*this.dbServiceObj.getBillData().subscribe((resolve) => {
-      this.billDBData = resolve;
-    });*/
   }
 
 
@@ -156,9 +150,9 @@ export class BuyProductHomePageComponent implements OnInit {
 
   // Gathering all the information related to One product choosen by Customer
   productDetails(product) {
-    this.productCost = product.price;
     this.productId = product.id;
     this.productName = product.name;
+    this.productCost = product.price;
     this.productCategory = product.category;
   }
 
@@ -209,6 +203,16 @@ export class BuyProductHomePageComponent implements OnInit {
         this.netTotal = this.netTotal - item.netCost;
       }
     }
+  }
+
+
+  addQuantity(){
+    this.quantity = this.quantity +1;
+  }
+
+  subQuantity(){
+    if(this.quantity != 0)
+      this.quantity = this.quantity - 1;
   }
 
 }

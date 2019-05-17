@@ -23,20 +23,13 @@ export default class BillController {
   static getAllWithPage(req, res) {
     let bodyPage= req.body.page;
     let bodySearch= req.body.search;
+    console.log("Body:", req.body);
     BillDao.getAllWithPage(bodyPage.pageNo, bodyPage.itemsPerPage, bodySearch).then(bills => {
       res.status(200);
       res.send(bills);
     }).catch(error => res.status(400).json(error));
   }
 
-  // Searching Bill data by Name and id
-  static getAllWithSearch(req, res) {
-    let search = req.query;
-    BillDao.getAllWithSearch(search).then(bills => {
-      res.status(200);
-      res.send(bills);
-    }).catch(error => res.status(400).json(error));
-  }
 
   // Inserting a row into Bill Table
   static add(req, res){
