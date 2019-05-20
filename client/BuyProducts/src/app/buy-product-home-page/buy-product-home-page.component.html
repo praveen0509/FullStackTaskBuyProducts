@@ -1,222 +1,197 @@
 <div class="container-fluid">
-  <!--First Row-->
-  <div class="row pt-lg-4 jumbotron shadow" *ngIf="buyProductFlag">
-    <div class="col-lg-3 col-sm-3 col-md-3"></div>
-    <div class="col">
-      <b><h3 class="text-success">Select Items to buy:</h3></b>
-      <table class="table col-lg-6 col-sm-6 col-md-6" border="2px solid black">
-        <tbody>
-        <tr>
-          <td class="pt-lg-4 pt-sm-4 pt-md-4">Select An Item : </td>
-          <td class="pt-0 pb-0">
-            <form  class="example-form" name="autoCompleterForm">
-              <mat-form-field  class="example-full-width">
-                <input type="text" placeholder="Enter Here" class="btn text-dark bg-transparent " matInput
-                       [formControl]="myControl" [matAutocomplete]="auto" [(ngModel)]="productFilter.name" name="searchBox">
-                <mat-autocomplete #auto="matAutocomplete">
-                  <mat-option *ngFor="let product of databaseData | filterBy: productFilter"  [value]="product.name"
-                              class="active bg-dark text-white rounded-circle"     (click)="productDetails(product)">
-                    <div class="text-center">{{product.name}}</div>
-                  </mat-option>
-                </mat-autocomplete>
-              </mat-form-field>
-            </form>
-          </td>
-        </tr>
+  <div class="row">
 
-        <tr>
-          <td class="pt-lg-4 pt-sm-4 pt-md-4">Enter Quantity :</td>
-          <td class="pb-0">
-            <form>
-              <div class="form-group">
-                <select class="form-control" id="sel1"  (click)="selectQuantity($event.target.value)"
-                        [(ngModel)]="quantity" [value]="options[0]" name="quantityDropDownform">
-                  <option [value]="option" *ngFor="let option of options">{{option}}</option>
-                </select>
-              </div>
-            </form>
-          </td>
-        </tr>
-
-        <tr class="border-0">
-          <td></td>
-          <td class="float-left"><input type="button" value="add into cart" (click)="addProduct()" class="btn btn-outline-info bg-success text-white">
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-
-  <!--<div class="row bg-secondary p-xl-2 p-md-2 p-lg-2 p-sm-2">
-    <div class="col">
-      <div class="dropdown">
-        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-          All Categories<span class="caret"></span>
-        </button>
-
-        <ul class="dropdown-menu">
-          <li class="dropdown">
-            <button type="button">Soaps<span class="caret"></span></button>
-            <div class="dropdown-menu" *ngFor="let product of databaseData">
-              <a *ngIf="product.category === 'Soap' ">{{product.name}}</a>
+    <!--Left side page-->
+    <div class="split left">
+      <br><br>
+      <div class="row">
+        <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1 "></div>
+        <div class="col-sm-10 col-md-10 col-lg-10 col-xl-10">
+          <form>
+            <div class="form-group">
+              <input class="form-control" style="background-color: moccasin" name="search" type="text" placeholder="Search Here" aria-label="Search"
+                     size="80%" [(ngModel)]="searchProducts"  (input)="getProductDetailsPaginationSearch(1)">
             </div>
-          </li>
-        </ul>
+          </form>
+        </div>
+      </div>
+
+      <!--All Categories Dropdown-->
+      <div class="row">
+        <div class="col dropdown"><button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">All Categories</button>
+          <div class="dropdown-menu">
+            <div class="dropdown-submenu">
+              <button type="button" class="dropdown-toggle">Soaps</button>
+              <div class="dropdown-menu">
+                <div class="dropdown-item">Rexona</div>
+                <div class="dropdown-item">Lux</div>
+                <div class="dropdown-item">Medimix</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>-->
 
 
-  <div class="row">
-    <div class="col-lg-2 col-xl-2 col-sm-2 col-md-2 jumbotron shadow">
-       <input type="search" placeholder="Search" aria-label="Search" [(ngModel)]="searchProducts">
-    </div>
-    <div class="col-lg-10 col-xl-10 col-sm-10 col-md-10">
-      <div class="row">
-        <div class="col-lg-4 col-xl-4 col-sm-4 col-md-4 p-2" *ngFor="let product of databaseData">
-          <div class="card shadow" id="{{product.id}}">
-            <div class="card-body">
-              <img src="../../assets/{{product.category}}/{{product.name}}.jpg" height="250" width="278">
+    <!--Right side page-->
+    <div class="split right pb-sm-5 pb-md-5 pb-lg-5 pb-xl-5">
+      <div class="container-fluid">
+        <!--First Row-->
+        <div class="row pt-lg-4 jumbotron shadow" *ngIf="buyProductFlag">
+          <div class="col-lg-2 col-sm-2 col-md-2"></div>
+          <div class="col">
+            <b><h3 class="text-success">Select Items to buy:</h3></b>
+            <table class="table col-lg-6 col-sm-6 col-md-6" border="2px solid black">
+              <tbody>
+              <tr>
+                <td class="pt-lg-4 pt-sm-4 pt-md-4">Select An Item : </td>
+                <td class="pt-0 pb-0">
+                  <form  class="example-form" name="autoCompleterForm">
+                    <mat-form-field  class="example-full-width">
+                      <input type="text" placeholder="Enter Here" class="btn text-dark bg-transparent " matInput
+                             [formControl]="myControl" [matAutocomplete]="auto" [(ngModel)]="productFilter.name" name="searchBox">
+                      <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option *ngFor="let product of productData | filterBy: productFilter"  [value]="product.name"
+                                    class="active bg-dark text-white rounded-circle"     (click)="productDetails(product)">
+                          <div class="text-center">{{product.name}}</div>
+                        </mat-option>
+                      </mat-autocomplete>
+                    </mat-form-field>
+                  </form>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="pt-lg-4 pt-sm-4 pt-md-4">Enter Quantity :</td>
+                <td class="pb-0">
+                  <form>
+                    <div class="form-group">
+                      <select class="form-control" id="sel1"  (click)="selectQuantity($event.target.value)"
+                              [(ngModel)]="quantity" [value]="options[0]" name="quantityDropDownform">
+                        <option [value]="option" *ngFor="let option of options">{{option}}</option>
+                      </select>
+                    </div>
+                  </form>
+                </td>
+              </tr>
+
+              <tr class="border-0">
+                <td></td>
+                <td class="float-left"><input type="button" value="add into cart" (click)="addProduct()" class="btn btn-outline-info bg-success text-white">
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <form>
+          <div class="form-group">
+            <input class="form-control" name="search" type="text" placeholder="Search Here" aria-label="Search" size="100%" id="search"
+                   [(ngModel)]="searchProducts"  (input)="getProductDetailsPaginationSearch(1)" style="background-color: moccasin">
+          </div>
+        </form>
+
+        <div class="row pt-lg-4">
+          <div class="col-lg-12 col-xl-12 col-sm-12 col-md-12">
+            <div class="card shadow bg-secondary" *ngIf="productData.length > 0">
+              <div class="card-body pt-3 pb-0" ><pagination-controls (pageChange)="getProductDetailsPaginationSearch($event)"></pagination-controls></div>
             </div>
-            <div class="card-footer">
-              <!--Price and default Add and Subtract buttons-->
-              <div class="row no-gutters">
-                <div class="col-lg-1 col-xl-1 col-sm-1 col-md-1"></div>
-                <div class="col-lg-3 col-xl-3 col-sm-3 col-md-3 font-weight-bold pt-2">Price:</div>
-                <div class="col-lg-3 col-xl-3 col-sm-3 col-md-3 pt-2"><i class="fa">&#xf156;</i> {{product.price}}</div>
-                <div class="col-lg-5 col-xl-5 col-sm-5 col-md-5">
-                  <div class="btn-group" *ngIf="product.id">
-                    <button type="button" class="btn btn-primary font-weight-bolder" (click)="addQuantity()">+</button>
-                    <button type="button" class="btn btn-primary stretched-link">{{quantity}}</button>
-                    <button type="button" class="btn btn-primary font-weight-bolder" (click)="subQuantity()">-</button>
+
+            <!--Displaying Product Images side by side-->
+            <div class="row">
+              <div class="col-lg-4 col-xl-4 col-sm-4 col-md-4 p-2" *ngFor="let product of productData
+                    | paginate: { itemsPerPage: itemsPerPage, currentPage: pageNo, totalItems: total }">
+                <div class="card shadow" id="{{product.id}}">
+                  <div class="card-body">
+                    <img src="../../assets/{{product.category}}/{{product.name}}.jpg" height="250" width="278">
+                  </div>
+                  <div class="card-footer">
+                    <!--Price and default Add and Subtract buttons-->
+                    <div class="row no-gutters">
+                      <div class="col-lg-1 col-xl-1 col-sm-1 col-md-1"></div>
+                      <div class="col-lg-3 col-xl-3 col-sm-3 col-md-3 font-weight-bold pt-2">Price:</div>
+                      <div class="col-lg-3 col-xl-3 col-sm-3 col-md-3 pt-2"><i class="fa">&#xf156;</i> {{product.price}}</div>
+                      <div class="col-lg-5 col-xl-5 col-sm-5 col-md-5">
+                        <div class="btn-group" *ngIf="product.id">
+                          <button type="button" class="btn btn-primary font-weight-bolder" (click)="addQuantity()">+</button>
+                          <button type="button" class="btn btn-primary stretched-link">{{quantity}}</button>
+                          <button type="button" class="btn btn-primary font-weight-bolder" (click)="subQuantity()">-</button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row no-gutters">
+                      <div class="col-lg-2 col-xl-2 col-sm-2 col-md-2"></div>
+                      <div class="col-lg-8 col-xl-8 col-sm-8 col-md-8 font-weight-bold">Total: <i class="fa">&#xf156;</i></div>
+                      <div class="col-lg-2 col-xl-2 col-sm-2 col-md-2"></div>
+                    </div>
                   </div>
                 </div>
               </div>
-
-              <div class="row no-gutters">
-                <div class="col-lg-2 col-xl-2 col-sm-2 col-md-2"></div>
-                <div class="col-lg-8 col-xl-8 col-sm-8 col-md-8 font-weight-bold">Total: <i class="fa">&#xf156;</i></div>
-                <div class="col-lg-2 col-xl-2 col-sm-2 col-md-2"></div>
-              </div>
             </div>
+
+            <div class="card shadow bg-secondary" *ngIf="productData.length > 0">
+              <div class="card-body pt-3 pb-0" ><pagination-controls (pageChange)="getProductDetailsPaginationSearch($event)"></pagination-controls></div>
+            </div>
+
+            <div *ngIf="productData.length == 0">searching item not  found...</div>
           </div>
+        </div><br><br>
+
+        <!--Third Row-->
+        <!--Displaying List of items selected by Customer-->
+        <div class="row">
+          <div class="col-lg-1 col-sm-1 col-md-1"></div>
+          <div class="col-lg-9 col-sm-9 col-md-9" *ngIf="addTableFlag">
+            <div><strong><h3 class="text-success"><u>Item details:</u></h3></strong></div>
+            <table border="2 px" class="table table-active"  style="width: 100%;">
+              <thead>
+              <tr>
+                <th >Id</th>
+                <th>ProductName</th>
+                <th>ItemCost</th>
+                <th>Quantity</th>
+                <th>NetCost</th>
+                <th></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let item of productTable">
+                <td>{{item.id}}</td>
+                <td>{{item.productName}}</td>
+                <td>{{item.itemCost}}</td>
+                <td>{{item.quantity}}</td>
+                <td>{{item.netCost}}</td>
+                <td><button (click)="removeDataFromTable(item)" type="button" class="btn btn-primary">Remove</button></td>
+              </tr>
+              <tr class="border-0">
+                <td></td>
+                <td></td>
+                <td><strong><h4>Total cost:</h4></strong></td>
+                <td><button type="button" class="btn btn-info">{{netTotal}}</button></td>
+                <td></td>
+                <td></td>
+              </tr>
+              </tbody>
+            </table>
           </div>
-      </div>
-    </div>
-  </div>
+        </div>
 
-
-
-  <br>
-  <br>
-
-
-  <!--Third Row-->
-  <!--Displaying List of items selected by Customer-->
-  <div class="row">
-    <div class="col-lg-2 col-sm-2 col-md-2"></div>
-    <div class="col-lg-9 col-sm-9 col-md-9" *ngIf="addTableFlag">
-      <div><strong><h3 class="text-success"><u>Item details:</u></h3></strong></div>
-      <table border="2 px" class="table table-active"  style="width: 100%;">
-        <thead>
-        <tr>
-          <th >Id</th>
-          <th>ProductName</th>
-          <th>ItemCost</th>
-          <th>Quantity</th>
-          <th>NetCost</th>
-          <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let item of productTable">
-          <td>{{item.id}}</td>
-          <td>{{item.productName}}</td>
-          <td>{{item.itemCost}}</td>
-          <td>{{item.quantity}}</td>
-          <td>{{item.netCost}}</td>
-          <td><button (click)="removeDataFromTable(item)" type="button" class="btn btn-primary">Remove</button></td>
-        </tr>
-        <tr class="border-0">
-          <td></td>
-          <td></td>
-          <td><strong><h4>Total cost:</h4></strong></td>
-          <td><button type="button" class="btn btn-info">{{netTotal}}</button></td>
-          <td></td>
-          <td></td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <!--Fourth Row-->
-  <!--SuccessPage buttons-->
-  <div *ngIf="addTableFlag" class="row">
-    <div class="col-sm-4"></div>
-    <div class="col-sm-3">
-      <button type="button" class="btn p-2 bg-success btn-outline-info text-white float-left"
-              data-toggle="modal" data-target="#alertModal" (click)="successPageNavigationMethod()">Proceed To Pay</button>
-      <button type="button" class="btn p-2 bg-success btn-outline-info text-white float-right" (click)="cancelMethod()">Cancel</button>
+        <!--Fourth Row-->
+        <!--SuccessPage buttons-->
+        <div *ngIf="addTableFlag" class="row">
+          <div class="col-sm-4"></div>
+          <div class="col-sm-3">
+            <button type="button" class="btn p-2 bg-success btn-outline-info text-white float-left"
+                    data-toggle="modal" data-target="#alertModal" (click)="successPageNavigationMethod()">Proceed To Pay</button>
+            <button type="button" class="btn p-2 bg-success btn-outline-info text-white float-right" (click)="cancelMethod()">Cancel</button>
+          </div>
+        </div>
+      </div><br><br>
     </div>
   </div>
 </div>
 
 
-<!--
-<div class="split left">
-  Hello
-</div>
-&lt;!&ndash;Dividing Right screen&ndash;&gt;
-<div class="split right">
-  <div class="row pt-lg-4 jumbotron shadow" *ngIf="buyProductFlag">
-    <div class="col-lg-3 col-sm-3 col-md-3"></div>
-    <div class="col">
-      <b><h3 class="text-success">Select Items to buy:</h3></b>
-      <table class="table col-lg-6 col-sm-6 col-md-6" border="2px solid black">
-        <tbody>
-        <tr>
-          <td class="pt-lg-4 pt-sm-4 pt-md-4">Select An Item : </td>
-          <td class="pt-0 pb-0">
-            <form  class="example-form" name="autoCompleterForm">
-              <mat-form-field  class="example-full-width">
-                <input type="text" placeholder="Enter Here" class="btn text-dark bg-transparent " matInput
-                       [formControl]="myControl" [matAutocomplete]="auto" [(ngModel)]="productFilter.name" name="searchBox">
-                <mat-autocomplete #auto="matAutocomplete">
-                  <mat-option *ngFor="let product of databaseData | filterBy: productFilter"  [value]="product.name"
-                              class="active bg-dark text-white rounded-circle"     (click)="productDetails(product)">
-                    <div class="text-center">{{product.name}}</div>
-                  </mat-option>
-                </mat-autocomplete>
-              </mat-form-field>
-            </form>
-          </td>
-        </tr>
-
-        <tr>
-          <td class="pt-lg-4 pt-sm-4 pt-md-4">Enter Quantity :</td>
-          <td class="pb-0">
-            <form>
-              <div class="form-group">
-                <select class="form-control" id="sel1"  (click)="selectQuantity($event.target.value)"
-                        [(ngModel)]="quantity" [value]="options[0]" name="quantityDropDownform">
-                  <option [value]="option" *ngFor="let option of options">{{option}}</option>
-                </select>
-              </div>
-            </form>
-          </td>
-        </tr>
-
-        <tr class="border-0">
-          <td></td>
-          <td class="float-left"><input type="button" value="add into cart" (click)="addProduct()" class="btn btn-outline-info bg-success text-white">
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
--->

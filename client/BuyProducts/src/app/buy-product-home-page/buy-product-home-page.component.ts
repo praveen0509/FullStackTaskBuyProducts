@@ -40,13 +40,11 @@ import {LocalStorage} from "@ngx-pwa/local-storage";
       .left {
         width: 20%;
         left: 0;
-        background-color: #111;
       }
 
       .right {
         width: 80%;
         right: 0;
-        background-color: red;
       }
     `
   ]
@@ -71,9 +69,12 @@ export class BuyProductHomePageComponent implements OnInit {
   billId: number;
   productTable = [] ;
   listOfItemsDetails = [];
-  databaseData: any ;
+  productData: any ;
   productName: string;
   productCategory: string;
+  page: any;                    // Page contains pageNo, itemsPerPage, search
+  pageNo = 1;
+  total: number;
 
   options = [1, 2, 3, 4, 5];
   productCost = 0;
@@ -81,6 +82,7 @@ export class BuyProductHomePageComponent implements OnInit {
   autoIncrement = 0;
   netTotal = 0;
   quantity = 1;
+  itemsPerPage = 6;
 
 
 
@@ -96,21 +98,27 @@ export class BuyProductHomePageComponent implements OnInit {
       }
     });
 
-    this.dbServiceObj.getProductData().subscribe((resolve) => {
-      console.log(resolve);
-      this.databaseData = resolve;
-    });
+   this.getProductDetailsPaginationSearch(1);       // Calling Product Data having pagination with default pageNo set to 1
+  }
 
+  getProductDetailsPaginationSearch(pageNumber) {
+    this.pageNo = pageNumber;
+    this.page = { pageNo: this.pageNo, itemsPerPage: this.itemsPerPage, search: this.searchProducts };
+    this.dbServiceObj.getProductDataWithPageAndSearch(this.page).subscribe((response) => {
+      this.productData = response.rows;
+      this.total=response.count;
+      console.log("productData:", this.productData);
+    });
   }
 
 
   // Displaying Selected items list as a table
   addProduct() {
-    for (let i = 0; i < this.databaseData.length; i++) {
+    for (let i = 0; i < this.productData.length; i++) {
       // total : total qauntity cost
       // netTotal: Total of all the ItemsCost
       // productCost: Cost of one Product:
-      if (this.productFilter.name === this.databaseData[i].name) {
+      if (this.productFilter.name === this.productData[i].name) {
         this.netCost = this.productCost * this.quantity;
         this.netTotal = this.netTotal + this.netCost;
         this.addTableFlag = true;       // Enables selected ItemsList Table

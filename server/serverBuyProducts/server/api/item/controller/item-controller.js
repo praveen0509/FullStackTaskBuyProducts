@@ -22,7 +22,6 @@ export default class ItemController {
   // Inserting Array of Objects into item modal
   static bulkAdd(req, res) {
     const _reqBody = req.body;
-    console.log()
     ItemDao.bulkAdd(_reqBody, _reqBody["billId"])
       .then( itemDao =>{res.status(201).json(itemDao);
       }) .catch(error => res.status(400).json(error));

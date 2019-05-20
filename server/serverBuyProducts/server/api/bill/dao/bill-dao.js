@@ -18,7 +18,6 @@ export default class BillDao {
   // server side searching with purchasedBy(name) and totalCost greater than or equal to the given input
   static getAllWithSearch(search) {
     return new Promise((resolve, reject) => {
-      console.log("total:", search.total.length);
       if(search.total.length==0){
         search.total = 0;
       }

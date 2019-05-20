@@ -13,7 +13,7 @@ export class QueryApi {
 
   doPost(url: string, params: any, headers?: any) {
     url = UserEndPoint(url, params);
-    return this.http.post(url, params, headers);
+    return this.http.post(url, params, headers)
   }
 
 

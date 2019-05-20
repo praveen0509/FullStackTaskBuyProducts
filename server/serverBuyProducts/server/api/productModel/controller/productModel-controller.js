@@ -12,7 +12,6 @@ export default class ProductModelController {
 
   static add(req, res){
     let _body = req.body;
-    console.log(_body);
     ProductModelDao.add(_body).then(products => {
       res.status(200);
       res.send(products);
@@ -29,7 +28,7 @@ export default class ProductModelController {
 
   /*Pagination and Searching One field and All attributes at a time*/
   static oneFieldAllAttributes(req, res){
-      let bodyPage = req.body.page;
+      let bodyPage = req.body;
       ProductModelDao.oneFieldAllAttributes(bodyPage)
         .then(searchresult => { res.send(searchresult) })
         .catch(error => res.status(400).json(error));

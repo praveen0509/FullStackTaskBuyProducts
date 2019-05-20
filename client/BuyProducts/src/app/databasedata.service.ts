@@ -16,6 +16,10 @@ export class DatabasedataService {
     return this.queryApi.doGet('PRODUCT_DETAILS', req).pipe(catchError(err => of([err])));
   }
 
+  getProductDataWithPageAndSearch(page): Observable<any> {
+    return this.queryApi.doPost('PRODUCT_DETAILS_WITH_ONE_FIELD', page).pipe(catchError(err => of([err])));
+  }
+
   getBillData() : Observable <any> {
     let req
     return this.queryApi.doGet('BILL_DETAILS', req).pipe(catchError(err => of([err])));
