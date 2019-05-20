@@ -45,7 +45,7 @@ export class SuccessMessageComponent implements OnInit {
   getBillData() {
     this.dbServiceObj.getBillData().subscribe((resolve) => { // Getting bill Data
       this.billLastRowId = resolve.length;
-      console.log("bill Last Row:", this.billLastRowId);
+      console.log("bill Data:", resolve);
       this.userData['noOfItems'] = resolve[resolve.length-1]["list"];
       this.userData['totalCost'] = resolve[resolve.length-1]["total"];
     });

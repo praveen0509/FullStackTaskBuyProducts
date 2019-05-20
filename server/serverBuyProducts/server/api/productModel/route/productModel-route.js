@@ -9,3 +9,5 @@ export default class ProductModelRoute {
     router.route('/productModel/search/:id').get(ProductModelController.getById);    // Getting Product Data by Id
   }
 }
+
+

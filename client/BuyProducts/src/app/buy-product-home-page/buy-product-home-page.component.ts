@@ -26,7 +26,28 @@ import {LocalStorage} from "@ngx-pwa/local-storage";
 
       .autoc {
         background-color: indigo;
-      }      
+      }
+
+      .split {
+        height: 100%;
+        position: fixed;
+        z-index: 1;
+        top: 8%;
+        overflow-x: hidden;
+        padding-top: 20px;
+      }
+
+      .left {
+        width: 20%;
+        left: 0;
+        background-color: #111;
+      }
+
+      .right {
+        width: 80%;
+        right: 0;
+        background-color: red;
+      }
     `
   ]
 })
@@ -60,6 +81,7 @@ export class BuyProductHomePageComponent implements OnInit {
   autoIncrement = 0;
   netTotal = 0;
   quantity = 1;
+
 
 
   ngOnInit() {
@@ -156,7 +178,7 @@ export class BuyProductHomePageComponent implements OnInit {
     this.productCategory = product.category;
   }
 
-  //
+
   successPageNavigationMethod() {
     let navigationextras: NavigationExtras = {
       queryParams : {

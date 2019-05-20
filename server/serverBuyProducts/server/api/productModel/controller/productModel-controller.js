@@ -28,7 +28,7 @@ export default class ProductModelController {
   }
 
   /*Pagination and Searching One field and All attributes at a time*/
-  oneFieldAllAttributes(req, res){
+  static oneFieldAllAttributes(req, res){
       let bodyPage = req.body.page;
       ProductModelDao.oneFieldAllAttributes(bodyPage)
         .then(searchresult => { res.send(searchresult) })

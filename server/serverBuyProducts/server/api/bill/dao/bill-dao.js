@@ -34,24 +34,6 @@ export default class BillDao {
     });
   }
 
-  // server side pagination
-  /*static getAllWithPage(pageNo,limit) {
-    return new Promise((resolve, reject) => {
-      let offset = limit * (pageNo - 1);
-      models.bill.findAndCountAll({
-        limit: limit,
-        offset: offset,
-        order: [
-          ['createdAt', 'DESC']
-        ]
-      })
-        .then((result) => {resolve(result)})
-        .catch(error=>{ reject(error); })
-    });
-  }*/
-
-
-/*
   static getAllWithPage(pageNo,limit, search) {
 
       return new Promise((resolve, reject) => {
@@ -76,10 +58,9 @@ export default class BillDao {
             .catch(error=>{ reject(error); })
       });
   }
-*/
 
 
-  static getAllWithPage(pageNo,limit, search) {
+  /*static getAllWithPage(pageNo,limit, search) {
 
     return new Promise((resolve, reject) => {
       var value = Number(search.purchasedBy);
@@ -103,7 +84,7 @@ export default class BillDao {
         .then((result) => {resolve(result)})
         .catch(error=>{ reject(error); })
     });
-  }
+  }*/
 
 
 

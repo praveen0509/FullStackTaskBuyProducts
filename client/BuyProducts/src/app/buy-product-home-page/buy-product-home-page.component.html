@@ -77,7 +77,9 @@
       <div class="row">
         <div class="col-lg-4 col-xl-4 col-sm-4 col-md-4 p-2" *ngFor="let product of databaseData">
           <div class="card shadow" id="{{product.id}}">
-            <div class="card-body"><img src="../../assets/{{product.category}}/{{product.name}}.jpg" height="250" width="278"></div>
+            <div class="card-body">
+              <img src="../../assets/{{product.category}}/{{product.name}}.jpg" height="250" width="278">
+            </div>
             <div class="card-footer">
               <!--Price and default Add and Subtract buttons-->
               <div class="row no-gutters">
@@ -87,7 +89,7 @@
                 <div class="col-lg-5 col-xl-5 col-sm-5 col-md-5">
                   <div class="btn-group" *ngIf="product.id">
                     <button type="button" class="btn btn-primary font-weight-bolder" (click)="addQuantity()">+</button>
-                    <button type="button" class="btn btn-primary">{{quantity}}</button>
+                    <button type="button" class="btn btn-primary stretched-link">{{quantity}}</button>
                     <button type="button" class="btn btn-primary font-weight-bolder" (click)="subQuantity()">-</button>
                   </div>
                 </div>
@@ -162,3 +164,59 @@
   </div>
 </div>
 
+
+<!--
+<div class="split left">
+  Hello
+</div>
+&lt;!&ndash;Dividing Right screen&ndash;&gt;
+<div class="split right">
+  <div class="row pt-lg-4 jumbotron shadow" *ngIf="buyProductFlag">
+    <div class="col-lg-3 col-sm-3 col-md-3"></div>
+    <div class="col">
+      <b><h3 class="text-success">Select Items to buy:</h3></b>
+      <table class="table col-lg-6 col-sm-6 col-md-6" border="2px solid black">
+        <tbody>
+        <tr>
+          <td class="pt-lg-4 pt-sm-4 pt-md-4">Select An Item : </td>
+          <td class="pt-0 pb-0">
+            <form  class="example-form" name="autoCompleterForm">
+              <mat-form-field  class="example-full-width">
+                <input type="text" placeholder="Enter Here" class="btn text-dark bg-transparent " matInput
+                       [formControl]="myControl" [matAutocomplete]="auto" [(ngModel)]="productFilter.name" name="searchBox">
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option *ngFor="let product of databaseData | filterBy: productFilter"  [value]="product.name"
+                              class="active bg-dark text-white rounded-circle"     (click)="productDetails(product)">
+                    <div class="text-center">{{product.name}}</div>
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </form>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="pt-lg-4 pt-sm-4 pt-md-4">Enter Quantity :</td>
+          <td class="pb-0">
+            <form>
+              <div class="form-group">
+                <select class="form-control" id="sel1"  (click)="selectQuantity($event.target.value)"
+                        [(ngModel)]="quantity" [value]="options[0]" name="quantityDropDownform">
+                  <option [value]="option" *ngFor="let option of options">{{option}}</option>
+                </select>
+              </div>
+            </form>
+          </td>
+        </tr>
+
+        <tr class="border-0">
+          <td></td>
+          <td class="float-left"><input type="button" value="add into cart" (click)="addProduct()" class="btn btn-outline-info bg-success text-white">
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+-->
