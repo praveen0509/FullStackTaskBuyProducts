@@ -34,6 +34,17 @@ export default class ProductModelController {
         .catch(error => res.status(400).json(error));
   }
 
+
+  /*Pagination and Searching One field and All attributes at a time*/
+  static oneFieldOneAttribute(req, res){
+    let bodyPage = req.body;
+    console.log("controller:", req.body);
+    ProductModelDao.oneFieldOneAttribute(bodyPage)
+      .then(searchresult => { res.send(searchresult) })
+      .catch(error => res.status(400).json(error));
+  }
+
+
 }
 
 

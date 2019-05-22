@@ -16,8 +16,15 @@ export class DatabasedataService {
     return this.queryApi.doGet('PRODUCT_DETAILS', req).pipe(catchError(err => of([err])));
   }
 
+  /*Getting Product data having On efield with muktiple attributes*/
   getProductDataWithPageAndSearch(page): Observable<any> {
     return this.queryApi.doPost('PRODUCT_DETAILS_WITH_ONE_FIELD', page).pipe(catchError(err => of([err])));
+  }
+
+  /*Getting Product Data with Individual search*/
+  getProductsByIndividualFields(page): Observable<any> {
+    console.log("service page:",page);
+    return this.queryApi.doPost('PRODUCT_DETAILS_WITH_MULTIPLE_FIELDS', page).pipe(catchError(err => of([err])));
   }
 
   getBillData() : Observable <any> {

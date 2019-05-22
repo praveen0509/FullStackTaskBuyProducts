@@ -9,26 +9,14 @@
         <div class="col-sm-10 col-md-10 col-lg-10 col-xl-10">
           <form>
             <div class="form-group">
-              <input class="form-control" style="background-color: moccasin" name="search" type="text" placeholder="Search Here" aria-label="Search"
-                     size="80%" [(ngModel)]="searchProducts"  (input)="getProductDetailsPaginationSearch(1)">
+              <input class="form-control mb-2" style="background-color: moccasin" name="search" type="text" placeholder="Search By Name" aria-label="Search"
+                     size="80%" [(ngModel)]="searchPrdFromDb.name"  (input)="getProductsByIndividualFields(1)">
+              <input class="form-control mb-2" style="background-color: moccasin" name="search" type="text" placeholder="Search By Category" aria-label="Search"
+                     size="80%" [(ngModel)]="searchPrdFromDb.category"  (input)="getProductsByIndividualFields(1)">
+              <input class="form-control mb-2" style="background-color: moccasin" name="search" type="text" placeholder="Search By Price" aria-label="Search"
+                     size="80%" [(ngModel)]="searchPrdFromDb.price"  (input)="getProductsByIndividualFields(1)">
             </div>
           </form>
-        </div>
-      </div>
-
-      <!--All Categories Dropdown-->
-      <div class="row">
-        <div class="col dropdown"><button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">All Categories</button>
-          <div class="dropdown-menu">
-            <div class="dropdown-submenu">
-              <button type="button" class="dropdown-toggle">Soaps</button>
-              <div class="dropdown-menu">
-                <div class="dropdown-item">Rexona</div>
-                <div class="dropdown-item">Lux</div>
-                <div class="dropdown-item">Medimix</div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -93,6 +81,8 @@
           </div>
         </form>
 
+
+        <!--Displaying all the images-->
         <div class="row pt-lg-4">
           <div class="col-lg-12 col-xl-12 col-sm-12 col-md-12">
             <div class="card shadow bg-secondary" *ngIf="productData.length > 0">
@@ -109,24 +99,20 @@
                   </div>
                   <div class="card-footer">
                     <!--Price and default Add and Subtract buttons-->
-                    <div class="row no-gutters">
-                      <div class="col-lg-1 col-xl-1 col-sm-1 col-md-1"></div>
-                      <div class="col-lg-3 col-xl-3 col-sm-3 col-md-3 font-weight-bold pt-2">Price:</div>
-                      <div class="col-lg-3 col-xl-3 col-sm-3 col-md-3 pt-2"><i class="fa">&#xf156;</i> {{product.price}}</div>
-                      <div class="col-lg-5 col-xl-5 col-sm-5 col-md-5">
-                        <div class="btn-group" *ngIf="product.id">
-                          <button type="button" class="btn btn-primary font-weight-bolder" (click)="addQuantity()">+</button>
-                          <button type="button" class="btn btn-primary stretched-link">{{quantity}}</button>
-                          <button type="button" class="btn btn-primary font-weight-bolder" (click)="subQuantity()">-</button>
-                        </div>
-                      </div>
+
+                    <div class="row " style="background-color: lightcyan">
+                      <div class="col"></div>
+                      <div class="col"><h3 >{{product.name}}</h3></div>
+                      <div class="col"></div>
                     </div>
 
                     <div class="row no-gutters">
-                      <div class="col-lg-2 col-xl-2 col-sm-2 col-md-2"></div>
-                      <div class="col-lg-8 col-xl-8 col-sm-8 col-md-8 font-weight-bold">Total: <i class="fa">&#xf156;</i></div>
-                      <div class="col-lg-2 col-xl-2 col-sm-2 col-md-2"></div>
+                      <div class="col"></div>
+                      <div class="col font-weight-bold pt-2">Price: <i class="fa">&#xf156;</i> {{product.price}}</div>
+                      <div class="col"></div>
                     </div>
+
+
                   </div>
                 </div>
               </div>

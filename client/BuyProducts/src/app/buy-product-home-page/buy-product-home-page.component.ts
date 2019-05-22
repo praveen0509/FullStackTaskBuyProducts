@@ -75,6 +75,8 @@ export class BuyProductHomePageComponent implements OnInit {
   page: any;                    // Page contains pageNo, itemsPerPage, search
   pageNo = 1;
   total: number;
+  searchPrdFromDb = {price: '', category: '', name: '' };          // searchPrdFromDb --> search Products from Database
+
 
   options = [1, 2, 3, 4, 5];
   productCost = 0;
@@ -82,7 +84,7 @@ export class BuyProductHomePageComponent implements OnInit {
   autoIncrement = 0;
   netTotal = 0;
   quantity = 1;
-  itemsPerPage = 6;
+  itemsPerPage = 10;
 
 
 
@@ -103,8 +105,19 @@ export class BuyProductHomePageComponent implements OnInit {
 
   getProductDetailsPaginationSearch(pageNumber) {
     this.pageNo = pageNumber;
-    this.page = { pageNo: this.pageNo, itemsPerPage: this.itemsPerPage, search: this.searchProducts };
+    this.page = { pageNo: this.pageNo, itemsPerPage: this.itemsPerPage, searchAll: this.searchProducts };
     this.dbServiceObj.getProductDataWithPageAndSearch(this.page).subscribe((response) => {
+      this.productData = response.rows;
+      this.total=response.count;
+      console.log("productData:", this.productData);
+    });
+  }
+
+
+  getProductsByIndividualFields(pageNumber) {
+    this.pageNo = pageNumber;
+    this.page = { pageNo: this.pageNo, itemsPerPage: this.itemsPerPage, searchAll: this.searchPrdFromDb };
+    this.dbServiceObj.getProductsByIndividualFields(this.page).subscribe((response) => {
       this.productData = response.rows;
       this.total=response.count;
       console.log("productData:", this.productData);

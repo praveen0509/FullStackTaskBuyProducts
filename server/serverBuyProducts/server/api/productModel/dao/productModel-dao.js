@@ -52,17 +52,17 @@ export default class ProductModelDao {
 
     return new Promise((resolve, reject) => {
       let orCondition = [];
-      let value = Number(bodyPage.search)                    // saving the search field value to check it is a Number or String
+      let value = Number(bodyPage.searchAll);                    // saving the search field value to check it is a Number or String
       if(!isNaN(value))    {                                  // If the field is Number, Parse the value to Integer
-        bodyPage.search = value;
+        bodyPage.searchAll = value;
        orCondition = [
-                       { price: { [Op.gte]: bodyPage.search }}
+                       { price: { [Op.gte]: bodyPage.searchAll }}
                       ]
       }
       else {
         orCondition = [
-                        { name: {[Op.iLike]: '%' + bodyPage.search + '%'} },
-                        { category: {[Op.iLike]: '%' + bodyPage.search + '%'} }
+                        { name: {[Op.iLike]: '%' + bodyPage.searchAll + '%'} },
+                        { category: {[Op.iLike]: '%' + bodyPage.searchAll + '%'} }
                       ]
       }
 
@@ -79,6 +79,34 @@ export default class ProductModelDao {
       }).then((result) => resolve(result))
         .catch((err) => reject(err));
 
+    });
+  }
+
+
+
+  /*Searching and Pagination using one field ne multiple data*/
+  static oneFieldOneAttribute(bodyPage) {
+
+    return new Promise((resolve, reject) => {
+      let bodySearch = bodyPage.searchAll;
+      bodySearch.name = bodySearch.name.trim();              // trimming all the spaces
+      bodySearch.category = bodySearch.category.trim();
+      bodySearch.price = Number(bodySearch.price);           // If user doesn't give price, default value will be 0
+      let offset = bodyPage.itemsPerPage * (bodyPage.pageNo - 1);      // Setting starting row  in the database
+
+      models.productModel.findAndCountAll({
+        where: {
+          name: {[Op.iLike]: '%' + bodySearch.name + '%'},
+          category: {[Op.iLike]: '%' + bodySearch.category + '%'},
+          price: {  [Op.gte]: bodySearch.price }
+        },
+        limit: bodyPage.itemsPerPage,
+        offset: offset,
+        order: [
+          ['category', 'DESC']
+        ]
+      }).then((result) => resolve(result))
+        .catch((err) => reject(err));
     });
   }
 
