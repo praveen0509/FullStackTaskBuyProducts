@@ -14,6 +14,10 @@ import {LocalStorage} from "@ngx-pwa/local-storage";
         max-width: 500px;
         width: 10%;
       }
+      
+      .search{
+        background-color: blanchedalmond;
+      }
 
       .example-full-width {
         width: 100%;
@@ -64,6 +68,7 @@ export class BuyProductHomePageComponent implements OnInit {
   userName: string;
   email: string;
   productId: number;
+  productDescription: string;
 
   searchProducts = "";
   billId: number;
@@ -83,7 +88,7 @@ export class BuyProductHomePageComponent implements OnInit {
   netCost = 0;
   autoIncrement = 0;
   netTotal = 0;
-  quantity = 1;
+  quantity = 0;
   itemsPerPage = 10;
 
 
@@ -126,70 +131,39 @@ export class BuyProductHomePageComponent implements OnInit {
 
 
   // Displaying Selected items list as a table
-  addProduct() {
-    for (let i = 0; i < this.productData.length; i++) {
-      // total : total qauntity cost
-      // netTotal: Total of all the ItemsCost
-      // productCost: Cost of one Product:
-      if (this.productFilter.name === this.productData[i].name) {
-        this.netCost = this.productCost * this.quantity;
-        this.netTotal = this.netTotal + this.netCost;
-        this.addTableFlag = true;       // Enables selected ItemsList Table
+  // total : total qauntity cost
+  // netTotal: Total of all the ItemsCost
+  // productCost: Cost of one Product:
 
-
-        if(this.productObjectFlag) {   // executes First time Only, to save Object into productTable array
-          const productObject = {};
-          productObject['id'] = ++this.autoIncrement;
-          productObject['productName'] =  this.productFilter.name;
-          productObject['itemCost'] = this.productCost;
-          productObject['quantity'] = this.quantity;
-          productObject['netCost'] = this.netCost;
-          this.productTable.push(productObject);   //pushing objects into productTable array
-          this.productObjectFlag = false;
-        }
-
-        else{
-          for(let i=0; i< this.productTable.length; i++) {
-            if(this.productFilter.name===this.productTable[i].productName){  // Checking whether the entered Product present in the array or not
-              let num1 = parseInt(this.productTable[i].quantity);
-              let num2 = parseInt(String(this.quantity));
-              this.productTable[i].quantity = num1 + num2;  // adding quantity to already existing product quantity
-              this.productTable[i].netCost = parseInt(this.productTable[i].netCost) + this.netCost; // adding netCost to already existing product netCost
-              this.addProductObjectFlag = false;
-              break;
-            }
-          }
-
-          if(this.addProductObjectFlag) {
-            const productObject = {};
-            productObject['id'] = ++this.autoIncrement;
-            productObject['productName'] =  this.productFilter.name;
-            productObject['itemCost'] = this.productCost;
-            productObject['quantity'] = this.quantity;
-            productObject['netCost'] = this.netCost;
-            this.productTable.push(productObject);
-          }
-          this.addProductObjectFlag = true;
-        }
-
-
-        let itemDetails = {};
-        itemDetails['productId'] = this.productId;
-        itemDetails['productName'] = this.productName;
-        itemDetails['quantity'] = this.quantity;
-        itemDetails['totalCost'] = this.netCost;
-        this.listOfItemsDetails.push(itemDetails);
-        this.productFilter.name = '';
-        this.quantity = 1;
+  //This method will be called Once 'add into product' button clicks
+  addProduct(){
+    this.netCost = this.productCost * this.quantity;
+    this.netTotal = this.netTotal + this.netCost;
+    for(let i=0; i< this.productTable.length; i++) {
+      if (this.productName === this.productTable[i].productName) {  // Checking whether the entered Product present in the array or not
+        let num1 = parseInt(this.productTable[i].quantity);
+        let num2 = parseInt(String(this.quantity));
+        this.productTable[i].quantity = num1 + num2;                // adding quantity to already existing product quantity
+        this.productTable[i].netCost = parseInt(this.productTable[i].netCost) + this.netCost;
+                                                                    // adding netCost to already existing product netCost
+        this.addProductObjectFlag = false;     // If same item not selected, then the item details should add into PRODUCTTABLE array
+        break;
       }
     }
+
+    if(this.addProductObjectFlag){
+      let productObject = {};
+      productObject['id'] = this.productId;
+      productObject['productName'] =  this.productName;
+      productObject['itemCost'] = this.productCost;
+      productObject['quantity'] = this.quantity;
+      productObject['netCost'] = this.netCost;
+      this.productTable.push(productObject);
+      this.addTableFlag = true;       // Enables selected ItemsList Table
+    }
+    this.addProductObjectFlag = true;
   }
 
-
-  // Getting Quantity information about an Item
-  selectQuantity(id: number) {
-    this.quantity = id;
-  }
 
   // Gathering all the information related to One product choosen by Customer
   productDetails(product) {
@@ -197,6 +171,8 @@ export class BuyProductHomePageComponent implements OnInit {
     this.productName = product.name;
     this.productCost = product.price;
     this.productCategory = product.category;
+    this.productDescription = product.description;
+    this.quantity = 0;
   }
 
 
@@ -245,6 +221,10 @@ export class BuyProductHomePageComponent implements OnInit {
         --this.autoIncrement;
         this.netTotal = this.netTotal - item.netCost;
       }
+    }
+
+    if(this.productTable.length==0){
+      this.addTableFlag = false;
     }
   }
 

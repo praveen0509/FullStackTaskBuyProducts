@@ -7,6 +7,7 @@ const productModel = require('/home/sb-33/Desktop/FullStackTask/FullStackTaskBuy
   '/server/serverBuyProducts/server/models/productmodel').productModel;
 
 export default class ProductModelDao {
+
   static getAll(_query) {
     return new Promise((resolve, reject) => {
       models.productModel.findAll({
@@ -45,6 +46,7 @@ export default class ProductModelDao {
           .catch((err) => {reject(err)} );
       });
   }
+
 
 
   /*Searching and Pagination using One field with multiple Data*/
