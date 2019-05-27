@@ -13,8 +13,7 @@ import {DatabasedataService} from "../databasedata.service";
       
      #nav .btn{
        color: orchid;
-     } 
-      
+     }       
     `
   ]
 })
@@ -23,6 +22,7 @@ export class HeaderComponent implements OnInit {
 
   databaseData: any;
   buyProductsId = 0;
+  myCartFlag = false;
 
   ngOnInit() {
         this.dbServiceObj.getProductData().subscribe((resolve) => {

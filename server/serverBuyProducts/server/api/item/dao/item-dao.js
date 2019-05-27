@@ -60,6 +60,5 @@ export default class ItemDao {
             .catch(error => { reject(error);});
       });
   }
-
 }
 

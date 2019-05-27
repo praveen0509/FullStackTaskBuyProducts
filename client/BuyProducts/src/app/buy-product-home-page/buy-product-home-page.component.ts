@@ -58,13 +58,10 @@ export class BuyProductHomePageComponent implements OnInit {
   constructor(private dbServiceObj: DatabasedataService, private router:Router, private activatedRoute: ActivatedRoute,
               private localStorage: LocalStorage) { }
 
-  myControl = new FormControl();
   addTableFlag = false;
   buyProductFlag = false;
-  productObjectFlag = true;
   addProductObjectFlag  = true;
 
-  productFilter = { name: ''};
   userName: string;
   email: string;
   productId: number;
@@ -74,7 +71,7 @@ export class BuyProductHomePageComponent implements OnInit {
   billId: number;
   productTable = [] ;
   listOfItemsDetails = [];
-  productData: any ;
+  productData = [] ;
   productName: string;
   productCategory: string;
   page: any;                    // Page contains pageNo, itemsPerPage, search
@@ -83,7 +80,6 @@ export class BuyProductHomePageComponent implements OnInit {
   searchPrdFromDb = {price: '', category: '', name: '' };          // searchPrdFromDb --> search Products from Database
 
 
-  options = [1, 2, 3, 4, 5];
   productCost = 0;
   netCost = 0;
   autoIncrement = 0;
@@ -114,7 +110,7 @@ export class BuyProductHomePageComponent implements OnInit {
     this.dbServiceObj.getProductDataWithPageAndSearch(this.page).subscribe((response) => {
       this.productData = response.rows;
       this.total=response.count;
-      console.log("productData:", this.productData);
+      console.log("productData1:", this.productData);
     });
   }
 
@@ -125,7 +121,7 @@ export class BuyProductHomePageComponent implements OnInit {
     this.dbServiceObj.getProductsByIndividualFields(this.page).subscribe((response) => {
       this.productData = response.rows;
       this.total=response.count;
-      console.log("productData:", this.productData);
+      console.log("productData2:", this.productData);
     });
   }
 
@@ -140,29 +136,40 @@ export class BuyProductHomePageComponent implements OnInit {
     this.netCost = this.productCost * this.quantity;
     this.netTotal = this.netTotal + this.netCost;
     for(let i=0; i< this.productTable.length; i++) {
-      if (this.productName === this.productTable[i].productName) {  // Checking whether the entered Product present in the array or not
-        let num1 = parseInt(this.productTable[i].quantity);
-        let num2 = parseInt(String(this.quantity));
-        this.productTable[i].quantity = num1 + num2;                // adding quantity to already existing product quantity
-        this.productTable[i].netCost = parseInt(this.productTable[i].netCost) + this.netCost;
-                                                                    // adding netCost to already existing product netCost
-        this.addProductObjectFlag = false;     // If same item not selected, then the item details should add into PRODUCTTABLE array
-        break;
-      }
+        if (this.productName === this.productTable[i].productName) {  // Checking whether the entered Product present in the array or not
+          let num1 = parseInt(this.productTable[i].quantity);
+          let num2 = parseInt(String(this.quantity));
+          this.productTable[i].quantity = num1 + num2;                // adding quantity to already existing product quantity
+          this.productTable[i].netCost = parseInt(this.productTable[i].netCost) + this.netCost;
+                                                                      // adding netCost to already existing product netCost
+          this.addProductObjectFlag = false;     // If same item not selected, then the item details should add into PRODUCTTABLE array
+          break;
+        }
     }
-
     if(this.addProductObjectFlag){
-      let productObject = {};
-      productObject['id'] = this.productId;
-      productObject['productName'] =  this.productName;
-      productObject['itemCost'] = this.productCost;
-      productObject['quantity'] = this.quantity;
-      productObject['netCost'] = this.netCost;
-      this.productTable.push(productObject);
-      this.addTableFlag = true;       // Enables selected ItemsList Table
+        let productObject = {};
+        productObject['id'] = this.productId;
+        productObject['productName'] =  this.productName;
+        productObject['itemCost'] = this.productCost;
+        productObject['category'] = this.productCategory;
+        productObject['quantity'] = this.quantity;
+        productObject['netCost'] = this.netCost;
+        this.productTable.push(productObject);
+        this.addTableFlag = true;       // Enables selected ItemsList Table
+        this.autoIncrement++;
     }
     this.addProductObjectFlag = true;
+    let itemDetails = {};
+    itemDetails['productId'] = this.productId;
+    itemDetails['productName'] = this.productName;
+    itemDetails['quantity'] = this.quantity;
+    itemDetails['totalCost'] = this.netCost;
+    this.listOfItemsDetails.push(itemDetails);
+
+    this.dbServiceObj.setProductTableData(this.productTable);
   }
+
+
 
 
   // Gathering all the information related to One product choosen by Customer
@@ -174,6 +181,8 @@ export class BuyProductHomePageComponent implements OnInit {
     this.productDescription = product.description;
     this.quantity = 0;
   }
+
+
 
 
   successPageNavigationMethod() {
@@ -204,8 +213,9 @@ export class BuyProductHomePageComponent implements OnInit {
       this.dbServiceObj.bulkPostItemData(this.listOfItemsDetails, this.billId).subscribe((res) => {});
       this.router.navigate(['successPage']);
     });                                             // Sending Object Array  Data To Items Model
-
   }
+
+
 
   cancelMethod() {
     this.productTable = [];
@@ -214,26 +224,30 @@ export class BuyProductHomePageComponent implements OnInit {
     this.netTotal = 0;
   }
 
+
+
   removeDataFromTable(item) {
     for( let i=0; i< this.productTable.length; i++) {
       if(this.productTable[i].productName === item.productName){
         this.productTable.splice(i,1);
+        this.listOfItemsDetails.splice(i,1);
         --this.autoIncrement;
         this.netTotal = this.netTotal - item.netCost;
       }
     }
-
     if(this.productTable.length==0){
       this.addTableFlag = false;
     }
   }
 
 
-  addQuantity(){
+
+  addQuantity(){                  // + button for adding quantity
     this.quantity = this.quantity +1;
   }
 
-  subQuantity(){
+
+  subQuantity(){                 // + button for adding quantity
     if(this.quantity != 0)
       this.quantity = this.quantity - 1;
   }

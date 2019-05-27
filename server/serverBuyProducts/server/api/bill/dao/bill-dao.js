@@ -8,12 +8,28 @@ const Op = Sequelize.Op;
 export default class BillDao {
   static getAll() {
     return new Promise((resolve, reject) => {
+      models.bill.findAll()
+        .then(bills => { resolve(bills); })
+        .catch(error => res.status(400).json(error));
+    });
+  }
+
+
+
+  static getCurrentCustomerData() {
+    return new Promise((resolve, reject) => {
       models.bill.findAll({
+        order: [
+          ['createdAt', 'DESC']
+        ],
+        limit: 1
       })
         .then(bills => { resolve(bills); })
         .catch(error => res.status(400).json(error));
     });
   }
+
+
 
   // server side searching with purchasedBy(name) and totalCost greater than or equal to the given input
   static getAllWithSearch(search) {

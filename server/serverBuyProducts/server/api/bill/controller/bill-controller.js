@@ -11,15 +11,18 @@ export default class BillController {
     }).catch(error => res.status(400).json(error));
   }
 
-  // pagination based on pageNo and itemsPerPage
- /* static getAllWithPage(req, res) {
-    let body= req.body;
-    BillDao.getAllWithPage(body.pageNo, body.itemsPerPage).then(bills => {
+
+  // Getting Bill Data
+  static getCurrentCustomerData(req, res) {
+    BillDao.getCurrentCustomerData().then(bills => {
       res.status(200);
       res.send(bills);
     }).catch(error => res.status(400).json(error));
-  }*/
+  }
 
+
+
+  // pagination based on pageNo and itemsPerPage
   static getAllWithPage(req, res) {
     let bodyPage= req.body.page;
     let bodySearch= req.body.search;
@@ -30,6 +33,8 @@ export default class BillController {
   }
 
 
+
+
   // Inserting a row into Bill Table
   static add(req, res){
     let _body = req.body;
@@ -38,6 +43,8 @@ export default class BillController {
       res.send(addedBill);
     }).catch(error => res.status(400).json(error));
   }
+
+
 
   // getting Bill Data based on ID
   static getById(req, res){

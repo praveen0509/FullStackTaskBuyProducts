@@ -26,6 +26,7 @@ import {FlashMessagesModule} from "ngx-flash-messages";
 import { PreviousOrdersComponent } from './previous-orders/previous-orders.component';
 import { ProductsListComponent } from './products-list/products-list.component';
 import { SearchProductsPipe } from './search-products.pipe';
+import { MycartComponent } from './mycart/mycart.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { SearchProductsPipe } from './search-products.pipe';
     RegistrationComponent,
     PreviousOrdersComponent,
     ProductsListComponent,
-    SearchProductsPipe
+    SearchProductsPipe,
+    MycartComponent
   ],
   imports: [
     BrowserModule,
@@ -66,6 +68,7 @@ import { SearchProductsPipe } from './search-products.pipe';
       { path: 'loginPage', component: LoginPageComponent },
       { path: 'logoutPage', component: LogoutComponent },
       { path: 'previousOrders', component: PreviousOrdersComponent },
+      { path: 'myCart', component: MycartComponent },
       { path: '**', redirectTo: '/previousOrders', pathMatch: 'full' }
     ])
   ],

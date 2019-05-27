@@ -1,11 +1,12 @@
 export const PRODUCTDATA = 'PRODUCT_DETAILS';
 export const BILLDATA = 'BILL_DETAILS';
-export const BILLDATAWITHPAGE = 'BILL_DETAILS_WITH_PAGE';
-export const PRODUCTDATAWITHPAGE = 'PRODUCT_DETAILS_WITH_PAGE';
-export const PRODUCTDATAWITHONEFIELD = 'PRODUCT_DETAILS_WITH_ONE_FIELD';  // Getting Product Data with one field multiple attributes
-export const PRODUCTDATAWITHMULTIPLEFIELDS = 'PRODUCT_DETAILS_WITH_MULTIPLE_FIELDS';  // Getting Product Data with one field multiple attributes
+export const BILLDATA_CURRENT_CUSTOMER = 'BILL_DATA_CURRENT_CUSTOMER';
+export const BILLDATA_WITHPAGE = 'BILL_DETAILS_WITH_PAGE';
+export const PRODUCTDATA_WITHPAGE = 'PRODUCT_DETAILS_WITH_PAGE';
+export const PRODUCTDATA_WITHONEFIELD = 'PRODUCT_DETAILS_WITH_ONE_FIELD';  // Getting Product Data with one field multiple attributes
+export const PRODUCTDATA_WITHMULTIPLE_FIELDS = 'PRODUCT_DETAILS_WITH_MULTIPLE_FIELDS';  // Getting Product Data with one field multiple attributes
 export const INSERTITEM = 'INSERT_DATA_INTO_ITEM';
-export const BULKINSERTITEM='BULK_INSERT_DATA_INTO_ITEM';
+export const BULKINSERT_ITEM='BULK_INSERT_DATA_INTO_ITEM';
 export const INSERTBILL='INSERT_DATA_INTO_BILL';
 export const ITEMBYID='ITEM_BY_ID';
 
@@ -13,13 +14,14 @@ export const UserEndPoint = (type: string, params: any) => {
   const endpoints = {
     [PRODUCTDATA]: '/productModel/getDetails',
     [BILLDATA]: '/bill/getDetails',
-    [BILLDATAWITHPAGE]: '/bill/paginationAndSearch',  //Getting Bill Data With Pagination and Search
-    [PRODUCTDATAWITHPAGE]: '/productModel/paginationAndSearch',  //Getting Product Data With Pagination and Search
-    [PRODUCTDATAWITHONEFIELD]: '/productModel/oneFieldAllAttributes',  //Getting Product Data With One Field Multiple Attributes
-    [PRODUCTDATAWITHMULTIPLEFIELDS]: '/productModel/oneFieldOneAttribute',  //Getting Product Data With One Field Multiple Attributes
+    [BILLDATA_CURRENT_CUSTOMER]: '/bill/getCurrentCustomerData',
+    [BILLDATA_WITHPAGE]: '/bill/paginationAndSearch',  //Getting Bill Data With Pagination and Search
+    [PRODUCTDATA_WITHPAGE]: '/productModel/paginationAndSearch',  //Getting Product Data With Pagination and Search
+    [PRODUCTDATA_WITHONEFIELD]: '/productModel/oneFieldAllAttributes',  //Getting Product Data With One Field Multiple Attributes
+    [PRODUCTDATA_WITHMULTIPLE_FIELDS]: '/productModel/oneFieldOneAttribute',  //Getting Product Data With One Field Multiple Attributes
     [INSERTITEM]:'/item/add',
     [INSERTBILL]:'/bill/add',
-    [BULKINSERTITEM]: '/item/bulkAdd',
+    [BULKINSERT_ITEM]: '/item/bulkAdd',
     [ITEMBYID]: '/item/billId/',
   };
   if(endpoints[type] === '/item/billId/') {
