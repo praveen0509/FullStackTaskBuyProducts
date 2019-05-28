@@ -81,7 +81,21 @@ export class DatabasedataService {
     return this.subject.asObservable();
   }
 
+  // Setting user details after he login
+  setUserDetails(userDetails: any){
+    console.log("User Details",userDetails);
+    this.subject.next({user: userDetails});
+  }
 
+  // Getting UserDetails
+  getUserDetails(): Observable<any>{
+    return this.subject.asObservable();
+  }
+
+  //making userDetails as null
+  removeSubjectData(){
+    this.subject.next();
+  }
 
 
 }

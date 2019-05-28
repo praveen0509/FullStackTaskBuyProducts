@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {DatabasedataService} from '../databasedata.service';
 import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
-import {LocalStorage} from "@ngx-pwa/local-storage";
 
 @Component({
   selector: 'app-buy-product-home-page',
@@ -55,8 +54,8 @@ import {LocalStorage} from "@ngx-pwa/local-storage";
 })
 export class BuyProductHomePageComponent implements OnInit {
 
-  constructor(private dbServiceObj: DatabasedataService, private router:Router, private activatedRoute: ActivatedRoute,
-              private localStorage: LocalStorage) { }
+  constructor(private dbServiceObj: DatabasedataService, private router:Router,
+              private activatedRoute: ActivatedRoute) { }
 
   addTableFlag = false;
   buyProductFlag = false;
@@ -90,7 +89,9 @@ export class BuyProductHomePageComponent implements OnInit {
 
 
   ngOnInit() {
-    this.localStorage.getItem('key').subscribe((customerDetails)=>{
+    this.dbServiceObj.getUserDetails().subscribe((details)=>{
+      let customerDetails = details.user;
+      console.log("details:", details);
       this.userName = customerDetails.userName;
       this.email = customerDetails.email;
     })
@@ -110,7 +111,6 @@ export class BuyProductHomePageComponent implements OnInit {
     this.dbServiceObj.getProductDataWithPageAndSearch(this.page).subscribe((response) => {
       this.productData = response.rows;
       this.total=response.count;
-      console.log("productData1:", this.productData);
     });
   }
 
@@ -121,7 +121,6 @@ export class BuyProductHomePageComponent implements OnInit {
     this.dbServiceObj.getProductsByIndividualFields(this.page).subscribe((response) => {
       this.productData = response.rows;
       this.total=response.count;
-      console.log("productData2:", this.productData);
     });
   }
 

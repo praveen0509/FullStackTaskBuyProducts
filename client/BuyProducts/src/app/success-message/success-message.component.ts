@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {LocalStorage} from "@ngx-pwa/local-storage";
 import {DatabasedataService} from "../databasedata.service";
-import {NgFlashMessageService} from "ng-flash-messages";
+
 
 @Component({
   selector: 'app-success-message',
@@ -26,13 +25,15 @@ import {NgFlashMessageService} from "ng-flash-messages";
 })
 export class SuccessMessageComponent implements OnInit {
 
-  constructor(private activatedRoute: ActivatedRoute, private localStorage: LocalStorage, private dbServiceObj: DatabasedataService) { }
+  constructor(private activatedRoute: ActivatedRoute, private dbServiceObj: DatabasedataService) { }
   userData: any = {};
   p: number = 1;
 
 
   ngOnInit() {
-    this.localStorage.getItem('key').subscribe((customerDetails)=> {
+    this.dbServiceObj.getUserDetails().subscribe((details)=> {
+      console.log(details.user);
+      let customerDetails = details.user;
       this.userData['userName'] = customerDetails['userName'];
       this.userData['email'] = customerDetails['email'];
     });

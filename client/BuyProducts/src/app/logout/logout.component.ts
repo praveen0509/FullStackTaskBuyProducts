@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
-import {LocalStorage} from "@ngx-pwa/local-storage";
+import {DatabasedataService} from "../databasedata.service";
 
 @Component({
   selector: 'app-logout',
@@ -9,11 +9,10 @@ import {LocalStorage} from "@ngx-pwa/local-storage";
 })
 export class LogoutComponent implements OnInit {
 
-  constructor(private router: Router, private localStorage: LocalStorage) { }
+  constructor(private router: Router, private dbServiceObj: DatabasedataService) { }
 
   ngOnInit() {
-    this.localStorage.removeItem('userName');
-    this.localStorage.removeItem('email');
+    this.dbServiceObj.removeSubjectData();
     this.router.navigate(['/loginPage']);
   }
 
