@@ -1,5 +1,5 @@
 <div class="container-fluid fixed-top p-1"  style="background-color: black; width: 100%">
-  <div class="row">
+  <div class="row m-1">
      <!--Header Search Box-->
     <div class="col-lg-4 col-sm-4 col-md-4">
       <form class="form-inline my-2 my-lg-0" style="position: absolute; top: 20%;">
@@ -8,29 +8,25 @@
       </form>
     </div>
 
-    <!--Welcome Content-->
-    <div class="col-lg-4 col-sm-4 col-md-4"><h3 style="position: absolute; top: 20%; color: moccasin; text-align: center">Welcome To Buy Prodcuts</h3></div>
+    <!--Welcome Content--><!--style="position: absolute; top: 20%; color: moccasin"-->
+    <div class="col-lg-4 col-sm-4 col-md-4 text-center"><h3 class="mt-2" style="color: moccasin" >Welcome To Buy Prodcuts</h3></div>
 
     <!--Home, Profile, dropDown(Buy Product, Products List, Previous Orders List), Help and LogOut Buttons -->
-    <div class="col-lg-4 col-sm-4 col-md-4">
-      <nav class="navbar navbar-expand-sm navbar-dark " id="nav">
-         <ul class="navbar-nav" id="ul" style="width: 100%">
-          <li class="nav-item p-1"> <button class=" btn nav-link " type="button">Home</button> </li>
-          <li class="nav-item p-1"> <button class="btn nav-link" type="button" [routerLink]="['/myCart']">My Cart</button> </li>
-
-          <!-- Dropdown -->
-          <li class="nav-item dropdown p-1">
-            <button class="btn nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown"> Select </button>
-            <div class="dropdown-menu">
-              <button class="btn dropdown-item" type="button" (click)="buyProductSendData()">Buy Product</button>
-              <button class="btn dropdown-item" type="button" data-toggle="modal" data-target="#myModal">Products List</button>
-              <button class="btn dropdown-item" type="button" [routerLink]="['previousOrders']">Previous Orders List</button>
-            </div>
-          </li>
-           <li class="nav-item p-1"> <button class="btn nav-link" type="button">Help</button> </li>
-          <li class="nav-item p-1"> <button class="btn nav-link" type="button" [routerLink]="['/loginPage']">logout</button> </li>
-        </ul>
-      </nav>
+    <div class="col-lg-4 col-sm-4 col-md-4 mt-2">
+      <ul class="list-unstyled">
+        <li><button class=" btn" type="button">Home</button></li>
+        <li><button class="btn" type="button" [routerLink]="['/myCart']">My Cart</button></li>
+        <li class="dropdown">
+          <button class="btn dropdown-toggle" id="navbardrop" data-toggle="dropdown"> Select </button>
+          <div class="dropdown-menu">
+            <button class="btn dropdown-item" type="button" (click)="buyProductSendData()">Buy Product</button>
+            <button class="btn dropdown-item" type="button" data-toggle="modal" data-target="#myModal">Products List</button>
+            <button class="btn dropdown-item" type="button" [routerLink]="['previousOrders']">Previous Orders List</button>
+          </div>
+        </li>
+        <li> <button class="btn" type="button">Help</button> </li>
+        <li> <button class="btn" type="button" [routerLink]="['/loginPage']">logout</button> </li>
+      </ul>
     </div>
 
   </div>
@@ -73,4 +69,3 @@
   </div>
 </div>
 
-<app-mycart [displayMyCartDetailsFlag]="myCartFlag"></app-mycart>

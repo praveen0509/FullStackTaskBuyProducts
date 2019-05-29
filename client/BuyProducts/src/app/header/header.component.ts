@@ -10,10 +10,21 @@ import {DatabasedataService} from "../databasedata.service";
     .a {
       color: white;
     }
+
+    ul li div button{
+       color:orchid;
+     }     
+     ul{
+       float: right;
+     }
+     
+     ul li{
+       display: inline-block;
+     }
       
-     #nav .btn{
-       color: orchid;
-     }       
+      ul li button{
+        color: blanchedalmond;
+      }
     `
   ]
 })

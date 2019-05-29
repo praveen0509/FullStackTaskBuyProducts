@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {DatabasedataService} from "../databasedata.service";
+import {LocalStorage} from "@ngx-pwa/local-storage";
 
 
 @Component({
@@ -25,21 +26,23 @@ import {DatabasedataService} from "../databasedata.service";
 })
 export class SuccessMessageComponent implements OnInit {
 
-  constructor(private activatedRoute: ActivatedRoute, private dbServiceObj: DatabasedataService) { }
+  constructor(private activatedRoute: ActivatedRoute, private dbServiceObj: DatabasedataService, private localStorage: LocalStorage) { }
   userData: any = {};
   p: number = 1;
 
 
   ngOnInit() {
-    this.dbServiceObj.getUserDetails().subscribe((details)=> {
-      console.log(details.user);
-      let customerDetails = details.user;
-      this.userData['userName'] = customerDetails['userName'];
-      this.userData['email'] = customerDetails['email'];
-    });
+    this.getUserDetails();
     this.getBillData();
   }
 
+  getUserDetails(){
+    this.localStorage.getItem('user').subscribe((customer) => {
+      console.log("customer:", customer);
+      this.userData['userName'] = customer['userName'];
+      this.userData['email'] = customer['email'];
+    })
+  }
 
   getBillData() {
     this.dbServiceObj.getBillDataOfCurrentCustomer().subscribe((resolve) => { // Getting bill Data of Current Customer

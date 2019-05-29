@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {DatabasedataService} from '../databasedata.service';
 import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
+import {LocalStorage} from "@ngx-pwa/local-storage";
 
 @Component({
   selector: 'app-buy-product-home-page',
@@ -55,7 +56,7 @@ import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 export class BuyProductHomePageComponent implements OnInit {
 
   constructor(private dbServiceObj: DatabasedataService, private router:Router,
-              private activatedRoute: ActivatedRoute) { }
+              private activatedRoute: ActivatedRoute, private localStorage: LocalStorage) { }
 
   addTableFlag = false;
   buyProductFlag = false;
@@ -89,14 +90,9 @@ export class BuyProductHomePageComponent implements OnInit {
 
 
   ngOnInit() {
-    this.dbServiceObj.getUserDetails().subscribe((details)=>{
-      let customerDetails = details.user;
-      console.log("details:", details);
-      this.userName = customerDetails.userName;
-      this.email = customerDetails.email;
-    })
-
+    this.getUserDetails();
     this.activatedRoute.params.subscribe((params) => {
+            // Once customer clicks BuyProduct from HeaderComponent, This should activate
       if(params.buyProductsId == 1) {
         this.buyProductFlag = true;
       }
@@ -104,6 +100,15 @@ export class BuyProductHomePageComponent implements OnInit {
 
    this.getProductDetailsPaginationSearch(1);       // Calling Product Data having pagination with default pageNo set to 1
   }
+
+  getUserDetails(){
+    this.localStorage.getItem('user').subscribe((customer) => {
+      console.log("customer:", customer);
+      this.userName = customer.userName;
+      this.email = customer.email;
+    })
+  }
+
 
   getProductDetailsPaginationSearch(pageNumber) {
     this.pageNo = pageNumber;
