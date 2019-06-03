@@ -4,7 +4,6 @@ export default class ProductModelController {
 
   static getAll(req, res) {
     const deptQuery = req.query;
-    console.log("controller:", deptQuery);
     ProductModelDao.getAll(deptQuery).then(products => {
      res.status(200);
      res.send(products);
@@ -39,7 +38,6 @@ export default class ProductModelController {
   /*Pagination and Searching One field and All attributes at a time*/
   static oneFieldOneAttribute(req, res){
     let bodyPage = req.body;
-    console.log("controller:", req.body);
     ProductModelDao.oneFieldOneAttribute(bodyPage)
       .then(searchresult => { res.send(searchresult) })
       .catch(error => res.status(400).json(error));

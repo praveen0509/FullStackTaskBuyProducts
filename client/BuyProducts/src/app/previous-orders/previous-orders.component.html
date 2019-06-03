@@ -1,3 +1,23 @@
-<p>
-  previous-orders works!
-</p>
+<div class="container-fluid">
+  <div class="split left">
+    <div class="justify-content-center">
+        <input type="text" placeholder="search by customer" class="btn searchBtn mb-2" style="background-color: moccasin"><br>
+        <input type="text" placeholder="search by amount" class="btn searchBtn mb-2" style="background-color: moccasin">
+    </div>
+  </div>
+  <div class="split right">
+   <div class="card shadow mb-4" *ngFor="let bills of billData">
+     <div class="card-body">
+          <div class="row justify-content-center display-4">{{bills.purchasedBy}}</div>
+          <div class="row">
+            <h3 class="font-weight-bolder ml-3"> Total Items: {{bills.list}}</h3>
+          </div>
+          <div class="row">
+            <div class="col"><h3 class="font-weight-bolder">Paid Cost:  <small class="fa">&#xf156;</small>{{bills.total}} </h3></div>
+            <div class="col font-weight-bolder"><div class="float-right">Date: {{bills.purchasedOn | date: 'medium'}}</div></div>
+          </div>
+     </div>
+   </div>
+    <pagination-controls (pageChange)="getBillsPaginationSearch($event)"></pagination-controls>
+  </div>
+</div>

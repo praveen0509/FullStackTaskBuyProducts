@@ -37,7 +37,6 @@ export default class BillDao {
       if(search.total.length===0){
         search.total = 0;
       }
-      console.log("Search total:",search.total);
       models.bill.findAll({
         where: {
           purchasedBy: {[Op.iLike]: '%' + search.purchasedBy + '%'},
@@ -49,8 +48,13 @@ export default class BillDao {
     });
   }
 
-  static getAllWithPage(pageNo,limit, search) {
 
+
+
+
+
+
+  static getAllWithPage(pageNo,limit, search) {
       return new Promise((resolve, reject) => {
           search.purchasedBy = search.purchasedBy.trim();
           if(typeof search.total === 'string')  {      // If the given value is String, we Have to trim first
@@ -69,8 +73,8 @@ export default class BillDao {
             order: [
               ['createdAt', 'DESC']
             ]
-          }).then((result) => {resolve(result)})
-            .catch(error=>{ reject(error); })
+          }).then((result) => {resolve(result);})
+            .catch(error=>{ reject(error); });
       });
   }
 
@@ -118,6 +122,8 @@ export default class BillDao {
         .catch(error => reject(error));
     });
   }
+
+
 
 
   // Get Bill data by Id

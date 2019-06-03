@@ -103,7 +103,6 @@ export class BuyProductHomePageComponent implements OnInit {
 
   getUserDetails(){
     this.localStorage.getItem('user').subscribe((customer) => {
-      console.log("customer:", customer);
       this.userName = customer.userName;
       this.email = customer.email;
     })
@@ -212,7 +211,6 @@ export class BuyProductHomePageComponent implements OnInit {
     }
 
     this.dbServiceObj.postBillData(billDetails).subscribe((params) => {  // Sending Object to Bill Model
-      console.log("params:", params.id);
       this.billId = params.id;
       this.dbServiceObj.bulkPostItemData(this.listOfItemsDetails, this.billId).subscribe((res) => {});
       this.router.navigate(['successPage']);
