@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "main": "src/.js",
   "scripts": {
-    "start-server": "nodemon ./server/index --watch server",
+    "start-server": "node server/index.js",
     "dev": "npm run start-server",
     "test-server": "mocha 'tests/server/**/*_test.js' --recursive --check-leaks --reporter min --compilers js:babel-register",
     "noop": "echo 'noop'"

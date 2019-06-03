@@ -11,9 +11,9 @@
   "newcap": true,
   "noarg": true,
   "quotmark": ["single", "double"],
-  "undef": true,
+  "undef": false,
   "unused": false,
-  "strict": true,
+  "strict": false,
   "browser": true,
   "globals": {
     "describe": false,
