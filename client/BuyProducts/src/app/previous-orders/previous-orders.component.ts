@@ -7,6 +7,7 @@ import {DatabasedataService} from "../databasedata.service";
   styles: [`
     .split {
       height: 100%;
+      top: 20%;
       position: fixed;
       overflow-x: hidden;
     }
