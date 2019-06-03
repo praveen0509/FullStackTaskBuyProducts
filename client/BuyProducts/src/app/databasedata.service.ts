@@ -97,5 +97,4 @@ export class DatabasedataService {
     this.subject.next();
   }
 
-
 }

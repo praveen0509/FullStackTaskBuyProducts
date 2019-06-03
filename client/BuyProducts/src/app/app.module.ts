@@ -19,14 +19,14 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import {AngularFontAwesomeModule} from "angular-font-awesome";
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { LogoutComponent } from './logout/logout.component';
-import { RegistrationComponent } from './registration/registration.component';
+// import { RegistrationComponent } from './registration/registration.component';
 import {NgxPaginationModule} from "ngx-pagination";
 import {NgFlashMessagesModule} from "ng-flash-messages";
 import {FlashMessagesModule} from "ngx-flash-messages";
-import { PreviousOrdersComponent } from './previous-orders/previous-orders.component';
-import { ProductsListComponent } from './products-list/products-list.component';
-import { SearchProductsPipe } from './search-products.pipe';
-import { MycartComponent } from './mycart/mycart.component';
+// import { PreviousOrdersComponent } from './previous-orders/previous-orders.component';
+// import { ProductsListComponent } from './products-list/products-list.component';
+// import { SearchProductsPipe } from './search-products.pipe';
+// import { MycartComponent } from './mycart/mycart.component';
 
 @NgModule({
   declarations: [
@@ -39,11 +39,11 @@ import { MycartComponent } from './mycart/mycart.component';
     LoginPageComponent,
     WelcomePageComponent,
     LogoutComponent,
-    RegistrationComponent,
+   /* RegistrationComponent,
     PreviousOrdersComponent,
     ProductsListComponent,
     SearchProductsPipe,
-    MycartComponent
+    MycartComponent*/
   ],
   imports: [
     BrowserModule,
@@ -67,8 +67,8 @@ import { MycartComponent } from './mycart/mycart.component';
       { path: 'buyProductsPage/:buyProductsId', component: BuyProductHomePageComponent},
       { path: 'loginPage', component: LoginPageComponent },
       { path: 'logoutPage', component: LogoutComponent },
-      { path: 'previousOrders', component: PreviousOrdersComponent },
-      { path: 'myCart', component: MycartComponent },
+      /*{ path: 'previousOrders', component: PreviousOrdersComponent },
+      { path: 'myCart', component: MycartComponent },*/
       { path: '**', redirectTo: '/previousOrders', pathMatch: 'full' }
     ])
   ],

@@ -34,7 +34,7 @@ export default class BillDao {
   // server side searching with purchasedBy(name) and totalCost greater than or equal to the given input
   static getAllWithSearch(search) {
     return new Promise((resolve, reject) => {
-      if(search.total.length==0){
+      if(search.total.length===0){
         search.total = 0;
       }
       console.log("Search total:",search.total);
@@ -53,10 +53,10 @@ export default class BillDao {
 
       return new Promise((resolve, reject) => {
           search.purchasedBy = search.purchasedBy.trim();
-          if(typeof search.total === "string")        // If the given value is String, we Have to trim first
-             search.total = search.total.trim();
-          if(search.total.length==0)                 // Checking whether the field is empty or not
-            search.total = 0;
+          if(typeof search.total === 'string')  {      // If the given value is String, we Have to trim first
+             search.total = search.total.trim();}
+          if(search.total.length===0)  {               // Checking whether the field is empty or not
+            search.total = 0;}
 
           let offset = limit * (pageNo - 1);          // Setting baseValue
           models.bill.findAndCountAll({
