@@ -37,6 +37,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
         this.dbServiceObj.getProductData().subscribe((resolve) => {
+          console.log(resolve);
         this.databaseData = resolve;
     });
   }

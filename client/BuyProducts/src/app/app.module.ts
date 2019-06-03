@@ -23,6 +23,7 @@ import { LogoutComponent } from './logout/logout.component';
 import {NgxPaginationModule} from "ngx-pagination";
 import {NgFlashMessagesModule} from "ng-flash-messages";
 import {FlashMessagesModule} from "ngx-flash-messages";
+import { PreviousOrdersComponent } from './previous-orders/previous-orders.component';
 // import { PreviousOrdersComponent } from './previous-orders/previous-orders.component';
 // import { ProductsListComponent } from './products-list/products-list.component';
 // import { SearchProductsPipe } from './search-products.pipe';
@@ -39,6 +40,7 @@ import {FlashMessagesModule} from "ngx-flash-messages";
     LoginPageComponent,
     WelcomePageComponent,
     LogoutComponent,
+    PreviousOrdersComponent,
    /* RegistrationComponent,
     PreviousOrdersComponent,
     ProductsListComponent,
@@ -67,8 +69,8 @@ import {FlashMessagesModule} from "ngx-flash-messages";
       { path: 'buyProductsPage/:buyProductsId', component: BuyProductHomePageComponent},
       { path: 'loginPage', component: LoginPageComponent },
       { path: 'logoutPage', component: LogoutComponent },
-      /*{ path: 'previousOrders', component: PreviousOrdersComponent },
-      { path: 'myCart', component: MycartComponent },*/
+      { path: 'previousOrders', component: PreviousOrdersComponent },
+      /*{ path: 'myCart', component: MycartComponent },*/
       { path: '**', redirectTo: '/previousOrders', pathMatch: 'full' }
     ])
   ],
