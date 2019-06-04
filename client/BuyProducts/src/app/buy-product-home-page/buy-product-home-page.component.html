@@ -88,7 +88,7 @@
             <table border="2 px" class="table table-active"  style="width: 100%;">
               <thead>
               <tr>
-                <th >Id</th>
+                <th >ItemId</th>
                 <th>ProductName</th>
                 <th>ItemCost</th>
                 <th>Quantity</th>
@@ -108,9 +108,9 @@
               <tr class="border-0">
                 <td></td>
                 <td></td>
+                <td></td>
                 <td><strong><h4>Total cost:</h4></strong></td>
                 <td><button type="button" class="btn btn-info">{{netTotal}}</button></td>
-                <td></td>
                 <td></td>
               </tr>
               </tbody>
@@ -120,7 +120,7 @@
 
         <!--Fourth Row-->
         <!--SuccessPage buttons-->
-        <div *ngIf="addTableFlag" class="row">
+        <div *ngIf="addTableFlag" class="row pb-lg-5">
           <div class="col-sm-4"></div>
           <div class="col-sm-3">
             <button type="button" class="btn p-2 bg-success btn-outline-info text-white float-left"
