@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {DatabasedataService} from "../databasedata.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-previous-orders',
@@ -33,12 +34,10 @@ export class PreviousOrdersComponent implements OnInit {
   billData: any;
   total: any;
 
-  constructor(private dbServiceObj: DatabasedataService) { }
+  constructor(private dbServiceObj: DatabasedataService, private router: Router ) { }
 
   ngOnInit() {
-
     this.getBillsPaginationSearch(1);       // Calling Product Data having pagination with default pageNo set to 1
-
   }
 
   getBillsPaginationSearch(pageNumber) {
@@ -50,5 +49,11 @@ export class PreviousOrdersComponent implements OnInit {
       this.total=response.count;
     });
   }
+
+
+  navigateToCustomerDetails(customerId){
+    this.router.navigate(['/customerDetails', customerId] );
+  }
+
 
 }

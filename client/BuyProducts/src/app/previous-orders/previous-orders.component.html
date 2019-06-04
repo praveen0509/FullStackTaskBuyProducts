@@ -8,11 +8,11 @@
   </div>
   <div class="split right">
    <div class="row">
-     <div class="col-sm-10 col-md-10 col-lg-10 col-xl-10">
+     <div class="col-sm-9 col-md-9 col-lg-9 col-xl-9">
        <div class="card shadow bg-secondary">
-         <div class="card-body pt-3 pb-0" ><pagination-controls (pageChange)="getBillsPaginationSearch($event)"></pagination-controls></div>
+         <div class="card-body pt-3 pb-0"><pagination-controls (pageChange)="getBillsPaginationSearch($event)"></pagination-controls></div>
        </div>
-       <div class="card shadow mb-4" *ngFor="let bills of billData">
+       <div class="card shadow mb-4" *ngFor="let bills of billData" (click)="navigateToCustomerDetails(bills.id)">
          <div class="card-body">
            <div class="row justify-content-center"><h2 class="font-weight-bolder">{{bills.purchasedBy}}</h2></div>
            <div class="row">
