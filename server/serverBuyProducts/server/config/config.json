@@ -14,10 +14,14 @@
     "dialect": "postgres"
   },
   "production": {
-    "username": "root",
-    "password": "password",
-    "database": "buyProductDB",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
+    "username": "vzldtgrmtdxwns",
+    "password": "e4c2dc68e52a4423740b3d7acfb22fae32d5170b21fdc084b75e2241f996e6bc",
+    "database": "d1mm89hh7kpppr",
+    "host": "ec2-54-83-201-84.compute-1.amazonaws.com",
+    "dialect": "postgres",
+    "port": "5432",
+    "dialectOptions": {
+      "ssl": true
+    }
   }
 }
