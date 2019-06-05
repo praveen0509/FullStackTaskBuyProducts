@@ -6,18 +6,10 @@ import {Router} from "@angular/router";
   templateUrl: './welcome-page.component.html',
   styles: [
     `
-      .container {
+      .container{
         position: absolute;
-        top: 40%;
-        left: 10%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-      .btn {
-        position: absolute;
-        top: 90%;
-        left: 40%;
+        top: 45%;
+        left: 35%;
       }
     `
   ]

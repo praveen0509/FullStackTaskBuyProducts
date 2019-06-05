@@ -23,6 +23,10 @@ import {Router} from "@angular/router";
       right: 0;
     }
     
+    .imagesUl li{
+      margin-bottom: 10%;
+    }
+    
   `]
 })
 export class PreviousOrdersComponent implements OnInit {
@@ -52,6 +56,7 @@ export class PreviousOrdersComponent implements OnInit {
 
 
   navigateToCustomerDetails(customerId){
+    console.log("id:", customerId);
     this.router.navigate(['/customerDetails', customerId] );
   }
 

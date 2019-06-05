@@ -29,10 +29,16 @@ export class DatabasedataService {
     return this.queryApi.doPost('PRODUCT_DETAILS_WITH_MULTIPLE_FIELDS', page).pipe(catchError(err => of([err])));
   }
 
+
   getBillData() : Observable <any> {
     let req
     return this.queryApi.doGet('BILL_DETAILS', req).pipe(catchError(err => of([err])));
   }
+
+
+
+  // Get Bill Data of particular customer
+
 
 
 
@@ -71,7 +77,6 @@ export class DatabasedataService {
   }
 
 
-
   setProductTableData(productTable: any){
       this.subject.next({data: productTable});
   }
@@ -81,20 +86,6 @@ export class DatabasedataService {
     return this.subject.asObservable();
   }
 
-  // Setting user details after he login
-  setUserDetails(userDetails: any){
-    console.log("User Details",userDetails);
-    this.subject.next({user: userDetails});
-  }
 
-  // Getting UserDetails
-  getUserDetails(): Observable<any>{
-    return this.subject.asObservable();
-  }
-
-  //making userDetails as null
-  removeSubjectData(){
-    this.subject.next();
-  }
 
 }
