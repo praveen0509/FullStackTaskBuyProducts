@@ -1,9 +1,7 @@
 import Promise from 'bluebird';
 import models from '../../../models';
-import * as res from "express";
 var Sequelize = require('sequelize');
 const Op = Sequelize.Op;
-const productModel = require('../../../models/productmodel').productModel;
 
 export default class ProductModelDao {
 
