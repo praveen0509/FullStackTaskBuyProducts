@@ -1,8 +1,6 @@
 import Promise from 'bluebird';
 import models from '../../../models';
 import * as res from "express";
-const item = require('/home/sb-33/Desktop/FullStackTask/FullStackTaskBuyProducts' +
-  '/server/serverBuyProducts/server/models/item').item;
 
 export default class ItemDao {
   static getAll(_query) {
