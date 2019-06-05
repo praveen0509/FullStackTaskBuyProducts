@@ -3,8 +3,7 @@ import models from '../../../models';
 import * as res from "express";
 var Sequelize = require('sequelize');
 const Op = Sequelize.Op;
-const productModel = require('/home/sb-33/Desktop/FullStackTask/FullStackTaskBuyProducts' +
-  '/server/serverBuyProducts/server/models/productmodel').productModel;
+const productModel = require('../../../models/productmodel').productModel;
 
 export default class ProductModelDao {
 
