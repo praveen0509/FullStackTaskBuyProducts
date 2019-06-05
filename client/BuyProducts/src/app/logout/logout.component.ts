@@ -12,7 +12,6 @@ export class LogoutComponent implements OnInit {
   constructor(private router: Router, private dbServiceObj: DatabasedataService) { }
 
   ngOnInit() {
-    this.dbServiceObj.removeSubjectData();
     this.router.navigate(['/loginPage']);
   }
 
