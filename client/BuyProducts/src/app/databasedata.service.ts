@@ -38,7 +38,9 @@ export class DatabasedataService {
 
 
   // Get Bill Data of particular customer
-
+  getBillDataById(id) : Observable <any> {
+    return this.queryApi.doGet('BILL_BY_ID', id).pipe(catchError(err => of([err])));
+  }
 
 
 

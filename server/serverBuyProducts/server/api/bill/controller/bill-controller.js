@@ -1,4 +1,5 @@
 import BillDao from '../dao/bill-dao';
+import ItemDao from "../../item/dao/item-dao";
 var url = require('url');
 
 export default class BillController {
@@ -47,7 +48,8 @@ export default class BillController {
 
 
   // getting Bill Data based on ID
-  static getById(req, res){
+  static  getById(req, res){
+    console.log("req id", req.id);
     BillDao.getById(req.id).then(billById=> {
       res.status(200);
       res.send(billById);

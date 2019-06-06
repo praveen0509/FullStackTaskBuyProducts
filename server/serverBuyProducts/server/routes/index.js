@@ -5,6 +5,7 @@ import BillRoute from "../api/bill/route/bill-route"
 
 export default class Routes {
    static init(app, router) {
+     console.log("index");
      TodoRoutes.init(router);
      ProductModelRoute.init(router);
      ItemRoute.init(router);

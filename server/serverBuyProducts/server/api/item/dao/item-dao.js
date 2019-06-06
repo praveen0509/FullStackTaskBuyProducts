@@ -47,16 +47,20 @@ export default class ItemDao {
           models.item.findAll({
             where: {billId: parseInt(id)},
             include:[
+                      { model: models.bill,
+                        attributes: ["id", "purchasedBy", "purchasedOn", "total"]
+                      },
                       { model: models.productModel,
                         attributes: ["id", "name", "category", "price"]
-                      },
-                      {model: models.bill}
-                    ],
-            attributes: ["id", "productId", "billId", "quantity", "totalCost"]
+                      }
+                    ]
+            // attributes: ["id", "productId", "billId", "quantity", "totalCost", "createdAt"]
           })
           .then(itemById => {resolve(itemById); })
             .catch(error => { reject(error);});
       });
   }
+
+
 }
 

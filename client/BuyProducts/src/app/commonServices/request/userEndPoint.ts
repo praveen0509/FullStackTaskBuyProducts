@@ -9,6 +9,7 @@ export const INSERTITEM = 'INSERT_DATA_INTO_ITEM';
 export const BULKINSERT_ITEM='BULK_INSERT_DATA_INTO_ITEM';
 export const INSERTBILL='INSERT_DATA_INTO_BILL';
 export const ITEMBYID='ITEM_BY_ID';
+export const BILLBYID='BILL_BY_ID';
 
 export const UserEndPoint = (type: string, params: any) => {
   const endpoints = {
@@ -23,8 +24,9 @@ export const UserEndPoint = (type: string, params: any) => {
     [INSERTBILL]:'/bill/add',
     [BULKINSERT_ITEM]: '/item/bulkAdd',
     [ITEMBYID]: '/item/billId/',
+    [BILLBYID]: '/bill/billId/'
   };
-  if(endpoints[type] === '/item/billId/') {
+  if(endpoints[type] === '/item/billId/' || endpoints[type] === '/bill/billId/') {
     endpoints[type] = endpoints[type] + params;
   }
   return 'https://server-buyproducts.herokuapp.com'+ endpoints[type];  // http://192.168.0.197:3333
