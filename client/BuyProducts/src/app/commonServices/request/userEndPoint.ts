@@ -27,7 +27,8 @@ export const UserEndPoint = (type: string, params: any) => {
   if(endpoints[type] === '/item/billId/') {
     endpoints[type] = endpoints[type] + params;
   }
-  return 'https://server-buyproducts.herokuapp.com'+ endpoints[type];
+  return 'http://server-buyproducts.herokuapp.com'+ endpoints[type];  // http://192.168.0.197:3333
+  // https://server-buyproducts.herokuapp.com
 };
 
 
