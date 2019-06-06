@@ -54,11 +54,9 @@ export class PreviousOrdersComponent implements OnInit {
     });
   }
 
-
   navigateToCustomerDetails(customerId){
     console.log("id:", customerId);
     this.router.navigate(['/customerDetails', customerId] );
   }
-
 
 }

@@ -1,4 +1,10 @@
 <div class="container jumbotron">
+  <div class="card">
+    <div class="card-body">
+
+    </div>
+  </div>
+
   <div class="card shadow m-sm-3 m-md-3 m-lg-3 m-xl-3" *ngFor="let customerData  of customerDetails">
     <div class="row card-body">
       <div class="col">
@@ -11,7 +17,7 @@
         <li><span class="fa pt-1">&#xf156; </span> {{customerData['productModel'].price}}</li>
       </ul>
       <div class="col">
-        <div class="float-right"><span>Ordered On </span> {{customerData.createdAt | date: 'medium'}}</div>
+        <div class="float-right font-weight-bolder"><span class="font-weight-light">Ordered On </span> {{customerData.createdAt | date: 'medium'}}</div>
       </div>
     </div>
   </div>
