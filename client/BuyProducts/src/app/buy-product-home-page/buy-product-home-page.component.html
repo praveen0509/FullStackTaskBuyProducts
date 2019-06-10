@@ -1,16 +1,11 @@
-<div class="container-fluid">
+<div class="container">
   <div class="row">
-
     <!--Left side page-->
     <div class="split left">
-      <br><br><br><br><br><br>
-      <h3 class="row font-weight-bolder justify-content-center">Filters:
-      </h3>
-      <div class="row">
-        <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1 "></div>
-        <div class="col-sm-10 col-md-10 col-lg-10 col-xl-10">
-          <form>
+      <div class="row card shadow-lg m-sm-1 m-md-2 m-lg-3 m-xl-4">
+          <form class="card-body">
             <div class="form-group">
+              <h2 class="font-weight-bolder">Filters:</h2>
               <input class="search form-control mb-2" name="search" type="text" placeholder="Search By Name" aria-label="Search"
                      size="80%" [(ngModel)]="searchPrdFromDb.name"  (input)="getProductsByIndividualFields(1)">
               <input class="search form-control mb-2" name="search" type="text" placeholder="Search By Category" aria-label="Search"
@@ -19,8 +14,13 @@
                      size="80%" [(ngModel)]="searchPrdFromDb.price"  (input)="getProductsByIndividualFields(1)">
             </div>
           </form>
-        </div>
       </div>
+
+      <div class="row m-sm-1 m-md-2 m-lg-3 m-xl-4">
+        <img src="../../assets/SideImages/side2.jpg" height="600" width="100%"/>
+      </div>
+      <div class="row m-sm-1 m-md-2 m-lg-3 m-xl-4">
+        <img src="../../assets/SideImages/side1.jpg" height="600" width="100%"/></div>
     </div>
     <!------------------------------------------------------------------------------------------------------------------------------------------------->
 
@@ -51,14 +51,12 @@
                     | paginate: { itemsPerPage: itemsPerPage, currentPage: pageNo, totalItems: total }" (click)="productDetails(product)"
                    data-toggle = "modal" data-target="#productDetails"  >
                 <div class="card shadow" id="{{product.id}}">
-                  <div class="card-body">
+                  <div class="card-body mx-auto">
                     <img src="../../assets/{{product.category}}/{{product.name}}.jpg" height="250" width="278">
                   </div>
                   <div class="card-footer">
-                    <div class="row " style="background-color: lightcyan">
-                      <div class="col"></div>
-                      <div class="col"><h3 >{{product.name}}</h3></div>
-                      <div class="col"></div>
+                    <div class="row justify-content-center" style="background-color: lightcyan">
+                      <h3 >{{product.name}}</h3>
                     </div>
 
                     <div class="row no-gutters">
@@ -85,7 +83,7 @@
           <div class="col-lg-1 col-sm-1 col-md-1"></div>
           <div class="col-lg-9 col-sm-9 col-md-9" *ngIf="addTableFlag">
             <div><strong><h3 class="text-success"><u>Item details:</u></h3></strong></div>
-            <table border="2 px" class="table table-active"  style="width: 100%;">
+            <table border="2 px" class="table table-active" style="width: 100%;">
               <thead>
               <tr>
                 <th >ItemId</th>
@@ -128,7 +126,7 @@
             <button type="button" class="btn p-2 bg-success btn-outline-info text-white float-right" (click)="cancelMethod()">Cancel</button>
           </div>
         </div>
-      </div><br><br>
+      </div><br><br>.
     </div>
   </div>
 </div>
