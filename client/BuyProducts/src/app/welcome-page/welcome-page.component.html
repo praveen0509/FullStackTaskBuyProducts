@@ -1,6 +1,16 @@
 <body style="position: absolute; top: 9%;">
-  <marquee class="text-white" style="font-size: 500%">Welcome To BuyProducts Project</marquee>
-      <button class="btn btn-outline-success btn-light text-primary" type="button" [routerLink]="['/previousOrders']">
+  <!--<marquee class="text-white" style="font-size: 500%">Welcome To BuyProducts Project</marquee>
+      <button size="30%" class="btn-lg btn-outline-white btn-light text-primary" type="button" style="position: absolute;top: 45%; left: 48%" [routerLink]="['/previousOrders']">
       Continue...
-    </button>
+    </button>-->
+    <form style="position: absolute; top: 30%; left:0% ;right:0%">
+      <div class="form-group">
+        <marquee for="continue" class="text-white display-4" scrollamount="10">Welcome to BuyProducts Project</marquee>
+        <button id="continue" class="form-control btn-lg" type="button" [routerLink]="['/previousOrders']"
+                style="width: 10%; position: absolute; left: 45%;">
+          Continue....
+        </button>
+      </div>
+    </form>
+
 </body>
