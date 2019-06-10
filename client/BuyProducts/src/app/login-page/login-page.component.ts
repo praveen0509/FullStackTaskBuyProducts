@@ -8,14 +8,12 @@ import {LocalStorage} from "@ngx-pwa/local-storage";
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
   styles: [
-    `
-      .table {
-        margin: auto;
-        width: 50% !important;
+    `      
+    input{
+          background-color: #ff80ab;
       }
-      
-      .h1 {
-        background-color: orchid;
+      label{
+        font-family: "Noto Sans CJK JP Bold";
       }
     `
   ]
@@ -25,22 +23,25 @@ export class LoginPageComponent implements OnInit {
   constructor(private router:Router,private dbServiceObj: DatabasedataService, private fb: FormBuilder, private localStorage: LocalStorage) { }
   userName: string;
   email: string;
+  containerFlag = false;
   ngOnInit() {
-    this.formSubmission();
+    /*this.formSubmission();*/
   }
 
   enterIntoproject() {
+    console.log(this.userName, this.email);
     if (this.userName != null && this.email != null && this.userName.match('[a-zA-Z0-9]')) {
       let customerDetails = {userName: this.userName, email: this.email};
+      console.log("customer Details:", customerDetails);
       this.localStorage.setItem('key', customerDetails).subscribe(() => { });
       this.router.navigate(['/']);
     }
   }
 
-  formSubmission() {
+  /*formSubmission() {
     this.angForm = this.fb.group({
       name: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
       email: ['', Validators.compose([Validators.required, Validators.email])]
     });
-  }
+  }*/
 }

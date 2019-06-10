@@ -6,7 +6,9 @@ import {LocalStorage} from "@ngx-pwa/local-storage";
 @Component({
   selector: 'app-logout',
   templateUrl: './logout.component.html',
-  styles: []
+  styles: [`
+    
+  `]
 })
 export class LogoutComponent implements OnInit, OnDestroy {
 
