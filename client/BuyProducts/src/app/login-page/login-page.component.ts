@@ -15,17 +15,21 @@ import {LocalStorage} from "@ngx-pwa/local-storage";
       label{
         font-family: "Noto Sans CJK JP Bold";
       }
+      
+      h6 {
+        padding: 0%;
+      }
     `
   ]
 })
 export class LoginPageComponent implements OnInit {
-  angForm: FormGroup;
-  constructor(private router:Router,private dbServiceObj: DatabasedataService, private fb: FormBuilder, private localStorage: LocalStorage) { }
+  loginForm: FormGroup;
+  constructor(private router:Router,private dbServiceObj: DatabasedataService, private fb: FormBuilder, private localStorage: LocalStorage) {
+    this.loginFormSubmission();
+  }
   userName: string;
   email: string;
-  containerFlag = false;
   ngOnInit() {
-    /*this.formSubmission();*/
   }
 
   enterIntoproject() {
@@ -33,15 +37,15 @@ export class LoginPageComponent implements OnInit {
     if (this.userName != null && this.email != null && this.userName.match('[a-zA-Z0-9]')) {
       let customerDetails = {userName: this.userName, email: this.email};
       console.log("customer Details:", customerDetails);
-      this.localStorage.setItem('key', customerDetails).subscribe(() => { });
+      this.localStorage.setItem('user', customerDetails).subscribe(() => { });
       this.router.navigate(['/']);
     }
   }
 
-  /*formSubmission() {
-    this.angForm = this.fb.group({
+  loginFormSubmission() {
+    this.loginForm = this.fb.group({
       name: ['', Validators.compose([Validators.required, Validators.minLength(4)])],
       email: ['', Validators.compose([Validators.required, Validators.email])]
     });
-  }*/
+  }
 }

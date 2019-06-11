@@ -43,7 +43,11 @@ export class HeaderComponent implements OnInit {
         this.databaseData = resolve;
       });
 
-    // getting user details from local storage
+    this.getUserDetails();
+  }
+
+  // getting user details from local storage
+  getUserDetails(){
     this.localStorage.getItem('user').subscribe((customer) => {
       this.userData['userName'] = customer['userName'];
       this.userData['email'] = customer['email'];
@@ -55,6 +59,12 @@ export class HeaderComponent implements OnInit {
     this.buyProductsId = 1;
     this.router.navigate(['/buyProductsPage', this.buyProductsId] );
   }
+
+  goToLoginPage(){
+    this.localStorage.removeItem('user');
+    this.router.navigate(['/loginPage']);
+  }
+
 
 
 }

@@ -1,3 +1,4 @@
+<app-header></app-header>
 <div class="container-fluid fixed-top p-1"  style="background-color: black; width: 100%">
   <div class="row m-1">
      <!--Header Search Box-->
@@ -22,7 +23,7 @@
           </div>
         </li>
         <li> <button class="btn" type="button">Help</button> </li>
-        <li> <button class="btn" type="button" [routerLink]="['/loginPage']">logout</button> </li>
+        <li> <button class="btn" type="button" [routerLink]="['/loginPage']" (click)="goToLoginPage()">logout</button> </li>
       </ul>
     </div>
 
