@@ -1,44 +1,44 @@
-<app-header></app-header>
-<h1><ng-flash-message></ng-flash-message></h1>
 
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-lg-4"><ng-flash-message></ng-flash-message></div>
+<div class="container" style="min-width: 100%; min-height: 100%">
+  <div class="row ">
+    <div class="col"></div>
+    <div class="col alert alert-success alert-dismissible">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <strong>Success!</strong> Payment successful...
+    </div>
+    <div class="col"></div>
+
   </div>
-
-  <div class="row">
-    <div class="col-sm-3"></div>
-    <div class="col-sm-7">
-      <strong><h3 class="text-success">Your cart details:</h3></strong>
-      <table class="table table-bordered">
-        <tbody>
-        <tr>
-          <td><b>Customer Name:</b></td>
-          <td>{{userData.userName}}</td>
-        </tr>
-        <tr>
-          <td><b>Email:</b></td>
-          <td>{{userData.email}}</td>
-        </tr>
-        <tr>
-          <td><b>Number Of Items:</b></td>
-          <td>{{userData.noOfItems}} </td>
-        </tr>
-        <tr>
-          <td><b>TotalCost:</b></td>
-          <td>{{userData.totalCost}}</td>
-        </tr>
-        </tbody>
-      </table>
+  <div class="row mx-auto">
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4">
+      <div class="card shadow-lg jumbotron" style="background-color: #d4edda">
+        <div class="card-body">
+          <table class="table" width="100%">
+            <tbody>
+            <tr>
+              <td><b>Customer Name:</b></td>
+              <td>{{userData.userName}}</td>
+            </tr>
+            <tr>
+              <td><b>Email:</b></td>
+              <td>{{userData.email}}</td>
+            </tr>
+            <tr>
+              <td><b>Number Of Items:</b></td>
+              <td>{{userData.noOfItems}} </td>
+            </tr>
+            <tr>
+              <td><b>TotalCost:</b></td>
+              <td>{{userData.totalCost}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-
-<br>
-<br>
-<br>
-<br>
-<app-footer></app-footer>
 
 
 
