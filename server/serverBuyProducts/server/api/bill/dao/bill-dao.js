@@ -7,6 +7,7 @@ const Op = Sequelize.Op;
 
 export default class BillDao {
   static getAll() {
+    console.log("models:",models.bill);
     return new Promise((resolve, reject) => {
       models.bill.findAll()
         .then(bills => { resolve(bills); })

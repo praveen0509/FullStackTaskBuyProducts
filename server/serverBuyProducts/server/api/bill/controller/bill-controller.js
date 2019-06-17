@@ -6,6 +6,7 @@ export default class BillController {
 
   // Getting Bill Data
   static getAll(req, res) {
+    console.log("controller");
     BillDao.getAll().then(bills => {
       res.status(200);
       res.send(bills);
