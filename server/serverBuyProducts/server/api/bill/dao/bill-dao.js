@@ -50,11 +50,7 @@ export default class BillDao {
   }
 
 
-
-
-
-
-
+  // Server side pagination and searching by taking pageNo and limit values from client side
   static getAllWithPage(pageNo,limit, search) {
       return new Promise((resolve, reject) => {
           search.purchasedBy = search.purchasedBy.trim();
@@ -80,35 +76,8 @@ export default class BillDao {
   }
 
 
-  /*static getAllWithPage(pageNo,limit, search) {
 
-    return new Promise((resolve, reject) => {
-      var value = Number(search.purchasedBy);
-      if(!isNaN(value)){
-        search.purchasedBy = parseInt(search.purchasedBy);
-      }
-      let offset = limit * (pageNo - 1);
-      models.bill.findAndCountAll({
-        where: {
-          [Op.or]: [
-            { purchasedBy: {[Op.iLike]: '%' + search.purchasedBy + '%'} },
-            { total: {  [Op.gte]: search.purchasedBy } }
-          ]
-        },
-        limit: limit,
-        offset: offset,
-        order: [
-          ['createdAt', 'DESC']
-        ]
-      })
-        .then((result) => {resolve(result)})
-        .catch(error=>{ reject(error); })
-    });
-  }*/
-
-
-
-  //
+  // adding one more row based on customer details
   static add(body) {
     return new Promise((resolve, reject) => {
       models.bill
@@ -139,4 +108,6 @@ export default class BillDao {
       });
   }
 }
+
+
 
