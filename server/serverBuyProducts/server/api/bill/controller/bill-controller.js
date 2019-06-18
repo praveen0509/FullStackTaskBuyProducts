@@ -6,7 +6,6 @@ export default class BillController {
 
   // Getting Bill Data
   static getAll(req, res) {
-    console.log("controller");
     BillDao.getAll().then(bills => {
       res.status(200);
       res.send(bills);
@@ -50,7 +49,6 @@ export default class BillController {
 
   // getting Bill Data based on ID
   static  getById(req, res){
-    console.log("req controller:", req.params.id);
     BillDao.getById(req.params.id).then(billById=> {
       res.status(200);
       res.send(billById);

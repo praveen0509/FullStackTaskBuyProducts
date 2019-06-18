@@ -24,6 +24,7 @@ import {NgFlashMessagesModule} from "ng-flash-messages";
 import {FlashMessagesModule} from "ngx-flash-messages";
 import { PreviousOrdersComponent } from './previous-orders/previous-orders.component';
 import { CustomerDetailsComponent } from './customer-details/customer-details.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { CustomerDetailsComponent } from './customer-details/customer-details.co
     LogoutComponent,
     PreviousOrdersComponent,
     CustomerDetailsComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,8 +59,9 @@ import { CustomerDetailsComponent } from './customer-details/customer-details.co
     RouterModule.forRoot([
       { path: 'successPage', component: SuccessMessageComponent },
       { path: '', component: WelcomePageComponent },
+      { path: 'about', component: AboutComponent },
       { path: 'buyProductsPage', component: BuyProductHomePageComponent},
-      { path: 'buyProductsPage/:buyProductsId', component: BuyProductHomePageComponent},
+      { path: 'buyProductsPage/:buyProductsId', component: BuyProductHomePageComponent },
       { path: 'loginPage', component: LoginPageComponent },
       { path: 'logoutPage', component: LogoutComponent },
       { path: 'previousOrders', component: PreviousOrdersComponent },

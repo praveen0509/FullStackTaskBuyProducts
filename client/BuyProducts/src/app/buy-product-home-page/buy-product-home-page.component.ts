@@ -213,8 +213,8 @@ export class BuyProductHomePageComponent implements OnInit {
     this.dbServiceObj.postBillData(billDetails).subscribe((params) => {  // Sending Object to Bill Model
       this.billId = params.id;
       this.dbServiceObj.bulkPostItemData(this.listOfItemsDetails, this.billId).subscribe((res) => {});
-      this.router.navigate(['successPage']);
-    });                                             // Sending Object Array  Data To Items Model
+      this.router.navigate(['successPage']);        // Sending Object Array  Data To Items Model
+    });
   }
 
 

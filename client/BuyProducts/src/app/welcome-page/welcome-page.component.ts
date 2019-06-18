@@ -29,6 +29,7 @@ export class WelcomePageComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
+    console.log("Welcome Page");
   }
 
   gotoLoginPage(){

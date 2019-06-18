@@ -1,4 +1,3 @@
-<app-header></app-header>
 <div class="container-fluid fixed-top p-1"  style="background-color: black; width: 100%">
   <div class="row m-1">
      <!--Header Search Box-->
@@ -22,7 +21,8 @@
             <button class="btn dropdown-item" type="button" [routerLink]="['previousOrders']">Previous Orders List</button>
           </div>
         </li>
-        <li> <button class="btn" type="button">Help</button> </li>
+        <li> <button class="btn" type="button" [routerLink]="['/about']">
+          <i style="font-size:12px" class="fa">&#xf06a;</i>about</button> </li>
         <li> <button class="btn" type="button" [routerLink]="['/loginPage']" (click)="goToLoginPage()">logout</button> </li>
       </ul>
     </div>

@@ -35,7 +35,5 @@ export class CustomerDetailsComponent implements OnInit {
       this.customerDetails = itemData;
     })
   }
-
-
-
+  
 }
