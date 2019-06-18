@@ -98,9 +98,10 @@ export default class BillDao {
 
   // Get Bill data by Id
   static getById(id) {
+    console.log("dao id:", id);
     return new Promise(
       (resolve, reject) => {
-        models.bill.find({
+        models.bill.findAll({
           where: {id: id}
         })
           .then(billById => { resolve(billById); })
