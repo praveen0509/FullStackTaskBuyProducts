@@ -38,7 +38,7 @@ export class LoginPageComponent implements OnInit {
       let customerDetails = {userName: this.userName, email: this.email};
       console.log("customer Details:", customerDetails);
       this.localStorage.setItem('user', customerDetails).subscribe(() => { });
-      this.router.navigate(['/previousOrders']);
+      this.router.navigate(['/']);
     }
   }
 
